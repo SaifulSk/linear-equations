@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICSE Linear Equations Practice Lab</title>
+    <title>ICSE Mathematics Practice Lab</title>
     <style>
         :root {
             --bg-color: #f8fafc;
@@ -38,7 +38,7 @@
 
         .container {
             background: var(--card-bg);
-            max-width: 850px;
+            max-width: 900px;
             width: 100%;
             border-radius: 1rem;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -69,13 +69,15 @@
             display: flex;
             border-bottom: 1px solid var(--border);
             background: #f8fafc;
+            flex-wrap: wrap;
         }
 
         .tab {
-            flex: 1;
-            padding: 1rem;
+            flex: 1 1 25%;
+            padding: 1rem 0.5rem;
             text-align: center;
             font-weight: 600;
+            font-size: 0.95rem;
             color: var(--text-muted);
             cursor: pointer;
             transition: all 0.2s;
@@ -135,7 +137,6 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            /* Allow horizontal scrolling on small screens instead of breaking fractions */
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
@@ -154,7 +155,7 @@
             flex-direction: column;
             gap: 1.25rem;
             align-items: center;
-            min-width: min-content; /* Ensure children dictate width */
+            min-width: min-content; 
             margin: 0 auto;
         }
 
@@ -164,18 +165,13 @@
             letter-spacing: 1px;
             font-family: 'Cambria Math', 'Times New Roman', serif;
             color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            white-space: nowrap; /* Prevent line breaks inside equations */
-            flex-wrap: nowrap;
+            display: block;
+            text-align: center;
+            white-space: nowrap; 
         }
         
-        .equation i {
-            font-style: italic;
-        }
+        .equation i { font-style: italic; }
 
-        /* Fraction CSS */
         .frac {
             display: inline-flex;
             flex-direction: column;
@@ -183,20 +179,25 @@
             vertical-align: middle;
             margin: 0 0.25rem;
             font-size: 1.25rem;
-            white-space: nowrap; /* CRITICAL for mobile */
+            white-space: nowrap; 
         }
         .frac .num {
             padding: 0 0.4rem;
             border-bottom: 2px solid var(--text-main);
             width: 100%;
             text-align: center;
-            white-space: nowrap; /* CRITICAL for mobile */
+            white-space: nowrap; 
         }
         .frac .den {
             padding: 0 0.4rem;
             width: 100%;
             text-align: center;
-            white-space: nowrap; /* CRITICAL for mobile */
+            white-space: nowrap; 
+        }
+
+        .large-paren {
+            font-size: 2.5rem;
+            font-weight: 300;
         }
 
         .input-section {
@@ -220,7 +221,7 @@
             font-style: italic;
         }
 
-        .input-group input {
+        .input-group input, .input-group select {
             width: 100px;
             padding: 0.75rem;
             border: 2px solid var(--border);
@@ -228,9 +229,16 @@
             font-size: 1.1rem;
             text-align: center;
             transition: border-color 0.2s;
+            background: white;
         }
 
-        .input-group input:focus {
+        .input-group select {
+            width: 70px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .input-group input:focus, .input-group select:focus {
             outline: none;
             border-color: var(--primary);
         }
@@ -256,23 +264,10 @@
             gap: 0.5rem;
         }
 
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .btn-secondary {
-            background-color: #e2e8f0;
-            color: var(--text-main);
-        }
-
-        .btn-secondary:hover {
-            background-color: #cbd5e1;
-        }
+        .btn-primary { background-color: var(--primary); color: white; }
+        .btn-primary:hover { background-color: var(--primary-hover); }
+        .btn-secondary { background-color: #e2e8f0; color: var(--text-main); }
+        .btn-secondary:hover { background-color: #cbd5e1; }
 
         .feedback {
             padding: 1rem;
@@ -321,7 +316,7 @@
 
         .solution-steps {
             padding: 1.5rem;
-            overflow-x: auto; /* Prevent math overflow in solution box */
+            overflow-x: auto; 
         }
 
         .step {
@@ -342,31 +337,46 @@
         .step-math {
             font-family: 'Cambria Math', 'Times New Roman', serif;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            display: block;
             margin-top: 0.5rem;
             color: #1e293b;
             font-size: 1.2rem;
-            flex-wrap: nowrap;
             white-space: nowrap;
         }
 
-        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tab { flex: 1 1 50%; }
+        }
+
         @media (max-width: 600px) {
             body { padding: 1rem 0.5rem; }
             .content { padding: 1.5rem 1rem; }
+            
+            /* Stack tabs fully on mobile */
             .tabs { flex-direction: column; }
-            .tab { border-left: 3px solid transparent; border-bottom: none; }
-            .tab.active { border-left-color: var(--primary); }
+            .tab { 
+                flex: 1 1 100%; 
+                border-left: 3px solid transparent; 
+                border-bottom: 1px solid var(--border); 
+                padding: 1rem; 
+                text-align: center; 
+            }
+            .tab:last-child { border-bottom: none; }
+            .tab.active { 
+                border-left-color: var(--primary); 
+                border-bottom-color: transparent;
+                background: white; 
+            }
             
+            /* Full width controls on mobile */
+            .controls { flex-direction: column; align-items: stretch; padding: 1rem; gap: 0.5rem; }
+            .controls select { width: 100%; text-align: center; }
+
             .problem-section { padding: 1rem 0.5rem; }
-            
-            /* Shrink equations on small screens to fit better */
-            .equation { font-size: 1.15rem; gap: 0.25rem; }
+            .equation { font-size: 1.15rem; }
             .frac { font-size: 1.05rem; margin: 0 0.15rem; }
             .step-math { font-size: 1.05rem; }
-            
+            .large-paren { font-size: 2rem; }
             .input-section { flex-direction: column; align-items: center; }
             .actions { flex-direction: column; width: 100%; }
             button { width: 100%; justify-content: center; }
@@ -377,22 +387,21 @@
 
 <div class="container">
     <div class="header">
-        <h1>ICSE Linear Equations Practice</h1>
+        <h1>ICSE Mathematics Practice Lab</h1>
         <p>Master algebraic solving methods with step-by-step guidance</p>
     </div>
 
     <div class="tabs">
-        <div class="tab active" data-mode="single" onclick="switchMode('single')">Linear Equations (1 Variable)</div>
-        <div class="tab" data-mode="simul" onclick="switchMode('simul')">Simultaneous Equations (2 Variables)</div>
+        <div class="tab active" data-mode="single" onclick="switchMode('single')">Linear Equations</div>
+        <div class="tab" data-mode="simul" onclick="switchMode('simul')">Simultaneous Equations</div>
+        <div class="tab" data-mode="ineq" onclick="switchMode('ineq')">Linear Inequalities</div>
+        <div class="tab" data-mode="quad" onclick="switchMode('quad')">Quadratic Equations</div>
     </div>
 
     <div class="controls">
         <label for="difficulty-level" style="font-weight:600; color:var(--text-muted);">Difficulty Level:</label>
         <select id="difficulty-level" onchange="generateProblem()">
-            <option value="standard">Standard Level (Basic Co-efficients)</option>
-            <option value="intermediate">Intermediate Level (Simple Fractions)</option>
-            <option value="advanced">Advanced Level (Complex Fractions / Reducible)</option>
-            <option id="opt-mastery" value="mastery">Mastery Level (Two-variable Denominators)</option>
+            <!-- Options injected dynamically based on tab -->
         </select>
     </div>
 
@@ -418,7 +427,7 @@
                 Next Problem
             </button>
             <button class="btn-secondary" onclick="toggleSolution()">
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                 Show Steps
             </button>
         </div>
@@ -435,7 +444,7 @@
 </div>
 
 <script>
-    let currentMode = 'single'; // 'single' or 'simul'
+    let currentMode = 'single'; 
     let currentProblem = {};
 
     // --- Math Utilities ---
@@ -446,13 +455,8 @@
     }
 
     function gcd(a, b) {
-        a = Math.abs(a);
-        b = Math.abs(b);
-        while(b) {
-            let t = b;
-            b = a % b;
-            a = t;
-        }
+        a = Math.abs(a); b = Math.abs(b);
+        while(b) { let t = b; b = a % b; a = t; }
         return a;
     }
 
@@ -461,18 +465,33 @@
         return Math.abs(a * b) / gcd(a, b);
     }
     
-    function lcm3(a, b, c) {
-        return lcm(a, lcm(b, c));
-    }
+    function lcm3(a, b, c) { return lcm(a, lcm(b, c)); }
 
-    // Simplifies fraction and returns [num, den]
     function simplifyFraction(n, d) {
         if (n === 0) return [0, 1];
         let g = gcd(n, d);
-        let sN = n / g;
-        let sD = d / g;
+        let sN = n / g; let sD = d / g;
         if (sD < 0) { sN = -sN; sD = -sD; }
         return [sN, sD];
+    }
+
+    // --- Inequality Utilities ---
+    function getIneqSymbol(code) {
+        const symbols = ['&lt;', '&le;', '&gt;', '&ge;'];
+        return symbols[code] || '=';
+    }
+    
+    function getIneqRaw(code) {
+        const symbols = ['<', '<=', '>', '>='];
+        return symbols[code] || '=';
+    }
+
+    function flipIneq(code) {
+        if (code === 0) return 2;
+        if (code === 1) return 3;
+        if (code === 2) return 0;
+        if (code === 3) return 1;
+        return code;
     }
 
     // --- Formatting Utilities ---
@@ -508,12 +527,6 @@
         return `<div class="frac"><div class="num">${numStr}</div><div class="den">${denStr}</div></div>`;
     }
 
-    function formatBinomial(variable, shift) {
-        if (shift === 0) return `<i>${variable}</i>`;
-        let sign = shift < 0 ? '+' : '-';
-        return `<i>${variable}</i> ${sign} ${Math.abs(shift)}`;
-    }
-    
     function formatLinearBinomial(coeff, variable, constant) {
         let varPart = "";
         if (coeff === 1) varPart = `<i>${variable}</i>`;
@@ -526,7 +539,6 @@
         return `${varPart} ${sign} ${Math.abs(constant)}`;
     }
     
-    // For simple fractions like 3x/5
     function formatFractionTerm(coeff, variable, den, isFirstTerm = false) {
         let absCoeff = Math.abs(coeff);
         let sign = coeff < 0 ? "-" : (isFirstTerm ? "" : "+");
@@ -581,17 +593,24 @@
         const instruction = document.getElementById('problem-instruction');
         const inputContainer = document.getElementById('input-container');
         const diffSelect = document.getElementById('difficulty-level');
-        const masteryOpt = document.getElementById('opt-mastery');
+        let currentDiff = diffSelect.value;
+        
+        let basicDiffs = `
+            <option value="standard">Standard Level (Basic Co-efficients)</option>
+            <option value="brackets">Standard Level (Brackets)</option>
+            <option value="intermediate">Intermediate Level (Simple Fractions)</option>
+            <option value="advanced">Advanced Level (Complex Fractions)</option>
+            <option value="mastery">Mastery Level (Variable in Denominator)</option>
+        `;
+
+        let quadDiffs = `
+            <option value="standard">Standard Level (Simple Factorization)</option>
+            <option value="brackets">Standard Level (Bracket Expansion)</option>
+            <option value="intermediate">Intermediate Level (Splitting Middle Term)</option>
+            <option value="mastery">Mastery Level (Reducible Fractions)</option>
+        `;
         
         if (mode === 'single') {
-            // Hide and disable Mastery level for single variable
-            masteryOpt.hidden = true;
-            masteryOpt.disabled = true;
-            masteryOpt.style.display = 'none';
-            if (diffSelect.value === 'mastery') {
-                diffSelect.value = 'advanced';
-            }
-
             instruction.innerText = "Solve for x";
             inputContainer.innerHTML = `
                 <div class="input-group">
@@ -599,12 +618,8 @@
                     <input type="number" id="ans-x" autocomplete="off" placeholder="Value">
                 </div>
             `;
-        } else {
-            // Show Mastery level for simultaneous equations
-            masteryOpt.hidden = false;
-            masteryOpt.disabled = false;
-            masteryOpt.style.display = 'block';
-
+            diffSelect.innerHTML = basicDiffs;
+        } else if (mode === 'simul') {
             instruction.innerText = "Solve the simultaneous equations";
             inputContainer.innerHTML = `
                 <div class="input-group">
@@ -616,164 +631,330 @@
                     <input type="number" id="ans-y" autocomplete="off" placeholder="Value">
                 </div>
             `;
+            diffSelect.innerHTML = basicDiffs;
+        } else if (mode === 'ineq') {
+            instruction.innerText = "Solve the Inequation";
+            inputContainer.innerHTML = `
+                <div class="input-group">
+                    <label>x</label>
+                    <select id="ans-ineq">
+                        <option value="<">&lt;</option>
+                        <option value="<=">&le;</option>
+                        <option value=">">&gt;</option>
+                        <option value=">=">&ge;</option>
+                    </select>
+                    <input type="number" id="ans-x" autocomplete="off" placeholder="Value">
+                </div>
+            `;
+            diffSelect.innerHTML = basicDiffs;
+        } else if (mode === 'quad') {
+            instruction.innerText = "Find the roots of the Quadratic Equation";
+            inputContainer.innerHTML = `
+                <div class="input-group">
+                    <label>x =</label>
+                    <input type="number" id="ans-x1" autocomplete="off" placeholder="Root 1">
+                </div>
+                <div class="input-group">
+                    <label>or x =</label>
+                    <input type="number" id="ans-x2" autocomplete="off" placeholder="Root 2">
+                </div>
+            `;
+            diffSelect.innerHTML = quadDiffs;
+            // Validate fallback for quad which doesn't have "advanced"
+            if (currentDiff === 'advanced') currentDiff = 'mastery'; 
         }
+
+        diffSelect.value = currentDiff || "standard";
         generateProblem();
     }
 
     function generateProblem() {
-        document.getElementById('feedback-msg').className = 'feedback';
         document.getElementById('feedback-msg').style.display = 'none';
         document.getElementById('solution-box').style.display = 'none';
         
-        document.getElementById('ans-x').value = '';
-        if (document.getElementById('ans-y')) document.getElementById('ans-y').value = '';
-
         let level = document.getElementById('difficulty-level').value;
 
-        if (currentMode === 'single') {
-            if (level === 'standard') generateSingleStandard();
-            else if (level === 'intermediate') generateSingleIntermediate();
-            else generateSingleAdvanced();
-        } else {
+        if (currentMode === 'single' || currentMode === 'ineq') {
+            let isIneq = (currentMode === 'ineq');
+            if (level === 'standard') generateSingleStandard(isIneq);
+            else if (level === 'brackets') generateSingleBrackets(isIneq);
+            else if (level === 'intermediate') generateSingleIntermediate(isIneq);
+            else if (level === 'advanced') generateSingleAdvanced(isIneq);
+            else generateSingleMastery(isIneq);
+        } else if (currentMode === 'simul') {
             if (level === 'standard') generateSimulStandard();
+            else if (level === 'brackets') generateSimulBrackets();
             else if (level === 'intermediate') generateSimulIntermediate();
             else if (level === 'advanced') generateSimulAdvanced();
             else generateSimulMastery();
+        } else if (currentMode === 'quad') {
+            if (level === 'standard') generateQuadStandard();
+            else if (level === 'brackets') generateQuadBrackets();
+            else if (level === 'intermediate') generateQuadIntermediate();
+            else generateQuadMastery();
         }
     }
 
-    // --- Single Variable Generators ---
-    function generateSingleStandard() {
+    // --- Linear / Inequality Shared Generators ---
+    function generateSingleStandard(isIneq = false) {
         let x = getRandomInt(-15, 15);
         let a = getRandomInt(-9, 9, true);
         let c = getRandomInt(-9, 9, true);
         while (a === c) { c = getRandomInt(-9, 9, true); }
         let b = getRandomInt(-20, 20);
         let d = a * x + b - c * x; 
-
-        currentProblem = { type: 'single', ansX: x };
+        
+        let ineqCode = isIneq ? getRandomInt(0, 3) : null;
+        let eqStr = isIneq ? getIneqSymbol(ineqCode) : '=';
+        
+        let finalXCoeff = a - c;
+        let finalCode = ineqCode;
+        let flipNote = "";
+        
+        if (isIneq && finalXCoeff < 0) {
+            finalCode = flipIneq(ineqCode);
+            flipNote = `<br><span style="color:var(--error); font-size:0.9em;">(Note: Inequality sign flips because we divided by a negative number ${finalXCoeff})</span>`;
+        }
+        
+        currentProblem = isIneq 
+            ? { type: 'ineq', ansX: x, ansSign: getIneqRaw(finalCode) } 
+            : { type: 'single', ansX: x };
 
         let lhs = formatPolynomial([{coeff: a, var: 'x'}, {coeff: b, var: ''}]);
         let rhs = formatPolynomial([{coeff: c, var: 'x'}, {coeff: d, var: ''}]);
         
-        document.getElementById('equation-display').innerHTML = `<div class="equation">${lhs} = ${rhs}</div>`;
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${lhs} ${eqStr} ${rhs}</div>`;
 
         let stepsHTML = `
-            <div class="step">Write the original equation: <span class="step-math">${lhs} = ${rhs}</span></div>
+            <div class="step">Write the original equation: <span class="step-math">${lhs} ${eqStr} ${rhs}</span></div>
             <div class="step">Transpose terms with <i>x</i> to the LHS, and constants to the RHS:
-                <span class="step-math">${formatPolynomial([{coeff: a, var: 'x'}, {coeff: -c, var: 'x'}])} = ${formatPolynomial([{coeff: d, var: ''}, {coeff: -b, var: ''}])}</span>
+                <span class="step-math">${formatPolynomial([{coeff: a, var: 'x'}, {coeff: -c, var: 'x'}])} ${eqStr} ${formatPolynomial([{coeff: d, var: ''}, {coeff: -b, var: ''}])}</span>
             </div>
             <div class="step">Simplify both sides:
-                <span class="step-math">${formatPolynomial([{coeff: (a - c), var: 'x'}])} = ${d - b}</span>
+                <span class="step-math">${formatPolynomial([{coeff: finalXCoeff, var: 'x'}])} ${eqStr} ${d - b}</span>
             </div>
             <div class="step">Divide by the coefficient of <i>x</i> to find the final value:
-                <span class="step-math"><i>x</i> = ${(d - b)} / ${(a - c)}</span>
-                <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
+                <span class="step-math"><i>x</i> ${isIneq ? getIneqSymbol(finalCode) : '='} ${(d - b)} / ${finalXCoeff} ${flipNote}</span>
+                <span class="step-math" style="color: var(--success);"><i>x</i> ${isIneq ? getIneqSymbol(finalCode) : '='} ${x}</span>
             </div>
         `;
         document.getElementById('solution-steps').innerHTML = stepsHTML;
     }
 
-    function generateSingleIntermediate() {
-        // Equation form: (a*x)/d1 + b = (c*x)/d2 + e
-        let d1 = getRandomInt(2, 5);
-        let d2 = getRandomInt(2, 5);
-        let L = lcm(d1, d2);
+    function generateSingleBrackets(isIneq = false) {
+        let x, C1, S1, C2, C3, C4, K1, C5, K2;
+        let bracketXCoeff, simpleXCoeff;
+        let bracketOnLeft = Math.random() < 0.5;
+
+        while(true) {
+            x = getRandomInt(-10, 10);
+            C1 = getRandomInt(2, 8);
+            S1 = Math.random() < 0.5 ? -1 : 1;
+            C2 = getRandomInt(1, 5);
+            C3 = getRandomInt(2, 5) * (Math.random() < 0.5 ? 1 : -1);
+            C4 = getRandomInt(1, 3);
+            K1 = getRandomInt(-5, 5, true);
+            C5 = getRandomInt(-5, 5, true);
+
+            bracketXCoeff = C1 + S1 * (C2 + C3 * C4);
+            simpleXCoeff = C5;
+            if (bracketXCoeff !== simpleXCoeff) break;
+        }
+
+        let innerV1 = C4 * x + K1;
+        let bracketVal = C2 * x + C3 * innerV1;
+        let bracketSideTotal = C1 * x + S1 * bracketVal;
+        K2 = bracketSideTotal - C5 * x;
+
+        let ineqCode = isIneq ? getRandomInt(0, 3) : null;
+        let eqStrM = isIneq ? getIneqSymbol(ineqCode) : '=';
         
-        // Ensure x is a multiple of L so divisions are clean
+        let term1 = formatPolynomial([{coeff: C1, var: 'x'}]);
+        let signS1 = S1 === -1 ? '-' : '+';
+        let term2 = formatPolynomial([{coeff: C2, var: 'x'}]);
+        let c3Sign = C3 < 0 ? '-' : '+';
+        let absC3 = Math.abs(C3);
+        let innerParen = formatLinearBinomial(C4, 'x', K1);
+        
+        let strSimple = formatLinearBinomial(C5, 'x', K2);
+        let strBracket_init = `${term1} ${signS1} [${term2} ${c3Sign} ${absC3}(${innerParen})]`;
+        
+        let eqStr = bracketOnLeft ? `${strBracket_init} ${eqStrM} ${strSimple}` : `${strSimple} ${eqStrM} ${strBracket_init}`;
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${eqStr}</div>`;
+
+        let expInnerX = C3 * C4; let expInnerK = C3 * K1;
+        let bracketX = C2 + expInnerX; let bracketK = expInnerK;
+        let expBracketX = S1 * bracketX; let expBracketK = S1 * bracketK;
+        let finalBracketSideX = C1 + expBracketX;
+
+        let bracketExpStr = formatPolynomial([{coeff: C2, var: 'x'}, {coeff: expInnerX, var: 'x'}, {coeff: expInnerK, var: ''}]);
+        let bracketCombinedStr = formatLinearBinomial(bracketX, 'x', bracketK);
+        let removedBracketStr = formatPolynomial([{coeff: C1, var: 'x'}, {coeff: expBracketX, var: 'x'}, {coeff: expBracketK, var: ''}]);
+        let finalBracketSideStr = formatLinearBinomial(finalBracketSideX, 'x', expBracketK);
+        
+        function makeEq(l, r) { return `${l} ${eqStrM} ${r}`; }
+        
+        let eqStep1 = bracketOnLeft ? makeEq(`${term1} ${signS1} [${bracketExpStr}]`, strSimple) : makeEq(strSimple, `${term1} ${signS1} [${bracketExpStr}]`);
+        let eqStep2 = bracketOnLeft ? makeEq(`${term1} ${signS1} [${bracketCombinedStr}]`, strSimple) : makeEq(strSimple, `${term1} ${signS1} [${bracketCombinedStr}]`);
+        let eqStep3a = bracketOnLeft ? makeEq(removedBracketStr, strSimple) : makeEq(strSimple, removedBracketStr);
+        let eqStep3b = bracketOnLeft ? makeEq(finalBracketSideStr, strSimple) : makeEq(strSimple, finalBracketSideStr);
+
+        let leftX_final = bracketOnLeft ? finalBracketSideX : C5;
+        let rightX_final = bracketOnLeft ? C5 : finalBracketSideX;
+        let leftK_final = bracketOnLeft ? expBracketK : K2;
+        let rightK_final = bracketOnLeft ? K2 : expBracketK;
+
+        let groupingLhs = formatPolynomial([{coeff: leftX_final, var: 'x'}, {coeff: -rightX_final, var: 'x'}]);
+        let groupingRhs = leftK_final === 0 ? rightK_final.toString() : `${rightK_final} ${leftK_final < 0 ? '+' : '-'} ${Math.abs(leftK_final)}`;
+        
+        let groupedXCoeff = leftX_final - rightX_final;
+        let groupedConst = rightK_final - leftK_final;
+
+        let finalCode = ineqCode;
+        let flipNote = "";
+        if (isIneq && groupedXCoeff < 0) {
+            finalCode = flipIneq(ineqCode);
+            flipNote = `<br><span style="color:var(--error); font-size:0.9em;">(Flipped sign due to division by negative number)</span>`;
+        }
+
+        currentProblem = isIneq 
+            ? { type: 'ineq', ansX: x, ansSign: getIneqRaw(finalCode) } 
+            : { type: 'single', ansX: x };
+
+        let finalSignStr = isIneq ? getIneqSymbol(finalCode) : '=';
+        
+        let finalSolveHTML = '';
+        if (Math.abs(groupedXCoeff) === 1) {
+            if (groupedXCoeff === -1) {
+                finalSolveHTML = `
+                    <span class="step-math">-<i>x</i> ${eqStrM} ${groupedConst}</span>
+                    <span class="step-math" style="color: var(--success);"><i>x</i> ${finalSignStr} ${x} ${flipNote}</span>
+                `;
+            } else {
+                finalSolveHTML = `<span class="step-math" style="color: var(--success);"><i>x</i> ${finalSignStr} ${x}</span>`;
+            }
+        } else {
+            finalSolveHTML = `
+                <span class="step-math"><i>x</i> ${finalSignStr} ${groupedConst} / ${groupedXCoeff} ${flipNote}</span>
+                <span class="step-math" style="color: var(--success);"><i>x</i> ${finalSignStr} ${x}</span>
+            `;
+        }
+
+        let stepsHTML = `
+            <div class="step">Expand the innermost parentheses:
+                <span class="step-math">${c3Sign} ${absC3}(${innerParen}) = ${formatLinearBinomial(expInnerX, 'x', expInnerK)}</span>
+                <span class="step-math">Equation becomes: ${eqStep1}</span>
+            </div>
+            <div class="step">Combine terms inside the square bracket:
+                <span class="step-math">${eqStep2}</span>
+            </div>
+            <div class="step">Remove the square bracket by distributing the sign:
+                <span class="step-math">${eqStep3a}</span>
+                <span class="step-math">${eqStep3b}</span>
+            </div>
+            <div class="step">Group <i>x</i> terms on the LHS and constants on the RHS:
+                <span class="step-math">${groupingLhs} ${eqStrM} ${groupingRhs}</span>
+                <span class="step-math">${groupedXCoeff}<i>x</i> ${eqStrM} ${groupedConst}</span>
+            </div>
+            <div class="step">Solve for <i>x</i>:
+                ${finalSolveHTML}
+            </div>
+        `;
+        document.getElementById('solution-steps').innerHTML = stepsHTML;
+    }
+
+    function generateSingleIntermediate(isIneq = false) {
+        let d1 = getRandomInt(2, 5); let d2 = getRandomInt(2, 5);
+        let L = lcm(d1, d2);
         let x = getRandomInt(-4, 4, true) * L;
         
-        let a = getRandomInt(-5, 5, true);
-        let c = getRandomInt(-5, 5, true);
-        
-        // Prevent x from cancelling out (a/d1 != c/d2)
+        let a = getRandomInt(-5, 5, true); let c = getRandomInt(-5, 5, true);
         while (a * d2 === c * d1) {
-            c = getRandomInt(-5, 5, true);
-            d2 = getRandomInt(2, 5);
-            L = lcm(d1, d2);
-            x = getRandomInt(-4, 4, true) * L;
+            c = getRandomInt(-5, 5, true); d2 = getRandomInt(2, 5);
+            L = lcm(d1, d2); x = getRandomInt(-4, 4, true) * L;
         }
         
         let b = getRandomInt(-15, 15);
         let e = ((a * x) / d1) + b - ((c * x) / d2);
         
-        currentProblem = { type: 'single', ansX: x };
+        let ineqCode = isIneq ? getRandomInt(0, 3) : null;
+        let eqStrM = isIneq ? getIneqSymbol(ineqCode) : '=';
         
         let eqLeft = `${formatFractionTerm(a, 'x', d1, true)} ${b < 0 ? '-' : '+'} ${Math.abs(b)}`;
         let eqRight = `${formatFractionTerm(c, 'x', d2, true)} ${e < 0 ? '-' : '+'} ${Math.abs(e)}`;
         
-        document.getElementById('equation-display').innerHTML = `<div class="equation">${eqLeft} = ${eqRight}</div>`;
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${eqLeft} ${eqStrM} ${eqRight}</div>`;
         
         let constDiff = e - b;
-        let nA = a * (L / d1);
-        let nC = c * (L / d2);
+        let nA = a * (L / d1); let nC = c * (L / d2);
         let numDiff = nA - nC;
         let finalRHS = constDiff * L;
         
+        let finalCode = ineqCode;
+        let flipNote = "";
+        if (isIneq && numDiff < 0) {
+            finalCode = flipIneq(ineqCode);
+            flipNote = `<br><span style="color:var(--error); font-size:0.9em;">(Flipped sign due to division by negative number)</span>`;
+        }
+
+        currentProblem = isIneq 
+            ? { type: 'ineq', ansX: x, ansSign: getIneqRaw(finalCode) } 
+            : { type: 'single', ansX: x };
+            
+        let finalSignStr = isIneq ? getIneqSymbol(finalCode) : '=';
+
         let stepsHTML = `
-            <div class="step">Group variable terms on the LHS and constant terms on the RHS:
-                <span class="step-math">${formatFractionTerm(a, 'x', d1, true)} ${c > 0 ? '-' : '+'} ${formatFractionTerm(Math.abs(c), 'x', d2, true)} = ${e} ${b < 0 ? '+' : '-'} ${Math.abs(b)}</span>
-                <span class="step-math">${formatFractionTerm(a, 'x', d1, true)} ${c > 0 ? '-' : '+'} ${formatFractionTerm(Math.abs(c), 'x', d2, true)} = ${constDiff}</span>
+            <div class="step">Group variable terms on LHS and constants on RHS:
+                <span class="step-math">${formatFractionTerm(a, 'x', d1, true)} ${c > 0 ? '-' : '+'} ${formatFractionTerm(Math.abs(c), 'x', d2, true)} ${eqStrM} ${e} ${b < 0 ? '+' : '-'} ${Math.abs(b)}</span>
+                <span class="step-math">${formatFractionTerm(a, 'x', d1, true)} ${c > 0 ? '-' : '+'} ${formatFractionTerm(Math.abs(c), 'x', d2, true)} ${eqStrM} ${constDiff}</span>
             </div>
-            <div class="step">Find the LCM of the denominators (${d1}, ${d2}) which is ${L}. Multiply the entire equation by ${L} to clear fractions:
-                <span class="step-math">${nA}<i>x</i> ${nC > 0 ? '-' : '+'} ${Math.abs(nC)}<i>x</i> = ${constDiff} × ${L}</span>
+            <div class="step">Multiply by LCM (${L}) to clear fractions:
+                <span class="step-math">${nA}<i>x</i> ${nC > 0 ? '-' : '+'} ${Math.abs(nC)}<i>x</i> ${eqStrM} ${constDiff} × ${L}</span>
             </div>
             <div class="step">Simplify and solve for <i>x</i>:
-                <span class="step-math">${numDiff}<i>x</i> = ${finalRHS}</span>
-                <span class="step-math"><i>x</i> = ${finalRHS} / ${numDiff}</span>
-                <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
+                <span class="step-math">${numDiff}<i>x</i> ${eqStrM} ${finalRHS}</span>
+                <span class="step-math"><i>x</i> ${finalSignStr} ${finalRHS} / ${numDiff} ${flipNote}</span>
+                <span class="step-math" style="color: var(--success);"><i>x</i> ${finalSignStr} ${x}</span>
             </div>
         `;
         document.getElementById('solution-steps').innerHTML = stepsHTML;
     }
 
-    function generateSingleAdvanced() {
+    function generateSingleAdvanced(isIneq = false) {
         let x, d1, d2, n1, n2, c1, c2, k1, k2, const1, const2, K, L;
         let M1, M2, xCoeff, constSum, rhsVal;
 
         while (true) {
             x = getRandomInt(-8, 8);
-            d1 = getRandomInt(2, 5);
-            d2 = getRandomInt(2, 5);
-            // Ensure denominators are different
+            d1 = getRandomInt(2, 5); d2 = getRandomInt(2, 5);
             if (d1 === d2) d2 = getRandomInt(2, 5) === d1 ? (d1 === 5 ? 4 : d1 + 1) : getRandomInt(2, 5);
             
             n1 = getRandomInt(1, 4);
-            let [sN1, sD1] = simplifyFraction(n1, d1);
-            n1 = sN1; d1 = sD1;
-            if (d1 === 1) { d1 = 2; n1 = 1; } // Force it to remain a fraction
+            let [sN1, sD1] = simplifyFraction(n1, d1); n1 = sN1; d1 = sD1;
+            if (d1 === 1) { d1 = 2; n1 = 1; }
 
-            n2 = getRandomInt(-4, 4, true); // Allow negative for subtraction
-            let [sN2, sD2] = simplifyFraction(n2, d2);
-            n2 = sN2; d2 = sD2;
+            n2 = getRandomInt(-4, 4, true); 
+            let [sN2, sD2] = simplifyFraction(n2, d2); n2 = sN2; d2 = sD2;
             if (d2 === 1) { d2 = 3; n2 = 1; }
 
-            c1 = getRandomInt(-4, 4, true);
-            c2 = getRandomInt(-4, 4, true);
-
+            c1 = getRandomInt(-4, 4, true); c2 = getRandomInt(-4, 4, true);
             L = lcm(d1, d2);
-            M1 = n1 * (L / d1);
-            M2 = n2 * (L / d2);
-
+            M1 = n1 * (L / d1); M2 = n2 * (L / d2);
             xCoeff = (M1 * c1) + (M2 * c2);
-            if (xCoeff !== 0) break; // Ensure 'x' does not cancel out completely
+            if (xCoeff !== 0) break;
         }
 
-        // Guarantee clean integer math by forcing the binomial evaluation to be multiples of the denominator
-        k1 = getRandomInt(-3, 3);
-        k2 = getRandomInt(-3, 3);
-
-        const1 = d1 * k1 - c1 * x;
-        const2 = d2 * k2 - c2 * x;
-
+        k1 = getRandomInt(-3, 3); k2 = getRandomInt(-3, 3);
+        const1 = d1 * k1 - c1 * x; const2 = d2 * k2 - c2 * x;
         K = n1 * k1 + n2 * k2;
 
-        currentProblem = { type: 'single', ansX: x };
+        let ineqCode = isIneq ? getRandomInt(0, 3) : null;
+        let eqStrM = isIneq ? getIneqSymbol(ineqCode) : '=';
 
         let t1 = formatFractionWithParens(n1, d1, c1, 'x', const1, true);
         let t2 = formatFractionWithParens(n2, d2, c2, 'x', const2, false);
         
-        document.getElementById('equation-display').innerHTML = `<div class="equation">${t1} ${t2} = ${K}</div>`;
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${t1} ${t2} ${eqStrM} ${K}</div>`;
 
         let expC1 = M1 * c1; let expK1 = M1 * const1;
         let expC2 = M2 * c2; let expK2 = M2 * const2;
@@ -784,40 +965,51 @@
         let groupStepHTML = '';
         if (constSum !== 0) {
             groupStepHTML = `
-                <span class="step-math">${formatPolynomial([{coeff: xCoeff, var: 'x'}, {coeff: constSum, var: ''}])} = ${rhsVal}</span>
-                <span class="step-math">${formatPolynomial([{coeff: xCoeff, var: 'x'}])} = ${rhsVal} ${constSum > 0 ? '-' : '+'} ${Math.abs(constSum)}</span>
-                <span class="step-math">${formatPolynomial([{coeff: xCoeff, var: 'x'}])} = ${rhsVal - constSum}</span>
+                <span class="step-math">${formatPolynomial([{coeff: xCoeff, var: 'x'}, {coeff: constSum, var: ''}])} ${eqStrM} ${rhsVal}</span>
+                <span class="step-math">${formatPolynomial([{coeff: xCoeff, var: 'x'}])} ${eqStrM} ${rhsVal} ${constSum > 0 ? '-' : '+'} ${Math.abs(constSum)}</span>
+                <span class="step-math">${formatPolynomial([{coeff: xCoeff, var: 'x'}])} ${eqStrM} ${rhsVal - constSum}</span>
             `;
         } else {
-            groupStepHTML = `
-                <span class="step-math">${formatPolynomial([{coeff: xCoeff, var: 'x'}])} = ${rhsVal}</span>
-            `;
+            groupStepHTML = `<span class="step-math">${formatPolynomial([{coeff: xCoeff, var: 'x'}])} ${eqStrM} ${rhsVal}</span>`;
         }
+
+        let finalCode = ineqCode;
+        let flipNote = "";
+        if (isIneq && xCoeff < 0) {
+            finalCode = flipIneq(ineqCode);
+            flipNote = `<br><span style="color:var(--error); font-size:0.9em;">(Flipped sign due to division by negative number)</span>`;
+        }
+        
+        currentProblem = isIneq 
+            ? { type: 'ineq', ansX: x, ansSign: getIneqRaw(finalCode) } 
+            : { type: 'single', ansX: x };
+            
+        let finalSignStr = isIneq ? getIneqSymbol(finalCode) : '=';
 
         let finalSolveHTML = '';
         if (Math.abs(xCoeff) === 1) {
             if (xCoeff === -1) {
                 finalSolveHTML = `
-                    <span class="step-math">-<i>x</i> = ${rhsVal - constSum}</span>
-                    <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
+                    <span class="step-math">-<i>x</i> ${eqStrM} ${rhsVal - constSum}</span>
+                    <span class="step-math" style="color: var(--success);"><i>x</i> ${finalSignStr} ${x} ${flipNote}</span>
                 `;
             } else {
-                finalSolveHTML = `<span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>`;
+                finalSolveHTML = `<span class="step-math" style="color: var(--success);"><i>x</i> ${finalSignStr} ${x}</span>`;
             }
         } else {
             finalSolveHTML = `
-                <span class="step-math"><i>x</i> = ${rhsVal - constSum} / ${xCoeff}</span>
-                <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
+                <span class="step-math"><i>x</i> ${finalSignStr} ${rhsVal - constSum} / ${xCoeff} ${flipNote}</span>
+                <span class="step-math" style="color: var(--success);"><i>x</i> ${finalSignStr} ${x}</span>
             `;
         }
 
         let stepsHTML = `
             <div class="step">Find the LCM of the denominators (${d1} and ${d2}). The LCM is ${L}.</div>
             <div class="step">Multiply the entire equation by ${L} to clear the fractions:
-                <span class="step-math">${M1}(${formatLinearBinomial(c1, 'x', const1)}) ${M2 < 0 ? '-' : '+'} ${Math.abs(M2)}(${formatLinearBinomial(c2, 'x', const2)}) = ${K} × ${L}</span>
+                <span class="step-math">${M1}(${formatLinearBinomial(c1, 'x', const1)}) ${M2 < 0 ? '-' : '+'} ${Math.abs(M2)}(${formatLinearBinomial(c2, 'x', const2)}) ${eqStrM} ${K} × ${L}</span>
             </div>
             <div class="step">Expand the brackets:
-                <span class="step-math">${formatPolynomial([{coeff: expC1, var: 'x'}, {coeff: expK1, var: ''}, {coeff: expC2, var: 'x'}, {coeff: expK2, var: ''}])} = ${rhsVal}</span>
+                <span class="step-math">${formatPolynomial([{coeff: expC1, var: 'x'}, {coeff: expK1, var: ''}, {coeff: expC2, var: 'x'}, {coeff: expK2, var: ''}])} ${eqStrM} ${rhsVal}</span>
             </div>
             <div class="step">Group like terms on the LHS and shift constants to the RHS:
                 ${groupStepHTML}
@@ -829,361 +1021,582 @@
         document.getElementById('solution-steps').innerHTML = stepsHTML;
     }
 
-    // --- Simultaneous Generators ---
-    function generateSimulStandard() {
-        let x = getRandomInt(-10, 10);
-        let y = getRandomInt(-10, 10);
-        let a1 = getRandomInt(-6, 6, true);
-        let b1 = getRandomInt(-6, 6, true);
-        let a2 = getRandomInt(-6, 6, true);
-        let b2 = getRandomInt(-6, 6, true);
-        
-        while ((a1 * b2) - (a2 * b1) === 0) {
-            a2 = getRandomInt(-6, 6, true);
-            b2 = getRandomInt(-6, 6, true);
-        }
-
-        let c1 = a1 * x + b1 * y;
-        let c2 = a2 * x + b2 * y;
-
-        currentProblem = { type: 'simul', ansX: x, ansY: y };
-
-        let eq1Str = formatPolynomial([{coeff: a1, var: 'x'}, {coeff: b1, var: 'y'}]);
-        let eq2Str = formatPolynomial([{coeff: a2, var: 'x'}, {coeff: b2, var: 'y'}]);
-        
-        document.getElementById('equation-display').innerHTML = `
-            <div class="equation">${eq1Str} = ${c1} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(i)</span></div>
-            <div class="equation">${eq2Str} = ${c2} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(ii)</span></div>
-        `;
-
-        let mult1 = Math.abs(b2);
-        let mult2 = Math.abs(b1);
-        
-        let nA1 = a1 * mult1, nB1 = b1 * mult1, nC1 = c1 * mult1;
-        let nA2 = a2 * mult2, nB2 = b2 * mult2, nC2 = c2 * mult2;
-
-        let action = (nB1 === nB2) ? 'Subtracting' : 'Adding';
-        let xCoeff = (nB1 === nB2) ? (nA1 - nA2) : (nA1 + nA2);
-        let constant = (nB1 === nB2) ? (nC1 - nC2) : (nC1 + nC2);
-
-        let subTerm = a1 * x;
-        let rhsAfterSub = c1 - subTerm;
-
-        let stepsHTML = `
-            <div class="step">We will use the <b>Elimination Method</b> to eliminate <i>y</i>. <br>
-                Multiply equation (i) by ${mult1} and equation (ii) by ${mult2}:
-                <span class="step-math">${formatPolynomial([{coeff: nA1, var: 'x'}, {coeff: nB1, var: 'y'}])} = ${nC1} &nbsp;&nbsp;&nbsp; ...(iii)</span>
-                <span class="step-math">${formatPolynomial([{coeff: nA2, var: 'x'}, {coeff: nB2, var: 'y'}])} = ${nC2} &nbsp;&nbsp;&nbsp; ...(iv)</span>
-            </div>
-            <div class="step">${action} equation (iv) ${action === 'Subtracting' ? 'from' : 'and'} equation (iii) to eliminate <i>y</i>:
-                <span class="step-math">${formatPolynomial([{coeff: xCoeff, var: 'x'}])} = ${constant}</span>
-                <span class="step-math"><i>x</i> = ${constant} / ${xCoeff}</span>
-                <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
-            </div>
-            <div class="step">Substitute <i>x</i> = ${x} into equation (i):
-                <span class="step-math">${formatPolynomial([{coeff: a1, var: `(${x})`}])} ${formatPolynomial([{coeff: b1, var: 'y'}])} = ${c1}</span>
-            </div>
-            <div class="step">Solve for <i>y</i>:
-                <span class="step-math">${formatPolynomial([{coeff: b1, var: 'y'}])} = ${c1} - (${subTerm})</span>
-                <span class="step-math">${formatPolynomial([{coeff: b1, var: 'y'}])} = ${rhsAfterSub}</span>
-                <span class="step-math" style="color: var(--success);"><i>y</i> = ${y}</span>
-            </div>
-        `;
-        document.getElementById('solution-steps').innerHTML = stepsHTML;
+    function generateSingleMastery(isIneq = false) {
+        if (Math.random() < 0.5) generateSingleSameDenom(isIneq);
+        else generateSingleDiffDenom(isIneq);
     }
 
-    function generateSimulIntermediate() {
-        // Equation form: (a1*x)/dx1 + (b1*y)/dy1 = Cnum1/Cden1
-        let x = getRandomInt(-8, 8);
-        let y = getRandomInt(-8, 8);
-        
-        let a1, b1, dx1, dy1, a2, b2, dx2, dy2;
-        
-        // Loop ensures independence
-        while (true) {
-            a1 = getRandomInt(-5, 5, true); b1 = getRandomInt(-5, 5, true);
-            dx1 = getRandomInt(1, 4); dy1 = getRandomInt(1, 4);
-            // Ensure at least one fraction in Eq 1
-            if (dx1 === 1 && dy1 === 1) dx1 = getRandomInt(2, 4);
-            
-            a2 = getRandomInt(-5, 5, true); b2 = getRandomInt(-5, 5, true);
-            dx2 = getRandomInt(1, 4); dy2 = getRandomInt(1, 4);
-            // Ensure at least one fraction in Eq 2
-            if (dx2 === 1 && dy2 === 1) dy2 = getRandomInt(2, 4);
-            
-            // Check determinant != 0
-            if ((a1 * dy1 * b2 * dx2) - (a2 * dy2 * b1 * dx1) !== 0) break;
-        }
-
-        // Calculate RHS fractions perfectly
-        let n1 = (a1 * x * dy1) + (b1 * y * dx1);
-        let d1 = dx1 * dy1;
-        let [Cnum1, Cden1] = simplifyFraction(n1, d1);
-        
-        let n2 = (a2 * x * dy2) + (b2 * y * dx2);
-        let d2 = dx2 * dy2;
-        let [Cnum2, Cden2] = simplifyFraction(n2, d2);
-        
-        currentProblem = { type: 'simul', ansX: x, ansY: y };
-
-        document.getElementById('equation-display').innerHTML = `
-            <div class="equation">${formatFractionEq(a1, dx1, b1, dy1, Cnum1, Cden1)} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(i)</span></div>
-            <div class="equation">${formatFractionEq(a2, dx2, b2, dy2, Cnum2, Cden2)} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(ii)</span></div>
-        `;
-
-        // Standardize the linear eq values
-        let L1 = lcm3(dx1, dy1, Cden1);
-        let A1 = a1 * (L1 / dx1);
-        let B1 = b1 * (L1 / dy1);
-        let K1 = Cnum1 * (L1 / Cden1);
-        
-        let L2 = lcm3(dx2, dy2, Cden2);
-        let A2 = a2 * (L2 / dx2);
-        let B2 = b2 * (L2 / dy2);
-        let K2 = Cnum2 * (L2 / Cden2);
-
-        // Standard Elimination logic follows:
-        let mult1 = Math.abs(B2);
-        let mult2 = Math.abs(B1);
-        
-        let nA1 = A1 * mult1, nB1 = B1 * mult1, nK1 = K1 * mult1;
-        let nA2 = A2 * mult2, nB2 = B2 * mult2, nK2 = K2 * mult2;
-
-        let action = (nB1 === nB2) ? 'Subtracting' : 'Adding';
-        let xCoeff = (nB1 === nB2) ? (nA1 - nA2) : (nA1 + nA2);
-        let constant = (nB1 === nB2) ? (nK1 - nK2) : (nK1 + nK2);
-        
-        let subTerm = A1 * x;
-        let rhsAfterSub = K1 - subTerm;
-
-        let stepsHTML = `
-            <div class="step"><b>Phase 1: Clear Fractions</b><br>
-                Convert to standard form by multiplying each equation by the LCM of its denominators.<br>
-                For eq(i), the LCM of (${dx1}, ${dy1}, ${Cden1}) is ${L1}. Multiply by ${L1}:<br>
-                <span class="step-math">${formatPolynomial([{coeff: A1, var: 'x'}, {coeff: B1, var: 'y'}])} = ${K1} &nbsp;&nbsp;&nbsp; ...(iii)</span>
-                For eq(ii), the LCM of (${dx2}, ${dy2}, ${Cden2}) is ${L2}. Multiply by ${L2}:<br>
-                <span class="step-math">${formatPolynomial([{coeff: A2, var: 'x'}, {coeff: B2, var: 'y'}])} = ${K2} &nbsp;&nbsp;&nbsp; ...(iv)</span>
-            </div>
-            <div class="step"><b>Phase 2: Elimination Method</b><br>
-                Multiply eq(iii) by ${mult1} and eq(iv) by ${mult2} to eliminate <i>y</i>:
-                <span class="step-math">${formatPolynomial([{coeff: nA1, var: 'x'}, {coeff: nB1, var: 'y'}])} = ${nK1} &nbsp;&nbsp;&nbsp; ...(v)</span>
-                <span class="step-math">${formatPolynomial([{coeff: nA2, var: 'x'}, {coeff: nB2, var: 'y'}])} = ${nK2} &nbsp;&nbsp;&nbsp; ...(vi)</span>
-                ${action} eq(vi) ${action === 'Subtracting' ? 'from' : 'and'} eq(v):
-                <span class="step-math">${formatPolynomial([{coeff: xCoeff, var: 'x'}])} = ${constant}</span>
-                <span class="step-math"><i>x</i> = ${constant} / ${xCoeff}</span>
-                <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
-            </div>
-            <div class="step">Substitute <i>x</i> = ${x} into eq(iii):
-                <span class="step-math">${formatPolynomial([{coeff: A1, var: `(${x})`}])} ${formatPolynomial([{coeff: B1, var: 'y'}])} = ${K1}</span>
-            </div>
-            <div class="step">Solve for <i>y</i>:
-                <span class="step-math">${formatPolynomial([{coeff: B1, var: 'y'}])} = ${K1} - (${subTerm})</span>
-                <span class="step-math">${formatPolynomial([{coeff: B1, var: 'y'}])} = ${rhsAfterSub}</span>
-                <span class="step-math" style="color: var(--success);"><i>y</i> = ${y}</span>
-            </div>
-        `;
-        document.getElementById('solution-steps').innerHTML = stepsHTML;
-    }
-
-    function generateSimulAdvanced() {
-        // Reducible: A1/(mx+p) + B1/(ny+q) = C1
-        let U = getRandomInt(2, 5) * (Math.random() < 0.5 ? 1 : -1);
-        let V = getRandomInt(2, 5) * (Math.random() < 0.5 ? 1 : -1);
-        
-        let x = getRandomInt(-5, 5); 
-        let y = getRandomInt(-5, 5);
-        
-        let m = getRandomInt(1, 3);
-        let n = getRandomInt(1, 3);
-        
-        let p = U - (m * x);
-        let q = V - (n * y);
-
-        let a1 = getRandomInt(-4, 4, true);
-        let b1 = getRandomInt(-4, 4, true);
-        let a2 = getRandomInt(-4, 4, true);
-        let b2 = getRandomInt(-4, 4, true);
-        
-        while ((a1 * b2) - (a2 * b1) === 0) {
-            a2 = getRandomInt(-4, 4, true);
-            b2 = getRandomInt(-4, 4, true);
-        }
-
-        let A1 = a1 * U; let B1 = b1 * V; let C1 = a1 + b1;
-        let A2 = a2 * U; let B2 = b2 * V; let C2 = a2 + b2;
-
-        currentProblem = { type: 'simul', ansX: x, ansY: y };
-
-        let eq1Left = `${buildFraction(A1, formatLinearBinomial(m, 'x', p))} ${B1 < 0 ? '-' : '+'} ${buildFraction(Math.abs(B1), formatLinearBinomial(n, 'y', q))}`;
-        let eq2Left = `${buildFraction(A2, formatLinearBinomial(m, 'x', p))} ${B2 < 0 ? '-' : '+'} ${buildFraction(Math.abs(B2), formatLinearBinomial(n, 'y', q))}`;
-
-        document.getElementById('equation-display').innerHTML = `
-            <div class="equation">${eq1Left} = ${C1} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(i)</span></div>
-            <div class="equation">${eq2Left} = ${C2} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(ii)</span></div>
-        `;
-
-        let mult1 = Math.abs(b2);
-        let mult2 = Math.abs(b1);
-        
-        let nA1 = A1 * mult1, nB1 = B1 * mult1, nC1 = C1 * mult1;
-        let nA2 = A2 * mult2, nB2 = B2 * mult2, nC2 = C2 * mult2;
-
-        let action = (nB1 === nB2) ? 'Subtracting' : 'Adding';
-        let aCoeff = (nB1 === nB2) ? (nA1 - nA2) : (nA1 + nA2);
-        let constant = (nB1 === nB2) ? (nC1 - nC2) : (nC1 + nC2);
-        
-        let simpA = simplifyFraction(constant, aCoeff); 
-        
-        let subTerm = A1 * (1/U); 
-        let rhsAfterSub = C1 - subTerm;
-        let simpB = simplifyFraction(rhsAfterSub, B1); 
-
-        let stepsHTML = `
-            <div class="step"><b>Phase 1: Substitution</b><br>
-                These equations are not linear. Let's substitute: 
-                <span class="step-math">Let <i>a</i> = ${buildFraction('1', formatLinearBinomial(m, 'x', p))} and <i>b</i> = ${buildFraction('1', formatLinearBinomial(n, 'y', q))}</span>
-                This reduces our system to linear equations:
-                <span class="step-math">${formatPolynomial([{coeff: A1, var: 'a'}, {coeff: B1, var: 'b'}])} = ${C1} &nbsp;&nbsp;&nbsp; ...(iii)</span>
-                <span class="step-math">${formatPolynomial([{coeff: A2, var: 'a'}, {coeff: B2, var: 'b'}])} = ${C2} &nbsp;&nbsp;&nbsp; ...(iv)</span>
-            </div>
-            <div class="step"><b>Phase 2: Solve for <i>a</i> and <i>b</i></b><br>
-                Multiply equation (iii) by ${mult1} and equation (iv) by ${mult2}:
-                <span class="step-math">${formatPolynomial([{coeff: nA1, var: 'a'}, {coeff: nB1, var: 'b'}])} = ${nC1} &nbsp;&nbsp;&nbsp; ...(v)</span>
-                <span class="step-math">${formatPolynomial([{coeff: nA2, var: 'a'}, {coeff: nB2, var: 'b'}])} = ${nC2} &nbsp;&nbsp;&nbsp; ...(vi)</span>
-                ${action} equation (vi) ${action === 'Subtracting' ? 'from' : 'and'} (v) to eliminate <i>b</i>:
-                <span class="step-math">${aCoeff}<i>a</i> = ${constant} 
-                    &nbsp;&nbsp;&nbsp; ⇒ &nbsp;&nbsp;&nbsp; 
-                    <i>a</i> = ${buildFraction(simpA[0], simpA[1])}</span>
-            </div>
-            <div class="step">Substitute <i>a</i> into equation (iii):
-                <span class="step-math">${A1}(${buildFraction(simpA[0], simpA[1])}) ${B1 < 0 ? '-' : '+'} ${Math.abs(B1)}<i>b</i> = ${C1}</span>
-                <span class="step-math">${subTerm} ${B1 < 0 ? '-' : '+'} ${Math.abs(B1)}<i>b</i> = ${C1} 
-                    &nbsp;&nbsp;&nbsp; ⇒ &nbsp;&nbsp;&nbsp; 
-                    <i>b</i> = ${buildFraction(simpB[0], simpB[1])}</span>
-            </div>
-            <div class="step"><b>Phase 3: Back-Substitution</b><br>
-                Now substitute back to find <i>x</i> and <i>y</i>.
-                <span class="step-math">Since <i>a</i> = ${buildFraction('1', formatLinearBinomial(m, 'x', p))} = ${buildFraction(simpA[0], simpA[1])}</span>
-                <span class="step-math">${formatLinearBinomial(m, 'x', p)} = ${simpA[1] / simpA[0]}</span>
-                ${p !== 0 ? `<span class="step-math">${m === 1 ? '<i>x</i>' : `${m}<i>x</i>`} = ${(simpA[1] / simpA[0])} ${p > 0 ? '-' : '+'} ${Math.abs(p)}</span>` : ''}
-                ${(m !== 1 && p !== 0) ? `<span class="step-math">${m}<i>x</i> = ${U - p}</span>` : ''}
-                <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
-                <br>
-                <span class="step-math">Since <i>b</i> = ${buildFraction('1', formatLinearBinomial(n, 'y', q))} = ${buildFraction(simpB[0], simpB[1])}</span>
-                <span class="step-math">${formatLinearBinomial(n, 'y', q)} = ${simpB[1] / simpB[0]}</span>
-                ${q !== 0 ? `<span class="step-math">${n === 1 ? '<i>y</i>' : `${n}<i>y</i>`} = ${(simpB[1] / simpB[0])} ${q > 0 ? '-' : '+'} ${Math.abs(q)}</span>` : ''}
-                ${(n !== 1 && q !== 0) ? `<span class="step-math">${n}<i>y</i> = ${V - q}</span>` : ''}
-                <span class="step-math" style="color: var(--success);"><i>y</i> = ${y}</span>
-            </div>
-        `;
-        document.getElementById('solution-steps').innerHTML = stepsHTML;
-    }
-
-    function generateSimulMastery() {
-        let x, y, m1, n1, m2, n2, U, V;
-        let a1, b1, a2, b2, A1, B1, C1, A2, B2, C2;
-
-        while (true) {
-            x = getRandomInt(-4, 4);
-            y = getRandomInt(-4, 4);
-            if (x === 0 && y === 0) continue;
-
-            m1 = getRandomInt(-3, 3, true); n1 = getRandomInt(-3, 3, true);
-            m2 = getRandomInt(-3, 3, true); n2 = getRandomInt(-3, 3, true);
-
-            if ((m1 * n2) - (m2 * n1) === 0) continue;
-
-            U = m1 * x + n1 * y;
-            V = m2 * x + n2 * y;
-
-            if (U === 0 || V === 0) continue;
-
-            a1 = getRandomInt(-4, 4, true); b1 = getRandomInt(-4, 4, true);
-            a2 = getRandomInt(-4, 4, true); b2 = getRandomInt(-4, 4, true);
-
-            if ((a1 * b2) - (a2 * b1) === 0) continue;
-
-            A1 = a1 * U; B1 = b1 * V; C1 = a1 + b1;
-            A2 = a2 * U; B2 = b2 * V; C2 = a2 + b2;
+    function generateSingleSameDenom(isIneq) {
+        let x, c, d, K, A, B, e, f, a, b, V;
+        while(true) {
+            x = getRandomInt(-5, 5);
+            c = getRandomInt(1, 3);
+            d = getRandomInt(-5, 5, true);
+            V = c*x + d;
+            if (V === 0 || (isIneq && V < 0)) continue; // Keep denom positive for inequality simplicity
+            K = getRandomInt(-4, 4, true);
+            A = K*c + getRandomInt(-3, 3, true); 
+            B = K*V - A*x;
+            e = getRandomInt(-3, 3);
+            f = getRandomInt(-5, 5, true);
+            a = A + e; b = B + f;
             break;
         }
 
-        currentProblem = { type: 'simul', ansX: x, ansY: y };
+        let ineqCode = isIneq ? getRandomInt(0, 3) : null;
+        let eqStrM = isIneq ? getIneqSymbol(ineqCode) : '=';
 
-        let den1 = formatPolynomial([{coeff: m1, var: 'x'}, {coeff: n1, var: 'y'}]);
-        let den2 = formatPolynomial([{coeff: m2, var: 'x'}, {coeff: n2, var: 'y'}]);
+        let num1 = formatLinearBinomial(a, 'x', b);
+        let den = formatLinearBinomial(c, 'x', d);
+        let frac1 = buildFraction(num1, den);
+        let sign2 = f < 0 && e === 0 ? "-" : "+";
+        let num2Str = e === 0 ? Math.abs(f).toString() : formatLinearBinomial(e, 'x', f);
+        let frac2 = buildFraction(num2Str, den);
 
-        let eq1Left = `${buildFraction(A1, den1)} ${B1 < 0 ? '-' : '+'} ${buildFraction(Math.abs(B1), den2)}`;
-        let eq2Left = `${buildFraction(A2, den1)} ${B2 < 0 ? '-' : '+'} ${buildFraction(Math.abs(B2), den2)}`;
-
-        document.getElementById('equation-display').innerHTML = `
-            <div class="equation">${eq1Left} = ${C1} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(i)</span></div>
-            <div class="equation">${eq2Left} = ${C2} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(ii)</span></div>
-        `;
-
-        // Phase 2 logic (Solve for a and b)
-        let mult1 = Math.abs(b2);
-        let mult2 = Math.abs(b1);
+        let rhsStr = `${K} ${sign2} ${frac2}`;
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${frac1} ${eqStrM} ${rhsStr}</div>`;
         
-        let nA1 = A1 * mult1, nB1 = B1 * mult1, nC1 = C1 * mult1;
-        let nA2 = A2 * mult2, nB2 = B2 * mult2, nC2 = C2 * mult2;
-
-        let action1 = (nB1 === nB2) ? 'Subtracting' : 'Adding';
-        let aCoeff = (nB1 === nB2) ? (nA1 - nA2) : (nA1 + nA2);
-        let constant1 = (nB1 === nB2) ? (nC1 - nC2) : (nC1 + nC2);
+        let xCoeff = a - (K*c + e);
+        let finalCode = ineqCode;
+        let flipNote = "";
         
-        let simpA = simplifyFraction(constant1, aCoeff); 
-        let subTermA = A1 * (1/U); 
-        let rhsAfterSubA = C1 - subTermA;
-        let simpB = simplifyFraction(rhsAfterSubA, B1); 
-
-        // Phase 4 logic (Solve for x and y)
-        let mult3 = Math.abs(n2);
-        let mult4 = Math.abs(n1);
-
-        let nM1 = m1 * mult3, nN1 = n1 * mult3, nU_val = U * mult3;
-        let nM2 = m2 * mult4, nN2 = n2 * mult4, nV_val = V * mult4;
-
-        let action2 = (nN1 === nN2) ? 'Subtracting' : 'Adding';
-        let xCoeff = (nN1 === nN2) ? (nM1 - nM2) : (nM1 + nM2);
-        let constant2 = (nN1 === nN2) ? (nU_val - nV_val) : (nU_val + nV_val);
+        if (isIneq && xCoeff < 0) {
+            finalCode = flipIneq(ineqCode);
+            flipNote = `<br><span style="color:var(--error); font-size:0.9em;">(Flipped sign due to division by negative number)</span>`;
+        }
         
-        let subTermX = m1 * x;
+        currentProblem = isIneq ? { type: 'ineq', ansX: x, ansSign: getIneqRaw(finalCode) } : { type: 'single', ansX: x };
+        let finalSignStr = isIneq ? getIneqSymbol(finalCode) : '=';
+
+        let ineqDenomWarning = isIneq ? ` <b>(Assume ${den} > 0)</b>` : "";
 
         let stepsHTML = `
-            <div class="step"><b>Phase 1: Substitution</b><br>
-                <span class="step-math">Let <i>a</i> = ${buildFraction('1', den1)} and <i>b</i> = ${buildFraction('1', den2)}</span>
-                This reduces our system to linear equations:
-                <span class="step-math">${formatPolynomial([{coeff: A1, var: 'a'}, {coeff: B1, var: 'b'}])} = ${C1} &nbsp;&nbsp;&nbsp; ...(iii)</span>
-                <span class="step-math">${formatPolynomial([{coeff: A2, var: 'a'}, {coeff: B2, var: 'b'}])} = ${C2} &nbsp;&nbsp;&nbsp; ...(iv)</span>
+            <div class="step">Multiply all terms by the common denominator (${den}) to clear fractions:${ineqDenomWarning}
+                <span class="step-math">${num1} ${eqStrM} ${K}(${den}) ${sign2 === '-' ? '-' : '+'} (${num2Str})</span>
             </div>
-            <div class="step"><b>Phase 2: Solve for <i>a</i> and <i>b</i></b><br>
-                Multiply eq (iii) by ${mult1} and eq (iv) by ${mult2}:
-                <span class="step-math">${formatPolynomial([{coeff: nA1, var: 'a'}, {coeff: nB1, var: 'b'}])} = ${nC1}</span>
-                <span class="step-math">${formatPolynomial([{coeff: nA2, var: 'a'}, {coeff: nB2, var: 'b'}])} = ${nC2}</span>
-                ${action1} to eliminate <i>b</i>:
-                <span class="step-math">${aCoeff}<i>a</i> = ${constant1} &nbsp;&nbsp; ⇒ &nbsp;&nbsp; <i>a</i> = ${buildFraction(simpA[0], simpA[1])}</span>
-                Substitute <i>a</i> into eq (iii) to find <i>b</i>:
-                <span class="step-math">${A1}(${buildFraction(simpA[0], simpA[1])}) ${B1 < 0 ? '-' : '+'} ${Math.abs(B1)}<i>b</i> = ${C1} &nbsp;&nbsp; ⇒ &nbsp;&nbsp; <i>b</i> = ${buildFraction(simpB[0], simpB[1])}</span>
+            <div class="step">Expand the brackets:
+                <span class="step-math">${num1} ${eqStrM} ${formatLinearBinomial(K*c, 'x', K*d)} ${sign2 === '-' ? '-' : '+'} (${num2Str})</span>
             </div>
-            <div class="step"><b>Phase 3: Back-Substitution yields a new linear system</b><br>
-                <span class="step-math">Since <i>a</i> = ${buildFraction('1', den1)} = ${buildFraction(simpA[0], simpA[1])} &nbsp; ⇒ &nbsp; ${den1} = ${U} &nbsp;&nbsp;&nbsp; ...(v)</span>
-                <span class="step-math">Since <i>b</i> = ${buildFraction('1', den2)} = ${buildFraction(simpB[0], simpB[1])} &nbsp; ⇒ &nbsp; ${den2} = ${V} &nbsp;&nbsp;&nbsp; ...(vi)</span>
+            <div class="step">Combine like terms on the right side:
+                <span class="step-math">${num1} ${eqStrM} ${formatLinearBinomial(K*c + e, 'x', K*d + f)}</span>
             </div>
-            <div class="step"><b>Phase 4: Solve the new linear system for <i>x</i> and <i>y</i></b><br>
-                Multiply eq (v) by ${mult3} and eq (vi) by ${mult4}:
-                <span class="step-math">${formatPolynomial([{coeff: nM1, var: 'x'}, {coeff: nN1, var: 'y'}])} = ${nU_val}</span>
-                <span class="step-math">${formatPolynomial([{coeff: nM2, var: 'x'}, {coeff: nN2, var: 'y'}])} = ${nV_val}</span>
-                ${action2} equations to eliminate <i>y</i>:
-                <span class="step-math">${xCoeff}<i>x</i> = ${constant2} &nbsp;&nbsp; ⇒ &nbsp;&nbsp; <span style="color: var(--success);"><i>x</i> = ${x}</span></span>
-                Substitute <i>x</i> = ${x} into eq (v):
-                <span class="step-math">${formatPolynomial([{coeff: m1, var: `(${x})`}])} ${formatPolynomial([{coeff: n1, var: 'y'}])} = ${U}</span>
-                <span class="step-math">${subTermX} ${formatPolynomial([{coeff: n1, var: 'y'}])} = ${U} &nbsp;&nbsp; ⇒ &nbsp;&nbsp; <span style="color: var(--success);"><i>y</i> = ${y}</span></span>
+            <div class="step">Group variable terms on the LHS and constants on the RHS:
+                <span class="step-math">${xCoeff}<i>x</i> ${eqStrM} ${(K*d + f) - b}</span>
+            </div>
+            <div class="step">Solve for <i>x</i>:
+                <span class="step-math" style="color: var(--success);"><i>x</i> ${finalSignStr} ${x} ${flipNote}</span>
             </div>
         `;
         document.getElementById('solution-steps').innerHTML = stepsHTML;
     }
 
+    function generateSingleDiffDenom(isIneq) {
+        let x, c, d, g, h, m, n, k, a, e, b, f, K;
+        let V1, V2, xCoeff;
+        while(true) {
+            x = getRandomInt(-5, 5);
+            c = getRandomInt(1, 3); g = getRandomInt(1, 3);
+            d = getRandomInt(-5, 5, true); h = getRandomInt(-5, 5, true);
+            V1 = c*x + d; V2 = g*x + h;
+            if (V1 === 0 || V2 === 0 || (isIneq && (V1 < 0 || V2 < 0))) continue; // Pos denoms for simple inequalities
+            if (c*h === d*g) continue;
+            
+            m = getRandomInt(-3, 3, true); n = getRandomInt(-3, 3, true);
+            K = m + n; if (K === 0) continue;
+            k = getRandomInt(-2, 2, true);
+            a = m*c; e = n*g; b = k*V1 + m*d; f = -k*V2 + n*h;
+            
+            xCoeff = (a*h + b*g + e*d + f*c) - K*(c*h + d*g);
+            if (xCoeff !== 0) break;
+        }
+
+        let ineqCode = isIneq ? getRandomInt(0, 3) : null;
+        let eqStrM = isIneq ? getIneqSymbol(ineqCode) : '=';
+
+        let num1 = formatLinearBinomial(a, 'x', b); let den1 = formatLinearBinomial(c, 'x', d);
+        let num2 = formatLinearBinomial(e, 'x', f); let den2 = formatLinearBinomial(g, 'x', h);
+
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${buildFraction(num1, den1)} + ${buildFraction(num2, den2)} ${eqStrM} ${K}</div>`;
+
+        let finalCode = ineqCode;
+        let flipNote = "";
+        if (isIneq && xCoeff < 0) {
+            finalCode = flipIneq(ineqCode);
+            flipNote = `<br><span style="color:var(--error); font-size:0.9em;">(Flipped sign due to division by negative number)</span>`;
+        }
+
+        currentProblem = isIneq ? { type: 'ineq', ansX: x, ansSign: getIneqRaw(finalCode) } : { type: 'single', ansX: x };
+        let finalSignStr = isIneq ? getIneqSymbol(finalCode) : '=';
+
+        let step2_LHS_exp1 = formatPolynomial([{coeff: a*g, var: 'x<sup>2</sup>'}, {coeff: a*h+b*g, var: 'x'}, {coeff: b*h, var: ''}]);
+        let step2_LHS_exp2 = formatPolynomial([{coeff: e*c, var: 'x<sup>2</sup>'}, {coeff: e*d+f*c, var: 'x'}, {coeff: f*d, var: ''}]);
+        let step2_RHS_exp  = formatPolynomial([{coeff: c*g, var: 'x<sup>2</sup>'}, {coeff: c*h+d*g, var: 'x'}, {coeff: d*h, var: ''}]);
+
+        let ineqDenomWarning = isIneq ? ` <b>(Assume denominators are positive)</b>` : "";
+
+        let stepsHTML = `
+            <div class="step">Find the LCM of the denominators: $(${den1})(${den2})$. Multiply the entire equation by this LCM:${ineqDenomWarning}
+                <span class="step-math">(${num1})(${den2}) + (${num2})(${den1}) ${eqStrM} ${K}(${den1})(${den2})</span>
+            </div>
+            <div class="step">Expand the brackets on both sides:
+                <span class="step-math">[${step2_LHS_exp1}] + [${step2_LHS_exp2}] ${eqStrM} ${K}[${step2_RHS_exp}]</span>
+            </div>
+            <div class="step">Combine terms. The <i>x<sup>2</sup></i> terms will perfectly cancel out!
+                <span class="step-math">${a*g + e*c}<i>x<sup>2</sup></i> ${a*h+b*g+e*d+f*c < 0 ? '-' : '+'} ${Math.abs(a*h+b*g+e*d+f*c)}<i>x</i> ${b*h+f*d < 0 ? '-' : '+'} ${Math.abs(b*h+f*d)} ${eqStrM} ${K*c*g}<i>x<sup>2</sup></i> ${K*(c*h+d*g) < 0 ? '-' : '+'} ${Math.abs(K*(c*h+d*g))}<i>x</i> ${K*d*h < 0 ? '-' : '+'} ${Math.abs(K*d*h)}</span>
+            </div>
+            <div class="step">Cancel <i>x<sup>2</sup></i> and group linear terms on the LHS and constants on the RHS:
+                <span class="step-math">${xCoeff}<i>x</i> ${eqStrM} ${K*d*h - (b*h+f*d)}</span>
+            </div>
+            <div class="step">Solve for <i>x</i>:
+                <span class="step-math" style="color: var(--success);"><i>x</i> ${finalSignStr} ${x} ${flipNote}</span>
+            </div>
+        `;
+        document.getElementById('solution-steps').innerHTML = stepsHTML;
+    }
+
+    // --- Quadratic Generators & Utilities ---
+    function formatQuadSteps(A, B, C, x1, x2) {
+        if (C === 0) {
+            return `
+                <div class="step">Factor out <i>x</i> from the terms:
+                    <span class="step-math"><i>x</i>(${formatLinearBinomial(A, 'x', B)}) = 0</span>
+                </div>
+                <div class="step">Set each factor to zero to solve for <i>x</i>:
+                    <span class="step-math"><i>x</i> = 0 &nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp; ${formatLinearBinomial(A, 'x', B)} = 0</span>
+                    <span class="step-math" style="color: var(--success);"><i>x</i> = 0, &nbsp; <i>x</i> = ${parseFloat((-B/A).toFixed(2))}</span>
+                </div>
+            `;
+        }
+        
+        if (B === 0) {
+            let val = -C/A;
+            let root = Math.sqrt(val);
+            return `
+                <div class="step">Isolate the <i>x<sup>2</sup></i> term:
+                    <span class="step-math">${A === 1 ? '' : A}<i>x<sup>2</sup></i> = ${-C}</span>
+                    ${A !== 1 ? `<span class="step-math"><i>x<sup>2</sup></i> = ${val}</span>` : ''}
+                </div>
+                <div class="step">Take the square root of both sides (remember the &plusmn; sign):
+                    <span class="step-math"><i>x</i> = &plusmn;&radic;${val}</span>
+                    <span class="step-math" style="color: var(--success);"><i>x</i> = ${parseFloat(root.toFixed(2))}, &nbsp; <i>x</i> = ${parseFloat((-root).toFixed(2))}</span>
+                </div>
+            `;
+        }
+
+        let AC = A * C;
+        let m = 0, n = 0;
+        for (let i = -Math.abs(AC); i <= Math.abs(AC); i++) {
+            if (i === 0) continue;
+            if (AC % i === 0) {
+                let j = AC / i;
+                if (i + j === B) { m = i; n = j; break; }
+            }
+        }
+        
+        if (A === 1) {
+            return `
+                <div class="step">Find two numbers that multiply to ${C} and add to ${B}. These are ${m} and ${n}.</div>
+                <div class="step">Rewrite the equation in factored form:
+                    <span class="step-math">(<i>x</i> ${m < 0 ? '-' : '+'} ${Math.abs(m)})(<i>x</i> ${n < 0 ? '-' : '+'} ${Math.abs(n)}) = 0</span>
+                </div>
+                <div class="step">Set each factor to zero to solve for <i>x</i>:
+                    <span class="step-math"><i>x</i> ${m < 0 ? '-' : '+'} ${Math.abs(m)} = 0 &nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp; <i>x</i> ${n < 0 ? '-' : '+'} ${Math.abs(n)} = 0</span>
+                    <span class="step-math" style="color: var(--success);"><i>x</i> = ${-m}, &nbsp; <i>x</i> = ${-n}</span>
+                </div>
+            `;
+        } else {
+            let p = gcd(A, Math.abs(m));
+            let q = A / p; let r = m / p;
+            let s = n < 0 ? -gcd(Math.abs(n), Math.abs(C)) : gcd(Math.abs(n), Math.abs(C));
+            
+            return `
+                <div class="step">Multiply <i>a</i> (${A}) and <i>c</i> (${C}): ${A} × ${C} = ${AC}.</div>
+                <div class="step">Find two numbers that multiply to ${AC} and add to the middle term (${B}). These are ${m} and ${n}.</div>
+                <div class="step">Split the middle term:
+                    <span class="step-math">${A}<i>x<sup>2</sup></i> ${m < 0 ? '-' : '+'} ${Math.abs(m)}<i>x</i> ${n < 0 ? '-' : '+'} ${Math.abs(n)}<i>x</i> ${C < 0 ? '-' : '+'} ${Math.abs(C)} = 0</span>
+                </div>
+                <div class="step">Factor by grouping:
+                    <span class="step-math">${p === 1 ? '' : p}<i>x</i>(${formatLinearBinomial(q, 'x', r)}) ${s < 0 ? '-' : '+'} ${Math.abs(s)}(${formatLinearBinomial(q, 'x', r)}) = 0</span>
+                    <span class="step-math">(${formatLinearBinomial(p, 'x', s)})(${formatLinearBinomial(q, 'x', r)}) = 0</span>
+                </div>
+                <div class="step">Set each factor to zero:
+                    <span class="step-math" style="color: var(--success);"><i>x</i> = ${parseFloat(x1.toFixed(2))}, &nbsp; <i>x</i> = ${parseFloat(x2.toFixed(2))}</span>
+                </div>
+            `;
+        }
+    }
+
+    function generateQuadStandard() {
+        let type = getRandomInt(0, 2);
+        let A = 1, B = 0, C = 0, x1 = 0, x2 = 0;
+        let eqStr = "";
+        
+        if (type === 0) { 
+            // Difference of squares (B = 0) e.g., x^2 - 16 = 0
+            x1 = getRandomInt(1, 10); x2 = -x1;
+            C = -x1*x1; B = 0;
+            let forms = [
+                `${formatPolynomial([{coeff:1, var:'x<sup>2</sup>'}, {coeff:C, var:''}])} = 0`,
+                `<i>x<sup>2</sup></i> = ${-C}`
+            ];
+            eqStr = forms[getRandomInt(0,1)];
+        } else if (type === 1) { 
+            // Missing constant (C = 0) e.g., 12x^2 = 25x
+            x1 = 0; x2 = getRandomInt(-10, 10, true);
+            B = -x2; C = 0;
+            let forms = [
+                `${formatPolynomial([{coeff:1, var:'x<sup>2</sup>'}, {coeff:B, var:'x'}])} = 0`,
+                `<i>x<sup>2</sup></i> = ${-B < 0 ? '-' : ''}${Math.abs(B)}<i>x</i>`
+            ];
+            eqStr = forms[getRandomInt(0,1)];
+        } else { 
+            // Standard but scrambled e.g., x^2 = 11x - 28
+            x1 = getRandomInt(-8, 8, true); x2 = getRandomInt(-8, 8, true);
+            if (x1 === x2) x2++;
+            B = -(x1+x2); C = x1*x2;
+            let forms = [
+                `${formatPolynomial([{coeff:1, var:'x<sup>2</sup>'}, {coeff:B, var:'x'}])} = ${-C}`,
+                `<i>x<sup>2</sup></i> = ${formatPolynomial([{coeff:-B, var:'x'}, {coeff:-C, var:''}])}`,
+                `${formatPolynomial([{coeff:1, var:'x<sup>2</sup>'}])} = ${formatPolynomial([{coeff:-B, var:'x'}, {coeff:-C, var:''}])}`
+            ];
+            eqStr = forms[getRandomInt(0, 2)];
+        }
+
+        currentProblem = { type: 'quad', ansX1: x1, ansX2: x2 };
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${eqStr}</div>`;
+        
+        let preStep = "";
+        if (eqStr.indexOf('= 0') === -1 && C !== 0 && B !== 0) {
+            preStep = `<div class="step">Bring all terms to the LHS to form the standard quadratic equation ($ax^2+bx+c=0$):<span class="step-math">${formatPolynomial([{coeff:A, var:'x<sup>2</sup>'}, {coeff:B, var:'x'}, {coeff:C, var:''}])} = 0</span></div>`;
+        } else if (eqStr.indexOf('= 0') === -1 && C === 0) {
+             preStep = `<div class="step">Bring all terms to the LHS:<span class="step-math">${formatPolynomial([{coeff:A, var:'x<sup>2</sup>'}, {coeff:B, var:'x'}])} = 0</span></div>`;
+        }
+        
+        document.getElementById('solution-steps').innerHTML = preStep + formatQuadSteps(1, B, C, x1, x2);
+    }
+
+    function generateQuadBrackets() {
+        let type = getRandomInt(0, 2);
+        let stepsHTML = "";
+        
+        if (type === 0) {
+            // (x+A)(x+B) = K
+            let x1 = getRandomInt(-8, 8); let x2 = getRandomInt(-8, 8);
+            while (x1 === x2) x2 = getRandomInt(-8, 8);
+            let S = x1 + x2; let P = x1 * x2;
+            let A = getRandomInt(-5, 5, true); let B = -S - A;
+            let K = A * B - P;
+            
+            currentProblem = { type: 'quad', ansX1: x1, ansX2: x2 };
+            let p1 = formatLinearBinomial(1, 'x', A); let p2 = formatLinearBinomial(1, 'x', B);
+            document.getElementById('equation-display').innerHTML = `<div class="equation">(${p1})(${p2}) = ${K}</div>`;
+            
+            let B_std = -(x1 + x2); let C_std = x1 * x2;
+            stepsHTML = `
+                <div class="step">Expand the brackets:
+                    <span class="step-math"><i>x<sup>2</sup></i> ${B < 0 ? '-' : '+'} ${Math.abs(B)}<i>x</i> ${A < 0 ? '-' : '+'} ${Math.abs(A)}<i>x</i> ${A*B < 0 ? '-' : '+'} ${Math.abs(A*B)} = ${K}</span>
+                </div>
+                <div class="step">Combine terms and shift constant to LHS to form standard quadratic equation ($ax^2 + bx + c = 0$):
+                    <span class="step-math">${formatPolynomial([{coeff: 1, var: 'x<sup>2</sup>'}, {coeff: B_std, var: 'x'}, {coeff: C_std, var: ''}])} = 0</span>
+                </div>
+                ${formatQuadSteps(1, B_std, C_std, x1, x2)}
+            `;
+        } else if (type === 1) {
+            // Mx(Nx+P) = K  (e.g., 3x(3x+1) = 2)
+            let q = getRandomInt(1, 3); let p = getRandomInt(-3, 3, true);
+            let v = getRandomInt(1, 3); let u = getRandomInt(-3, 3, true);
+            let a = q*v; let b = -(q*u + p*v); let c = p*u;
+            if (b === 0) b = 1; // Prevent B=0 to ensure visible inner binomial
+            
+            let M = gcd(Math.abs(a), Math.abs(b));
+            let N = a/M; let P = b/M; let K = -c;
+            
+            let x1 = p/q; let x2 = u/v;
+            currentProblem = { type: 'quad', ansX1: x1, ansX2: x2 };
+            
+            let bracket = formatLinearBinomial(N, 'x', P);
+            document.getElementById('equation-display').innerHTML = `<div class="equation">${M === 1 ? '' : M}<i>x</i>(${bracket}) = ${K}</div>`;
+            
+            stepsHTML = `
+                <div class="step">Distribute the term outside the bracket:
+                    <span class="step-math">${formatPolynomial([{coeff: a, var: 'x<sup>2</sup>'}, {coeff: b, var: 'x'}])} = ${K}</span>
+                </div>
+                <div class="step">Bring constant to the LHS to form standard quadratic equation:
+                    <span class="step-math">${formatPolynomial([{coeff: a, var: 'x<sup>2</sup>'}, {coeff: b, var: 'x'}, {coeff: c, var: ''}])} = 0</span>
+                </div>
+                ${formatQuadSteps(a, b, c, x1, x2)}
+            `;
+        } else {
+            // (Ax+B)^2 = K  (e.g., (z-2)^2 = 36)
+            let A = getRandomInt(1, 3);
+            let B = getRandomInt(-5, 5, true);
+            let R = getRandomInt(1, 6);
+            let K = R*R;
+            let x1 = (-B + R) / A; let x2 = (-B - R) / A;
+            
+            currentProblem = { type: 'quad', ansX1: x1, ansX2: x2 };
+            let bracket = formatLinearBinomial(A, 'x', B);
+            
+            let eqStr = `(${bracket})<sup>2</sup> ${Math.random() < 0.5 ? `= ${K}` : `- ${K} = 0`}`;
+            document.getElementById('equation-display').innerHTML = `<div class="equation">${eqStr}</div>`;
+            
+            let preStep = eqStr.indexOf('= 0') !== -1 
+                ? `<div class="step">Shift the constant to the RHS to isolate the squared bracket:<span class="step-math">(${bracket})<sup>2</sup> = ${K}</span></div>` 
+                : "";
+
+            stepsHTML = preStep + `
+                <div class="step">Take the square root of both sides (remember the &plusmn; sign):
+                    <span class="step-math">${bracket} = &plusmn;&radic;${K}</span>
+                    <span class="step-math">${bracket} = &plusmn;${R}</span>
+                </div>
+                <div class="step">Solve the two resulting linear equations:
+                    <span class="step-math">${bracket} = ${R} &nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp; ${bracket} = ${-R}</span>
+                    <span class="step-math">${A === 1 ? '<i>x</i>' : `${A}<i>x</i>`} = ${R - B} &nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp; ${A === 1 ? '<i>x</i>' : `${A}<i>x</i>`} = ${-R - B}</span>
+                    <span class="step-math" style="color: var(--success);"><i>x</i> = ${parseFloat(x1.toFixed(2))}, &nbsp; <i>x</i> = ${parseFloat(x2.toFixed(2))}</span>
+                </div>
+            `;
+        }
+        document.getElementById('solution-steps').innerHTML = stepsHTML;
+    }
+
+    function generateQuadIntermediate() {
+        let type = getRandomInt(0, 2);
+        let stepsHTML = "";
+        
+        if (type === 2) {
+            // x + C/x = -B
+            let x1, x2, B, C;
+            while(true) {
+                x1 = getRandomInt(-8, 8, true); x2 = getRandomInt(-8, 8, true);
+                B = -(x1 + x2); C = x1 * x2;
+                if (C !== 0 && Math.abs(B) < 20 && Math.abs(C) < 40 && x1 !== x2) break;
+            }
+            currentProblem = { type: 'quad', ansX1: x1, ansX2: x2 };
+            let eqStr = `<i>x</i> ${C < 0 ? '-' : '+'} ${buildFraction(Math.abs(C), '<i>x</i>')} = ${-B}`;
+            document.getElementById('equation-display').innerHTML = `<div class="equation">${eqStr}</div>`;
+            
+            stepsHTML = `
+                <div class="step">Multiply the entire equation by <i>x</i> to clear the fraction:
+                    <span class="step-math"><i>x</i>(<i>x</i>) ${C < 0 ? '-' : '+'} <i>x</i>(${buildFraction(Math.abs(C), '<i>x</i>')}) = <i>x</i>(${-B})</span>
+                    <span class="step-math"><i>x<sup>2</sup></i> ${C < 0 ? '-' : '+'} ${Math.abs(C)} = ${-B === 1 ? '' : (-B === -1 ? '-' : -B)}<i>x</i></span>
+                </div>
+                <div class="step">Rearrange to standard form ($ax^2 + bx + c = 0$):
+                    <span class="step-math">${formatPolynomial([{coeff: 1, var: 'x<sup>2</sup>'}, {coeff: B, var: 'x'}, {coeff: C, var: ''}])} = 0</span>
+                </div>
+                ${formatQuadSteps(1, B, C, x1, x2)}
+            `;
+            document.getElementById('solution-steps').innerHTML = stepsHTML;
+            return;
+        }
+        
+        let q = getRandomInt(1, 3); let p = getRandomInt(-5, 5, true);
+        while(gcd(Math.abs(p), q) !== 1) p = getRandomInt(-5, 5, true);
+        
+        let v = getRandomInt(1, 3); let u = getRandomInt(-5, 5, true);
+        while(gcd(Math.abs(u), v) !== 1) u = getRandomInt(-5, 5, true);
+
+        let A = q * v;
+        let B = -(q * u + p * v);
+        let C = p * u;
+        
+        if (B === 0 || C === 0) return generateQuadIntermediate(); 
+        
+        let x1 = p/q; let x2 = u/v;
+        currentProblem = { type: 'quad', ansX1: x1, ansX2: x2 };
+
+        if (type === 0) { 
+            // Scrambled / Split terms on both sides
+            let A2 = getRandomInt(-2, 2); let A1 = A + A2;
+            let B2 = getRandomInt(-3, 3); let B1 = B + B2;
+            let C2 = getRandomInt(-5, 5); let C1 = C + C2;
+            
+            let lhs = formatPolynomial([{coeff: A1, var: 'x<sup>2</sup>'}, {coeff: B1, var: 'x'}, {coeff: C1, var: ''}]);
+            let rhs = formatPolynomial([{coeff: A2, var: 'x<sup>2</sup>'}, {coeff: B2, var: 'x'}, {coeff: C2, var: ''}]);
+            if (rhs === "0") rhs = "0";
+            
+            document.getElementById('equation-display').innerHTML = `<div class="equation">${lhs} = ${rhs}</div>`;
+            
+            stepsHTML = `
+                <div class="step">Bring all terms to the LHS to form standard quadratic equation ($ax^2 + bx + c = 0$):
+                    <span class="step-math">${formatPolynomial([{coeff: A, var: 'x<sup>2</sup>'}, {coeff: B, var: 'x'}, {coeff: C, var: ''}])} = 0</span>
+                </div>
+                ${formatQuadSteps(A, B, C, x1, x2)}
+            `;
+        } else { 
+            // Fractional constants split across '=' (e.g., x^2 + 3x + 5/6 = -2x^2 - 3x - 1/6)
+            let D = getRandomInt(2, 6);
+            let N2 = getRandomInt(-5, 5);
+            let N1 = C * D + N2; 
+            
+            let A2 = getRandomInt(-2, 2); let A1 = A + A2;
+            let B2 = getRandomInt(-3, 3); let B1 = B + B2;
+            
+            let lhsQuad = formatPolynomial([{coeff: A1, var: 'x<sup>2</sup>'}, {coeff: B1, var: 'x'}]);
+            let rhsQuad = formatPolynomial([{coeff: A2, var: 'x<sup>2</sup>'}, {coeff: B2, var: 'x'}]);
+            
+            let lhs = lhsQuad === "0" ? buildFraction(N1 < 0 ? `-${Math.abs(N1)}` : N1, D) : `${lhsQuad} ${N1 < 0 ? '-' : '+'} ${buildFraction(Math.abs(N1), D)}`;
+            let rhs = rhsQuad === "0" ? buildFraction(N2 < 0 ? `-${Math.abs(N2)}` : N2, D) : `${rhsQuad} ${N2 < 0 ? '-' : '+'} ${buildFraction(Math.abs(N2), D)}`;
+            
+            document.getElementById('equation-display').innerHTML = `<div class="equation">${lhs} = ${rhs}</div>`;
+            
+            stepsHTML = `
+                <div class="step">Bring all terms to the LHS:
+                    <span class="step-math">${formatPolynomial([{coeff: A, var: 'x<sup>2</sup>'}, {coeff: B, var: 'x'}])} ${N1-N2 < 0 ? '-' : '+'} ${buildFraction(Math.abs(N1-N2), D)} = 0</span>
+                </div>
+                <div class="step">Simplify the fraction:
+                    <span class="step-math">${formatPolynomial([{coeff: A, var: 'x<sup>2</sup>'}, {coeff: B, var: 'x'}, {coeff: C, var: ''}])} = 0</span>
+                </div>
+                ${formatQuadSteps(A, B, C, x1, x2)}
+            `;
+        }
+        document.getElementById('solution-steps').innerHTML = stepsHTML;
+    }
+
+    function generateQuadMastery() {
+        let type = getRandomInt(0, 3);
+        let stepsHTML = "";
+        
+        if (type === 0) {
+            // Reducible: a/(x+b) + c/(x+d) = 1
+            let a, b, c, d, r1, r2, B, C;
+            let valid = false;
+
+            while (!valid) {
+                r1 = getRandomInt(-6, 6); r2 = getRandomInt(-6, 6);
+                if (r1 === r2) continue;
+                B = -(r1 + r2); C = r1 * r2;
+                b = getRandomInt(-5, 5);
+                if (b === -r1 || b === -r2) continue;
+                
+                let num = b * B - b * b - C;
+                d = getRandomInt(-8, 8);
+                if (d === b || d === -r1 || d === -r2 || d === 0) continue;
+                
+                if (num % (d - b) === 0) {
+                    a = num / (d - b);
+                    c = b + d - B - a;
+                    if (a !== 0 && c !== 0) valid = true;
+                }
+            }
+            
+            currentProblem = { type: 'quad', ansX1: r1, ansX2: r2 };
+            
+            let frac1 = buildFraction(a, formatLinearBinomial(1, 'x', b));
+            let frac2 = buildFraction(Math.abs(c), formatLinearBinomial(1, 'x', d));
+            let sign = c < 0 ? '-' : '+';
+            
+            document.getElementById('equation-display').innerHTML = `<div class="equation">${frac1} ${sign} ${frac2} = 1</div>`;
+
+            stepsHTML = `
+                <div class="step">Multiply entire equation by LCM $(${formatLinearBinomial(1, 'x', b)})(${formatLinearBinomial(1, 'x', d)})$ to clear fractions:
+                    <span class="step-math">${a}(${formatLinearBinomial(1, 'x', d)}) ${sign} ${Math.abs(c)}(${formatLinearBinomial(1, 'x', b)}) = (${formatLinearBinomial(1, 'x', b)})(${formatLinearBinomial(1, 'x', d)})</span>
+                </div>
+                <div class="step">Expand brackets on both sides:
+                    <span class="step-math">${formatPolynomial([{coeff: a+c, var: 'x'}, {coeff: a*d+c*b, var: ''}])} = <i>x<sup>2</sup></i> ${b+d < 0 ? '-' : '+'} ${Math.abs(b+d)}<i>x</i> ${b*d < 0 ? '-' : '+'} ${Math.abs(b*d)}</span>
+                </div>
+                <div class="step">Bring all terms to one side to form standard quadratic equation:
+                    <span class="step-math"><i>x<sup>2</sup></i> ${B < 0 ? '-' : '+'} ${Math.abs(B)}<i>x</i> ${C < 0 ? '-' : '+'} ${Math.abs(C)} = 0</span>
+                </div>
+                ${formatQuadSteps(1, B, C, r1, r2)}
+            `;
+        } else if (type === 1) {
+            // (x+A)/(x+B) + (x+C)/(x+D) = 3
+            let r1, r2, B, D, A, C;
+            while(true) {
+                r1 = getRandomInt(-5, 5); r2 = getRandomInt(-5, 5);
+                if (r1 === r2) continue;
+                B = getRandomInt(-5, 5, true); D = getRandomInt(-5, 5, true);
+                if (B === D || B === -r1 || B === -r2 || D === -r1 || D === -r2) continue;
+                let S = r1 + r2 + 2*B + 2*D;
+                let V = -r1*r2 + 3*B*D;
+                if ((V - B*S) % (D - B) === 0) {
+                    A = (V - B*S) / (D - B);
+                    C = S - A;
+                    if (A !== B && C !== D) break; 
+                }
+            }
+            currentProblem = { type: 'quad', ansX1: r1, ansX2: r2 };
+            
+            let frac1 = buildFraction(formatLinearBinomial(1, 'x', A), formatLinearBinomial(1, 'x', B));
+            let frac2 = buildFraction(formatLinearBinomial(1, 'x', C), formatLinearBinomial(1, 'x', D));
+            
+            document.getElementById('equation-display').innerHTML = `<div class="equation">${frac1} + ${frac2} = 3</div>`;
+            
+            stepsHTML = `
+                <div class="step">Multiply the entire equation by the LCM $(${formatLinearBinomial(1, 'x', B)})(${formatLinearBinomial(1, 'x', D)})$ to clear fractions:
+                    <span class="step-math">(${formatLinearBinomial(1, 'x', A)})(${formatLinearBinomial(1, 'x', D)}) + (${formatLinearBinomial(1, 'x', C)})(${formatLinearBinomial(1, 'x', B)}) = 3(${formatLinearBinomial(1, 'x', B)})(${formatLinearBinomial(1, 'x', D)})</span>
+                </div>
+                <div class="step">Expand the brackets on both sides:
+                    <span class="step-math">(<i>x<sup>2</sup></i> ${A+D < 0 ? '-' : '+'} ${Math.abs(A+D)}<i>x</i> ${A*D < 0 ? '-' : '+'} ${Math.abs(A*D)}) + (<i>x<sup>2</sup></i> ${B+C < 0 ? '-' : '+'} ${Math.abs(B+C)}<i>x</i> ${B*C < 0 ? '-' : '+'} ${Math.abs(B*C)}) = 3(<i>x<sup>2</sup></i> ${B+D < 0 ? '-' : '+'} ${Math.abs(B+D)}<i>x</i> ${B*D < 0 ? '-' : '+'} ${Math.abs(B*D)})</span>
+                </div>
+                <div class="step">Combine terms and shift to one side to form standard quadratic equation:
+                    <span class="step-math">${formatPolynomial([{coeff: 1, var: 'x<sup>2</sup>'}, {coeff: -(r1+r2), var: 'x'}, {coeff: r1*r2, var: ''}])} = 0</span>
+                </div>
+                ${formatQuadSteps(1, -(r1+r2), r1*r2, r1, r2)}
+            `;
+        } else {
+            // Substitution: A(cx+d)/(ex+f) + B(ex+f)/(cx+d) = K
+            let x1, x2, c, d, e, f, y1n, y1d, y2n, y2d, A, B, K;
+            while(true) {
+                x1 = getRandomInt(-5, 5); x2 = getRandomInt(-5, 5);
+                if(x1 === x2) continue;
+                c = getRandomInt(1, 3); d = getRandomInt(-4, 4, true);
+                e = getRandomInt(1, 3); f = getRandomInt(-4, 4, true);
+                if (c*f - d*e === 0) continue; 
+                let den1 = e*x1 + f; let den2 = e*x2 + f;
+                let num1 = c*x1 + d; let num2 = c*x2 + d;
+                if (den1 === 0 || den2 === 0 || num1 === 0 || num2 === 0) continue;
+                
+                let f1 = simplifyFraction(num1, den1); y1n = f1[0]; y1d = f1[1];
+                let f2 = simplifyFraction(num2, den2); y2n = f2[0]; y2d = f2[1];
+                
+                A = Math.abs(y1d * y2d);
+                let mult = A / (y1d * y2d); 
+                B = mult * y1n * y2n;
+                K = mult * (y1n * y2d + y2n * y1d);
+                
+                if (Math.abs(A) > 10 || Math.abs(B) > 15 || Math.abs(K) > 30) continue;
+                if (A === 0 || B === 0) continue;
+                break;
+            }
+            
+            currentProblem = { type: 'quad', ansX1: x1, ansX2: x2 };
+            
+            let term1 = buildFraction(formatLinearBinomial(c, 'x', d), formatLinearBinomial(e, 'x', f));
+            let term2 = buildFraction(formatLinearBinomial(e, 'x', f), formatLinearBinomial(c, 'x', d));
+            
+            let pL = `<span class="large-paren">(</span>`;
+            let pR = `<span class="large-paren">)</span>`;
+            
+            document.getElementById('equation-display').innerHTML = `<div class="equation">${A === 1 ? '' : A}${pL}${term1}${pR} ${B < 0 ? '-' : '+'} ${Math.abs(B)}${pL}${term2}${pR} = ${K}</div>`;
+
+            stepsHTML = `
+                <div class="step"><b>Phase 1: Substitution</b><br>
+                    Notice that the two fractions are reciprocals. Let <i>y</i> = $\\frac{${formatLinearBinomial(c, 'x', d)}}{${formatLinearBinomial(e, 'x', f)}}$.<br>
+                    The equation becomes: <span class="step-math">${A === 1 ? '' : A}<i>y</i> ${B < 0 ? '-' : '+'} ${buildFraction(Math.abs(B), '<i>y</i>')} = ${K}</span>
+                </div>
+                <div class="step">Multiply by <i>y</i> to clear the fraction and rearrange to standard quadratic form:
+                    <span class="step-math">${A === 1 ? '' : A}<i>y<sup>2</sup></i> ${B < 0 ? '-' : '+'} ${Math.abs(B)} = ${K}<i>y</i></span>
+                    <span class="step-math">${formatPolynomial([{coeff: A, var: 'y<sup>2</sup>'}, {coeff: -K, var: 'y'}, {coeff: B, var: ''}])} = 0</span>
+                </div>
+                <div class="step"><b>Phase 2: Solve for <i>y</i></b><br>
+                    Solving this quadratic equation gives:
+                    <span class="step-math"><i>y</i> = ${y1d === 1 ? y1n : buildFraction(y1n, y1d)} &nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp; <i>y</i> = ${y2d === 1 ? y2n : buildFraction(y2n, y2d)}</span>
+                </div>
+                <div class="step"><b>Phase 3: Back-Substitute to solve for <i>x</i></b><br>
+                    <b>For <i>y</i> = ${y1d === 1 ? y1n : buildFraction(y1n, y1d)}:</b>
+                    <span class="step-math">$\\frac{${formatLinearBinomial(c, 'x', d)}}{${formatLinearBinomial(e, 'x', f)}} = ${y1d === 1 ? y1n : buildFraction(y1n, y1d)}$</span>
+                    Cross-multiply and solve: <span class="step-math" style="color: var(--success);"><i>x</i> = ${x1}</span><br>
+                    <b>For <i>y</i> = ${y2d === 1 ? y2n : buildFraction(y2n, y2d)}:</b>
+                    <span class="step-math">$\\frac{${formatLinearBinomial(c, 'x', d)}}{${formatLinearBinomial(e, 'x', f)}} = ${y2d === 1 ? y2n : buildFraction(y2n, y2d)}$</span>
+                    Cross-multiply and solve: <span class="step-math" style="color: var(--success);"><i>x</i> = ${x2}</span>
+                </div>
+            `;
+        }
+        document.getElementById('solution-steps').innerHTML = stepsHTML;
+    }
+
+    // --- Answer Checking ---
     function checkAnswer() {
         const feedback = document.getElementById('feedback-msg');
         let isCorrect = false;
@@ -1193,16 +1606,32 @@
             const userX = document.getElementById('ans-x').value;
             if (userX === '') isEmpty = true;
             else if (parseInt(userX) === currentProblem.ansX) isCorrect = true;
-        } else {
+        } else if (currentMode === 'simul') {
             const userX = document.getElementById('ans-x').value;
             const userY = document.getElementById('ans-y').value;
             if (userX === '' || userY === '') isEmpty = true;
             else if (parseInt(userX) === currentProblem.ansX && parseInt(userY) === currentProblem.ansY) isCorrect = true;
+        } else if (currentMode === 'ineq') {
+            const userX = document.getElementById('ans-x').value;
+            const userSign = document.getElementById('ans-ineq').value;
+            if (userX === '') isEmpty = true;
+            else if (parseInt(userX) === currentProblem.ansX && userSign === currentProblem.ansSign) isCorrect = true;
+        } else if (currentMode === 'quad') {
+            const userX1 = parseFloat(document.getElementById('ans-x1').value);
+            const userX2 = parseFloat(document.getElementById('ans-x2').value);
+            if (isNaN(userX1) || isNaN(userX2)) isEmpty = true;
+            else {
+                // Allow answers in either order
+                if ((Math.abs(userX1 - currentProblem.ansX1) < 0.01 && Math.abs(userX2 - currentProblem.ansX2) < 0.01) ||
+                    (Math.abs(userX1 - currentProblem.ansX2) < 0.01 && Math.abs(userX2 - currentProblem.ansX1) < 0.01)) {
+                    isCorrect = true;
+                }
+            }
         }
 
         if (isEmpty) {
             feedback.className = 'feedback error';
-            feedback.innerText = 'Please enter a value for all variables before checking.';
+            feedback.innerText = 'Please fill out all answer fields before checking.';
             feedback.style.display = 'block';
             return;
         }
@@ -1212,7 +1641,7 @@
             feedback.innerText = 'Excellent! Your answer is correct.';
         } else {
             feedback.className = 'feedback error';
-            feedback.innerText = 'Incorrect. Try again, or click "Show Steps" to see the ICSE working method.';
+            feedback.innerText = 'Incorrect. Try again, or click "Show Steps" to see the full ICSE working method.';
         }
         feedback.style.display = 'block';
     }
@@ -1229,15 +1658,285 @@
 
     document.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-            if (document.activeElement.tagName === 'INPUT') {
+            if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'SELECT') {
                 checkAnswer();
             }
         }
     });
 
-    window.onload = () => {
-        switchMode('single');
-    };
+    window.onload = () => switchMode('single');
+    
+    // --- Unchanged Simultaneous Generators kept from previous state ---
+    function buildScrambledEq(a, b, c, format) {
+        let ax = formatPolynomial([{coeff: a, var: 'x'}]);
+        let by = formatPolynomial([{coeff: b, var: 'y'}]);
+        if (format === 0) return formatPolynomial([{coeff: a, var: 'x'}, {coeff: b, var: 'y'}]) + " = " + c;
+        else if (format === 1) return `${ax} = ${c === 0 ? formatPolynomial([{coeff: -b, var: 'y'}]) : `${c} ${-b < 0 ? '-' : '+'} ${Math.abs(b)}<i>y</i>`}`;
+        else if (format === 2) return `${by} = ${c === 0 ? formatPolynomial([{coeff: -a, var: 'x'}]) : `${c} ${-a < 0 ? '-' : '+'} ${Math.abs(a)}<i>x</i>`}`;
+        else if (format === 3) return formatPolynomial([{coeff: a, var: 'x'}, {coeff: b, var: 'y'}, {coeff: -c, var: ''}]) + " = 0";
+    }
+
+    function generateSimulStandard() {
+        let x = getRandomInt(-10, 10); let y = getRandomInt(-10, 10);
+        let a1, b1, a2, b2, c1, c2;
+        while(true) {
+            a1 = getRandomInt(-6, 6, true); b1 = getRandomInt(-6, 6, true);
+            a2 = getRandomInt(-6, 6, true); b2 = getRandomInt(-6, 6, true);
+            if ((a1 * b2) - (a2 * b1) !== 0) break;
+        }
+        c1 = a1 * x + b1 * y; c2 = a2 * x + b2 * y;
+        currentProblem = { type: 'simul', ansX: x, ansY: y };
+        
+        let fmt1 = getRandomInt(0, 3); let fmt2 = getRandomInt(0, 3);
+        if (fmt1 === 0 && fmt2 === 0) fmt1 = getRandomInt(1, 3);
+        
+        let eq1Scrambled = buildScrambledEq(a1, b1, c1, fmt1);
+        let eq2Scrambled = buildScrambledEq(a2, b2, c2, fmt2);
+        let eq1Std = formatPolynomial([{coeff: a1, var: 'x'}, {coeff: b1, var: 'y'}]) + " = " + c1;
+        let eq2Std = formatPolynomial([{coeff: a2, var: 'x'}, {coeff: b2, var: 'y'}]) + " = " + c2;
+        
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${eq1Scrambled} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(i)</span></div><div class="equation">${eq2Scrambled} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(ii)</span></div>`;
+
+        let mult1 = Math.abs(b2); let mult2 = Math.abs(b1);
+        let nA1 = a1 * mult1, nB1 = b1 * mult1, nC1 = c1 * mult1;
+        let nA2 = a2 * mult2, nB2 = b2 * mult2, nC2 = c2 * mult2;
+        let action = (nB1 === nB2) ? 'Subtracting' : 'Adding';
+        let xCoeff = (nB1 === nB2) ? (nA1 - nA2) : (nA1 + nA2);
+        let constant = (nB1 === nB2) ? (nC1 - nC2) : (nC1 + nC2);
+        let subTerm = a1 * x; let rhsAfterSub = c1 - subTerm;
+
+        document.getElementById('solution-steps').innerHTML = `
+            <div class="step">Rearrange into standard form ($ax + by = c$):
+                <span class="step-math">${eq1Std} &nbsp;&nbsp;&nbsp; ...(iii)</span><span class="step-math">${eq2Std} &nbsp;&nbsp;&nbsp; ...(iv)</span>
+            </div>
+            <div class="step">Multiply eq (iii) by ${mult1} and eq (iv) by ${mult2}:
+                <span class="step-math">${formatPolynomial([{coeff: nA1, var: 'x'}, {coeff: nB1, var: 'y'}])} = ${nC1}</span>
+                <span class="step-math">${formatPolynomial([{coeff: nA2, var: 'x'}, {coeff: nB2, var: 'y'}])} = ${nC2}</span>
+            </div>
+            <div class="step">${action} equations to eliminate <i>y</i>:
+                <span class="step-math">${formatPolynomial([{coeff: xCoeff, var: 'x'}])} = ${constant}</span>
+                <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
+            </div>
+            <div class="step">Substitute <i>x</i> = ${x} into equation (iii):
+                <span class="step-math">${formatPolynomial([{coeff: a1, var: `(${x})`}])} ${formatPolynomial([{coeff: b1, var: 'y'}])} = ${c1}</span>
+                <span class="step-math">${formatPolynomial([{coeff: b1, var: 'y'}])} = ${rhsAfterSub}</span>
+                <span class="step-math" style="color: var(--success);"><i>y</i> = ${y}</span>
+            </div>
+        `;
+    }
+
+    function buildBracketPattern1(x, y) {
+        let m1 = getRandomInt(-4, 4, true); let m2 = getRandomInt(-4, 4, true);
+        let k1 = getRandomInt(-4, 4, true); let k2 = getRandomInt(-4, 4, true);
+        let C = m1 * x + m2 * y; let K = C + m1 * k1 + m2 * k2;
+        let rawStr = `${m1}(${formatLinearBinomial(1, 'x', k1)}) ${m2 < 0 ? '-' : '+'} ${Math.abs(m2)}(${formatLinearBinomial(1, 'y', k2)}) = ${K}`;
+        let exp1Str = formatPolynomial([{coeff: m1, var: 'x'}, {coeff: m1*k1, var: ''}, {coeff: m2, var: 'y'}, {coeff: m2*k2, var: ''}]) + " = " + K;
+        let stdStr = formatPolynomial([{coeff: m1, var: 'x'}, {coeff: m2, var: 'y'}]) + " = " + C;
+        return { A: m1, B: m2, C: C, rawStr, stdStr, stepHtml: `Expand: <span class="step-math">${exp1Str}</span> Group: <span class="step-math">${stdStr}</span>` };
+    }
+    
+    function buildBracketPattern2(x, y) {
+        let n1, n2, n3, k4, A, B;
+        while(true) {
+            n1 = getRandomInt(2, 6); n2 = getRandomInt(-4, 4, true); n3 = getRandomInt(-4, 4, true); k4 = getRandomInt(-4, 4, true);
+            A = n1 - n3; B = -n2;
+            if (A !== 0 && B !== 0) break;
+        }
+        let C = A * x + B * y; let K = C + n3 * k4;
+        let rawStr = `${n1}<i>x</i> - [${formatPolynomial([{coeff: n2, var: 'y'}])} ${n3 < 0 ? '-' : '+'} ${Math.abs(n3)}(${formatLinearBinomial(1, 'x', k4)})] = ${K}`;
+        let innerExpStr = formatPolynomial([{coeff: n2, var: 'y'}, {coeff: n3, var: 'x'}, {coeff: n3*k4, var: ''}]);
+        let outerExpStr = formatPolynomial([{coeff: n1, var: 'x'}, {coeff: -n2, var: 'y'}, {coeff: -n3, var: 'x'}, {coeff: -n3*k4, var: ''}]) + " = " + K;
+        let stdStr = formatPolynomial([{coeff: A, var: 'x'}, {coeff: B, var: 'y'}]) + " = " + C;
+        return { A, B, C, rawStr, stdStr, stepHtml: `Inner parens: <span class="step-math">${n1}<i>x</i> - [${innerExpStr}] = ${K}</span> Outer bracket: <span class="step-math">${outerExpStr}</span> Group: <span class="step-math">${stdStr}</span>` };
+    }
+
+    function generateSimulBrackets() {
+        let x, y, eq1, eq2;
+        while(true) {
+            x = getRandomInt(-8, 8); y = getRandomInt(-8, 8);
+            eq1 = buildBracketPattern1(x, y); eq2 = buildBracketPattern2(x, y);
+            if ((eq1.A * eq2.B) - (eq2.A * eq1.B) !== 0) break;
+        }
+        if (Math.random() > 0.5) { let temp = eq1; eq1 = eq2; eq2 = temp; }
+        currentProblem = { type: 'simul', ansX: x, ansY: y };
+        
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${eq1.rawStr} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(i)</span></div><div class="equation">${eq2.rawStr} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(ii)</span></div>`;
+        
+        let mult1 = Math.abs(eq2.B); let mult2 = Math.abs(eq1.B);
+        let nA1 = eq1.A * mult1, nB1 = eq1.B * mult1, nC1 = eq1.C * mult1;
+        let nA2 = eq2.A * mult2, nB2 = eq2.B * mult2, nC2 = eq2.C * mult2;
+        let action = (nB1 === nB2) ? 'Subtracting' : 'Adding';
+        let xCoeff = (nB1 === nB2) ? (nA1 - nA2) : (nA1 + nA2);
+        let constant = (nB1 === nB2) ? (nC1 - nC2) : (nC1 + nC2);
+
+        document.getElementById('solution-steps').innerHTML = `
+            <div class="step"><b>Phase 1: Simplify to Standard Form</b><br>
+                ${eq1.stepHtml}<br>${eq2.stepHtml}<br>
+                System: <span class="step-math">${eq1.stdStr} &nbsp;&nbsp;&nbsp; ...(iii)</span><span class="step-math">${eq2.stdStr} &nbsp;&nbsp;&nbsp; ...(iv)</span>
+            </div>
+            <div class="step"><b>Phase 2: Elimination</b><br>
+                Multiply eq (iii) by ${mult1} and eq (iv) by ${mult2}:
+                <span class="step-math">${formatPolynomial([{coeff: nA1, var: 'x'}, {coeff: nB1, var: 'y'}])} = ${nC1}</span>
+                <span class="step-math">${formatPolynomial([{coeff: nA2, var: 'x'}, {coeff: nB2, var: 'y'}])} = ${nC2}</span>
+                ${action} to eliminate <i>y</i>:
+                <span class="step-math">${xCoeff}<i>x</i> = ${constant} &nbsp; ⇒ &nbsp; <span style="color: var(--success);"><i>x</i> = ${x}</span></span>
+                Sub <i>x</i> in eq (iii):
+                <span class="step-math">${formatPolynomial([{coeff: eq1.B, var: 'y'}])} = ${eq1.C - (eq1.A * x)} &nbsp; ⇒ &nbsp; <span style="color: var(--success);"><i>y</i> = ${y}</span></span>
+            </div>
+        `;
+    }
+
+    function generateSimulIntermediate() {
+        let x, y, a1, b1, dx1, dy1, a2, b2, dx2, dy2;
+        while (true) {
+            x = getRandomInt(-8, 8); y = getRandomInt(-8, 8);
+            a1 = getRandomInt(-5, 5, true); b1 = getRandomInt(-5, 5, true);
+            dx1 = getRandomInt(1, 4); dy1 = getRandomInt(1, 4);
+            if (dx1 === 1 && dy1 === 1) dx1 = getRandomInt(2, 4);
+            a2 = getRandomInt(-5, 5, true); b2 = getRandomInt(-5, 5, true);
+            dx2 = getRandomInt(1, 4); dy2 = getRandomInt(1, 4);
+            if (dx2 === 1 && dy2 === 1) dy2 = getRandomInt(2, 4);
+            if ((a1 * dy1 * b2 * dx2) - (a2 * dy2 * b1 * dx1) !== 0) break;
+        }
+
+        let [Cnum1, Cden1] = simplifyFraction((a1 * x * dy1) + (b1 * y * dx1), dx1 * dy1);
+        let [Cnum2, Cden2] = simplifyFraction((a2 * x * dy2) + (b2 * y * dx2), dx2 * dy2);
+        
+        currentProblem = { type: 'simul', ansX: x, ansY: y };
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${formatFractionEq(a1, dx1, b1, dy1, Cnum1, Cden1)} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(i)</span></div><div class="equation">${formatFractionEq(a2, dx2, b2, dy2, Cnum2, Cden2)} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(ii)</span></div>`;
+
+        let L1 = lcm3(dx1, dy1, Cden1); let A1 = a1 * (L1 / dx1); let B1 = b1 * (L1 / dy1); let K1 = Cnum1 * (L1 / Cden1);
+        let L2 = lcm3(dx2, dy2, Cden2); let A2 = a2 * (L2 / dx2); let B2 = b2 * (L2 / dy2); let K2 = Cnum2 * (L2 / Cden2);
+
+        let mult1 = Math.abs(B2); let mult2 = Math.abs(B1);
+        let nA1 = A1 * mult1, nB1 = B1 * mult1, nK1 = K1 * mult1;
+        let nA2 = A2 * mult2, nB2 = B2 * mult2, nK2 = K2 * mult2;
+
+        let action = (nB1 === nB2) ? 'Subtracting' : 'Adding';
+        let xCoeff = (nB1 === nB2) ? (nA1 - nA2) : (nA1 + nA2);
+        let constant = (nB1 === nB2) ? (nK1 - nK2) : (nK1 + nK2);
+
+        document.getElementById('solution-steps').innerHTML = `
+            <div class="step"><b>Phase 1: Clear Fractions</b><br>
+                LCM for eq(i) is ${L1}. Multiply by ${L1}:<br>
+                <span class="step-math">${formatPolynomial([{coeff: A1, var: 'x'}, {coeff: B1, var: 'y'}])} = ${K1} &nbsp;&nbsp;&nbsp; ...(iii)</span>
+                LCM for eq(ii) is ${L2}. Multiply by ${L2}:<br>
+                <span class="step-math">${formatPolynomial([{coeff: A2, var: 'x'}, {coeff: B2, var: 'y'}])} = ${K2} &nbsp;&nbsp;&nbsp; ...(iv)</span>
+            </div>
+            <div class="step"><b>Phase 2: Elimination</b><br>
+                Multiply eq(iii) by ${mult1} and eq(iv) by ${mult2}:
+                <span class="step-math">${formatPolynomial([{coeff: nA1, var: 'x'}, {coeff: nB1, var: 'y'}])} = ${nK1}</span>
+                <span class="step-math">${formatPolynomial([{coeff: nA2, var: 'x'}, {coeff: nB2, var: 'y'}])} = ${nK2}</span>
+                ${action} equations:
+                <span class="step-math">${xCoeff}<i>x</i> = ${constant} &nbsp; ⇒ &nbsp; <span style="color: var(--success);"><i>x</i> = ${x}</span></span>
+                Sub <i>x</i> into eq(iii):
+                <span class="step-math">${formatPolynomial([{coeff: B1, var: 'y'}])} = ${K1 - A1*x} &nbsp; ⇒ &nbsp; <span style="color: var(--success);"><i>y</i> = ${y}</span></span>
+            </div>
+        `;
+    }
+
+    function generateSimulAdvanced() {
+        let x, y, U, V, m, n, p, q, a1, b1, a2, b2;
+        while(true) {
+            U = getRandomInt(2, 5) * (Math.random() < 0.5 ? 1 : -1);
+            V = getRandomInt(2, 5) * (Math.random() < 0.5 ? 1 : -1);
+            x = getRandomInt(-5, 5); y = getRandomInt(-5, 5);
+            m = getRandomInt(1, 3); n = getRandomInt(1, 3);
+            p = U - (m * x); q = V - (n * y);
+            a1 = getRandomInt(-4, 4, true); b1 = getRandomInt(-4, 4, true);
+            a2 = getRandomInt(-4, 4, true); b2 = getRandomInt(-4, 4, true);
+            if ((a1 * b2) - (a2 * b1) !== 0) break;
+        }
+
+        let A1 = a1 * U; let B1 = b1 * V; let C1 = a1 + b1;
+        let A2 = a2 * U; let B2 = b2 * V; let C2 = a2 + b2;
+
+        currentProblem = { type: 'simul', ansX: x, ansY: y };
+        let eq1Left = `${buildFraction(A1, formatLinearBinomial(m, 'x', p))} ${B1 < 0 ? '-' : '+'} ${buildFraction(Math.abs(B1), formatLinearBinomial(n, 'y', q))}`;
+        let eq2Left = `${buildFraction(A2, formatLinearBinomial(m, 'x', p))} ${B2 < 0 ? '-' : '+'} ${buildFraction(Math.abs(B2), formatLinearBinomial(n, 'y', q))}`;
+
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${eq1Left} = ${C1} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(i)</span></div><div class="equation">${eq2Left} = ${C2} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(ii)</span></div>`;
+
+        let mult1 = Math.abs(b2); let mult2 = Math.abs(b1);
+        let nA1 = A1 * mult1, nB1 = B1 * mult1; let nA2 = A2 * mult2, nB2 = B2 * mult2;
+        let action = (nB1 === nB2) ? 'Subtracting' : 'Adding';
+        let aCoeff = (nB1 === nB2) ? (nA1 - nA2) : (nA1 + nA2);
+        let constant = (nB1 === nB2) ? (C1*mult1 - C2*mult2) : (C1*mult1 + C2*mult2);
+        let simpA = simplifyFraction(constant, aCoeff); 
+        let simpB = simplifyFraction(C1 - (A1 * (1/U)), B1); 
+
+        document.getElementById('solution-steps').innerHTML = `
+            <div class="step"><b>Phase 1: Substitution</b><br>
+                <span class="step-math">Let <i>a</i> = ${buildFraction('1', formatLinearBinomial(m, 'x', p))} and <i>b</i> = ${buildFraction('1', formatLinearBinomial(n, 'y', q))}</span>
+                <span class="step-math">${formatPolynomial([{coeff: A1, var: 'a'}, {coeff: B1, var: 'b'}])} = ${C1} &nbsp;&nbsp;&nbsp; ...(iii)</span>
+                <span class="step-math">${formatPolynomial([{coeff: A2, var: 'a'}, {coeff: B2, var: 'b'}])} = ${C2} &nbsp;&nbsp;&nbsp; ...(iv)</span>
+            </div>
+            <div class="step"><b>Phase 2: Solve for <i>a</i> and <i>b</i></b><br>
+                Multiply eq (iii) by ${mult1} and eq (iv) by ${mult2}, then ${action}:
+                <span class="step-math">${aCoeff}<i>a</i> = ${constant} &nbsp; ⇒ &nbsp; <i>a</i> = ${buildFraction(simpA[0], simpA[1])}</span>
+                Sub <i>a</i> into eq (iii) yields <i>b</i> = ${buildFraction(simpB[0], simpB[1])}
+            </div>
+            <div class="step"><b>Phase 3: Back-Substitution</b><br>
+                <span class="step-math"><i>a</i> = ${buildFraction(simpA[0], simpA[1])} &nbsp; ⇒ &nbsp; ${formatLinearBinomial(m, 'x', p)} = ${simpA[1] / simpA[0]} &nbsp; ⇒ &nbsp; <span style="color: var(--success);"><i>x</i> = ${x}</span></span>
+                <span class="step-math"><i>b</i> = ${buildFraction(simpB[0], simpB[1])} &nbsp; ⇒ &nbsp; ${formatLinearBinomial(n, 'y', q)} = ${simpB[1] / simpB[0]} &nbsp; ⇒ &nbsp; <span style="color: var(--success);"><i>y</i> = ${y}</span></span>
+            </div>
+        `;
+    }
+
+    function generateSimulMastery() {
+        let x, y, m1, n1, m2, n2, U, V, a1, b1, a2, b2, A1, B1, C1, A2, B2, C2;
+        while (true) {
+            x = getRandomInt(-4, 4); y = getRandomInt(-4, 4);
+            if (x === 0 && y === 0) continue;
+            m1 = getRandomInt(-3, 3, true); n1 = getRandomInt(-3, 3, true);
+            m2 = getRandomInt(-3, 3, true); n2 = getRandomInt(-3, 3, true);
+            if ((m1 * n2) - (m2 * n1) === 0) continue;
+            U = m1 * x + n1 * y; V = m2 * x + n2 * y;
+            if (U === 0 || V === 0) continue;
+            a1 = getRandomInt(-4, 4, true); b1 = getRandomInt(-4, 4, true);
+            a2 = getRandomInt(-4, 4, true); b2 = getRandomInt(-4, 4, true);
+            if ((a1 * b2) - (a2 * b1) === 0) continue;
+            A1 = a1 * U; B1 = b1 * V; C1 = a1 + b1;
+            A2 = a2 * U; B2 = b2 * V; C2 = a2 + b2; break;
+        }
+
+        currentProblem = { type: 'simul', ansX: x, ansY: y };
+        let den1 = formatPolynomial([{coeff: m1, var: 'x'}, {coeff: n1, var: 'y'}]);
+        let den2 = formatPolynomial([{coeff: m2, var: 'x'}, {coeff: n2, var: 'y'}]);
+
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${buildFraction(A1, den1)} ${B1 < 0 ? '-' : '+'} ${buildFraction(Math.abs(B1), den2)} = ${C1} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(i)</span></div><div class="equation">${buildFraction(A2, den1)} ${B2 < 0 ? '-' : '+'} ${buildFraction(Math.abs(B2), den2)} = ${C2} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(ii)</span></div>`;
+
+        let mult1 = Math.abs(b2); let mult2 = Math.abs(b1);
+        let aCoeff = ((A1*mult1) - (A2*mult2)) || ((A1*mult1) + (A2*mult2));
+        let constant1 = (B1*mult1 === B2*mult2 || B1*mult1 === -B2*mult2) ? ((C1*mult1)-(C2*mult2)) : ((C1*mult1)+(C2*mult2)); 
+        if (aCoeff === 0) {
+            aCoeff = ((A1*mult1) + (A2*mult2)); 
+            constant1 = ((C1*mult1)+(C2*mult2));
+        }
+
+        let simpA = simplifyFraction(1, 1/U); 
+        let simpB = simplifyFraction(1, 1/V); 
+
+        let mult3 = Math.abs(n2); let mult4 = Math.abs(n1);
+        let xCoeff = (n1*mult3 === n2*mult4 || n1*mult3 === -n2*mult4) ? (m1*mult3 - m2*mult4) : (m1*mult3 + m2*mult4);
+
+        document.getElementById('solution-steps').innerHTML = `
+            <div class="step"><b>Phase 1 & 2: Substitute and Solve</b><br>
+                <span class="step-math">Let <i>a</i> = ${buildFraction('1', den1)}, <i>b</i> = ${buildFraction('1', den2)}</span>
+                <span class="step-math">Solving $A_1 a + B_1 b = C_1$ gives: <i>a</i> = ${buildFraction(simpA[0], simpA[1])}, <i>b</i> = ${buildFraction(simpB[0], simpB[1])}</span>
+            </div>
+            <div class="step"><b>Phase 3: Back-Substitution (New System)</b><br>
+                <span class="step-math">${den1} = ${U} &nbsp;&nbsp;&nbsp; ...(v)</span>
+                <span class="step-math">${den2} = ${V} &nbsp;&nbsp;&nbsp; ...(vi)</span>
+            </div>
+            <div class="step"><b>Phase 4: Solve new system for <i>x</i> and <i>y</i></b><br>
+                Multiply eq (v) by ${mult3} and eq (vi) by ${mult4}, then eliminate <i>y</i>:
+                <span class="step-math">${xCoeff}<i>x</i> = ${xCoeff*x} &nbsp; ⇒ &nbsp; <span style="color: var(--success);"><i>x</i> = ${x}</span></span>
+                Substitute <i>x</i> back to get: <span class="step-math" style="color: var(--success);"><i>y</i> = ${y}</span>
+            </div>
+        `;
+    }
+
 </script>
 </body>
 </html>

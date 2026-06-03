@@ -392,7 +392,7 @@
             <option value="standard">Standard Level (Basic Co-efficients)</option>
             <option value="intermediate">Intermediate Level (Simple Fractions)</option>
             <option value="advanced">Advanced Level (Complex Fractions / Reducible)</option>
-            <option value="mastery">Mastery Level (Two-variable Denominators)</option>
+            <option id="opt-mastery" value="mastery">Mastery Level (Two-variable Denominators)</option>
         </select>
     </div>
 
@@ -580,8 +580,18 @@
 
         const instruction = document.getElementById('problem-instruction');
         const inputContainer = document.getElementById('input-container');
+        const diffSelect = document.getElementById('difficulty-level');
+        const masteryOpt = document.getElementById('opt-mastery');
         
         if (mode === 'single') {
+            // Hide and disable Mastery level for single variable
+            masteryOpt.hidden = true;
+            masteryOpt.disabled = true;
+            masteryOpt.style.display = 'none';
+            if (diffSelect.value === 'mastery') {
+                diffSelect.value = 'advanced';
+            }
+
             instruction.innerText = "Solve for x";
             inputContainer.innerHTML = `
                 <div class="input-group">
@@ -590,6 +600,11 @@
                 </div>
             `;
         } else {
+            // Show Mastery level for simultaneous equations
+            masteryOpt.hidden = false;
+            masteryOpt.disabled = false;
+            masteryOpt.style.display = 'block';
+
             instruction.innerText = "Solve the simultaneous equations";
             inputContainer.innerHTML = `
                 <div class="input-group">
@@ -618,7 +633,7 @@
         if (currentMode === 'single') {
             if (level === 'standard') generateSingleStandard();
             else if (level === 'intermediate') generateSingleIntermediate();
-            else generateSingleAdvanced(); // Handles both advanced and mastery fallback
+            else generateSingleAdvanced();
         } else {
             if (level === 'standard') generateSimulStandard();
             else if (level === 'intermediate') generateSimulIntermediate();

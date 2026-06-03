@@ -113,6 +113,7 @@
             color: var(--text-main);
             outline: none;
             cursor: pointer;
+            max-width: 100%;
         }
 
         .controls select:focus {
@@ -134,6 +135,9 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            /* Allow horizontal scrolling on small screens instead of breaking fractions */
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .problem-title {
@@ -150,6 +154,8 @@
             flex-direction: column;
             gap: 1.25rem;
             align-items: center;
+            min-width: min-content; /* Ensure children dictate width */
+            margin: 0 auto;
         }
 
         .equation {
@@ -161,6 +167,8 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            white-space: nowrap; /* Prevent line breaks inside equations */
+            flex-wrap: nowrap;
         }
         
         .equation i {
@@ -175,17 +183,20 @@
             vertical-align: middle;
             margin: 0 0.25rem;
             font-size: 1.25rem;
+            white-space: nowrap; /* CRITICAL for mobile */
         }
         .frac .num {
             padding: 0 0.4rem;
             border-bottom: 2px solid var(--text-main);
             width: 100%;
             text-align: center;
+            white-space: nowrap; /* CRITICAL for mobile */
         }
         .frac .den {
             padding: 0 0.4rem;
             width: 100%;
             text-align: center;
+            white-space: nowrap; /* CRITICAL for mobile */
         }
 
         .input-section {
@@ -310,6 +321,7 @@
 
         .solution-steps {
             padding: 1.5rem;
+            overflow-x: auto; /* Prevent math overflow in solution box */
         }
 
         .step {
@@ -336,15 +348,27 @@
             margin-top: 0.5rem;
             color: #1e293b;
             font-size: 1.2rem;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            white-space: nowrap;
         }
 
+        /* Responsive Design */
         @media (max-width: 600px) {
+            body { padding: 1rem 0.5rem; }
+            .content { padding: 1.5rem 1rem; }
             .tabs { flex-direction: column; }
             .tab { border-left: 3px solid transparent; border-bottom: none; }
             .tab.active { border-left-color: var(--primary); }
+            
+            .problem-section { padding: 1rem 0.5rem; }
+            
+            /* Shrink equations on small screens to fit better */
+            .equation { font-size: 1.15rem; gap: 0.25rem; }
+            .frac { font-size: 1.05rem; margin: 0 0.15rem; }
+            .step-math { font-size: 1.05rem; }
+            
             .input-section { flex-direction: column; align-items: center; }
-            .actions { flex-direction: column; }
+            .actions { flex-direction: column; width: 100%; }
             button { width: 100%; justify-content: center; }
         }
     </style>
@@ -895,11 +919,9 @@
         let x = getRandomInt(-5, 5); 
         let y = getRandomInt(-5, 5);
         
-        // Random coefficients for x and y in the denominator
         let m = getRandomInt(1, 3);
         let n = getRandomInt(1, 3);
         
-        // Calculate the required constants so U and V remain clean integers
         let p = U - (m * x);
         let q = V - (n * y);
 

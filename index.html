@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICSE Linear Equations Practice Lab</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --success: #10b981;
+            --success-bg: #d1fae5;
+            --error: #ef4444;
+            --error-bg: #fee2e2;
+            --border: #e2e8f0;
+            --step-bg: #f1f5f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: var(--card-bg);
+            max-width: 850px;
+            width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            background: #f8fafc;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 3px solid transparent;
+            user-select: none;
+        }
+
+        .tab:hover {
+            color: var(--primary);
+            background: #f1f5f9;
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background: white;
+        }
+
+        .controls {
+            padding: 1rem 2rem;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .controls select {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            font-weight: 600;
+            color: var(--text-main);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .controls select:focus {
+            border-color: var(--primary);
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .problem-section {
+            background: var(--step-bg);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .problem-title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .equation-display {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            align-items: center;
+        }
+
+        .equation {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .equation i {
+            font-style: italic;
+        }
+
+        /* Fraction CSS */
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            vertical-align: middle;
+            margin: 0 0.25rem;
+            font-size: 1.25rem;
+        }
+        .frac .num {
+            padding: 0 0.4rem;
+            border-bottom: 2px solid var(--text-main);
+            width: 100%;
+            text-align: center;
+        }
+        .frac .den {
+            padding: 0 0.4rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .input-section {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            font-size: 1.1rem;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-style: italic;
+        }
+
+        .input-group input {
+            width: 100px;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background-color: #cbd5e1;
+        }
+
+        .feedback {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .feedback.success {
+            display: block;
+            background-color: var(--success-bg);
+            color: var(--success);
+            border: 1px solid #a7f3d0;
+        }
+
+        .feedback.error {
+            display: block;
+            background-color: var(--error-bg);
+            color: var(--error);
+            border: 1px solid #fecaca;
+        }
+
+        .solution-container {
+            display: none;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .solution-header {
+            background: var(--step-bg);
+            padding: 1rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+            color: var(--primary);
+        }
+
+        .solution-steps {
+            padding: 1.5rem;
+        }
+
+        .step {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .step::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .step-math {
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            color: #1e293b;
+            font-size: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 600px) {
+            .tabs { flex-direction: column; }
+            .tab { border-left: 3px solid transparent; border-bottom: none; }
+            .tab.active { border-left-color: var(--primary); }
+            .input-section { flex-direction: column; align-items: center; }
+            .actions { flex-direction: column; }
+            button { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>ICSE Linear Equations Practice</h1>
+        <p>Master algebraic solving methods with step-by-step guidance</p>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active" data-mode="single" onclick="switchMode('single')">Linear Equations (1 Variable)</div>
+        <div class="tab" data-mode="simul" onclick="switchMode('simul')">Simultaneous Equations (2 Variables)</div>
+    </div>
+
+    <div class="controls">
+        <label for="difficulty-level" style="font-weight:600; color:var(--text-muted);">Difficulty Level:</label>
+        <select id="difficulty-level" onchange="generateProblem()">
+            <option value="standard">Standard Level (Basic Co-efficients)</option>
+            <option value="intermediate">Intermediate Level (Simple Fractions)</option>
+            <option value="advanced">Advanced Level (Complex Fractions / Reducible)</option>
+        </select>
+    </div>
+
+    <div class="content">
+        <div class="problem-section">
+            <div class="problem-title" id="problem-instruction">Solve for x</div>
+            <div id="equation-display" class="equation-display">
+                <!-- Equations injected here -->
+            </div>
+        </div>
+
+        <div class="input-section" id="input-container">
+            <!-- Inputs injected here -->
+        </div>
+
+        <div class="actions">
+            <button class="btn-primary" onclick="checkAnswer()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                Check Answer
+            </button>
+            <button class="btn-secondary" onclick="generateProblem()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                Next Problem
+            </button>
+            <button class="btn-secondary" onclick="toggleSolution()">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                Show Steps
+            </button>
+        </div>
+
+        <div id="feedback-msg" class="feedback"></div>
+
+        <div class="solution-container" id="solution-box">
+            <div class="solution-header">Step-by-Step ICSE Working</div>
+            <div class="solution-steps" id="solution-steps">
+                <!-- Steps injected here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentMode = 'single'; // 'single' or 'simul'
+    let currentProblem = {};
+
+    // --- Math Utilities ---
+    function getRandomInt(min, max, excludeZero = false) {
+        let val = Math.floor(Math.random() * (max - min + 1)) + min;
+        if (excludeZero && val === 0) return getRandomInt(min, max, true);
+        return val;
+    }
+
+    function gcd(a, b) {
+        a = Math.abs(a);
+        b = Math.abs(b);
+        while(b) {
+            let t = b;
+            b = a % b;
+            a = t;
+        }
+        return a;
+    }
+
+    function lcm(a, b) {
+        if (a === 0 || b === 0) return 0;
+        return Math.abs(a * b) / gcd(a, b);
+    }
+    
+    function lcm3(a, b, c) {
+        return lcm(a, lcm(b, c));
+    }
+
+    // Simplifies fraction and returns [num, den]
+    function simplifyFraction(n, d) {
+        if (n === 0) return [0, 1];
+        let g = gcd(n, d);
+        let sN = n / g;
+        let sD = d / g;
+        if (sD < 0) { sN = -sN; sD = -sD; }
+        return [sN, sD];
+    }
+
+    // --- Formatting Utilities ---
+    function formatPolynomial(terms) {
+        let result = "";
+        let isFirst = true;
+
+        for (let i = 0; i < terms.length; i++) {
+            let t = terms[i];
+            if (t.coeff === 0 && t.var !== '') continue;
+            if (t.coeff === 0 && t.var === '' && (terms.length > 1 || !isFirst)) {
+                let hasOtherTerms = terms.some((other, idx) => idx !== i && other.coeff !== 0);
+                if (hasOtherTerms) continue;
+            }
+
+            let sign = t.coeff < 0 ? "-" : "+";
+            let absCoeff = Math.abs(t.coeff);
+            let v = t.var ? `<i>${t.var}</i>` : '';
+            
+            let numStr = (absCoeff === 1 && v !== '') ? "" : absCoeff;
+
+            if (isFirst) {
+                result += (t.coeff < 0 ? "-" : "") + numStr + v;
+                isFirst = false;
+            } else {
+                result += ` ${sign} ${numStr}${v}`;
+            }
+        }
+        return result === "" ? "0" : result;
+    }
+
+    function buildFraction(numStr, denStr) {
+        return `<div class="frac"><div class="num">${numStr}</div><div class="den">${denStr}</div></div>`;
+    }
+
+    function formatBinomial(variable, shift) {
+        if (shift === 0) return `<i>${variable}</i>`;
+        let sign = shift < 0 ? '+' : '-';
+        return `<i>${variable}</i> ${sign} ${Math.abs(shift)}`;
+    }
+    
+    function formatLinearBinomial(coeff, variable, constant) {
+        let varPart = "";
+        if (coeff === 1) varPart = `<i>${variable}</i>`;
+        else if (coeff === -1) varPart = `-<i>${variable}</i>`;
+        else if (coeff !== 0) varPart = `${coeff}<i>${variable}</i>`;
+        else return constant.toString();
+
+        if (constant === 0) return varPart;
+        let sign = constant < 0 ? '-' : '+';
+        return `${varPart} ${sign} ${Math.abs(constant)}`;
+    }
+    
+    // For simple fractions like 3x/5
+    function formatFractionTerm(coeff, variable, den, isFirstTerm = false) {
+        let absCoeff = Math.abs(coeff);
+        let sign = coeff < 0 ? "-" : (isFirstTerm ? "" : "+");
+        
+        let numStr = "";
+        if (absCoeff === 1 && variable !== '') numStr = `<i>${variable}</i>`;
+        else numStr = `${absCoeff}<i>${variable}</i>`;
+        
+        let termStr = (den === 1) ? numStr : buildFraction(numStr, den);
+        
+        if (isFirstTerm) {
+            return coeff < 0 ? `- ${termStr}` : termStr;
+        } else {
+            return `${sign} ${termStr}`;
+        }
+    }
+
+    function formatFractionEq(a, dx, b, dy, Cnum, Cden) {
+        let t1 = formatFractionTerm(a, 'x', dx, true);
+        let t2 = formatFractionTerm(b, 'y', dy, false);
+        
+        let rhs = "";
+        let absCnum = Math.abs(Cnum);
+        if (Cden === 1) {
+            rhs = (Cnum < 0 ? "-" : "") + absCnum;
+        } else {
+            rhs = (Cnum < 0 ? "- " : "") + buildFraction(absCnum, Cden);
+        }
+        return `${t1} ${t2} = ${rhs}`;
+    }
+
+    // --- Core Application Logic ---
+    function switchMode(mode) {
+        currentMode = mode;
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelector(`.tab[data-mode="${mode}"]`).classList.add('active');
+
+        const instruction = document.getElementById('problem-instruction');
+        const inputContainer = document.getElementById('input-container');
+        
+        if (mode === 'single') {
+            instruction.innerText = "Solve for x";
+            inputContainer.innerHTML = `
+                <div class="input-group">
+                    <label>x =</label>
+                    <input type="number" id="ans-x" autocomplete="off" placeholder="Value">
+                </div>
+            `;
+        } else {
+            instruction.innerText = "Solve the simultaneous equations";
+            inputContainer.innerHTML = `
+                <div class="input-group">
+                    <label>x =</label>
+                    <input type="number" id="ans-x" autocomplete="off" placeholder="Value">
+                </div>
+                <div class="input-group">
+                    <label>y =</label>
+                    <input type="number" id="ans-y" autocomplete="off" placeholder="Value">
+                </div>
+            `;
+        }
+        generateProblem();
+    }
+
+    function generateProblem() {
+        document.getElementById('feedback-msg').className = 'feedback';
+        document.getElementById('feedback-msg').style.display = 'none';
+        document.getElementById('solution-box').style.display = 'none';
+        
+        document.getElementById('ans-x').value = '';
+        if (document.getElementById('ans-y')) document.getElementById('ans-y').value = '';
+
+        let level = document.getElementById('difficulty-level').value;
+
+        if (currentMode === 'single') {
+            if (level === 'standard') generateSingleStandard();
+            else if (level === 'intermediate') generateSingleIntermediate();
+            else generateSingleAdvanced();
+        } else {
+            if (level === 'standard') generateSimulStandard();
+            else if (level === 'intermediate') generateSimulIntermediate();
+            else generateSimulAdvanced();
+        }
+    }
+
+    // --- Single Variable Generators ---
+    function generateSingleStandard() {
+        let x = getRandomInt(-15, 15);
+        let a = getRandomInt(-9, 9, true);
+        let c = getRandomInt(-9, 9, true);
+        while (a === c) { c = getRandomInt(-9, 9, true); }
+        let b = getRandomInt(-20, 20);
+        let d = a * x + b - c * x; 
+
+        currentProblem = { type: 'single', ansX: x };
+
+        let lhs = formatPolynomial([{coeff: a, var: 'x'}, {coeff: b, var: ''}]);
+        let rhs = formatPolynomial([{coeff: c, var: 'x'}, {coeff: d, var: ''}]);
+        
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${lhs} = ${rhs}</div>`;
+
+        let stepsHTML = `
+            <div class="step">Write the original equation: <span class="step-math">${lhs} = ${rhs}</span></div>
+            <div class="step">Transpose terms with <i>x</i> to the LHS, and constants to the RHS:
+                <span class="step-math">${formatPolynomial([{coeff: a, var: 'x'}, {coeff: -c, var: 'x'}])} = ${formatPolynomial([{coeff: d, var: ''}, {coeff: -b, var: ''}])}</span>
+            </div>
+            <div class="step">Simplify both sides:
+                <span class="step-math">${formatPolynomial([{coeff: (a - c), var: 'x'}])} = ${d - b}</span>
+            </div>
+            <div class="step">Divide by the coefficient of <i>x</i> to find the final value:
+                <span class="step-math"><i>x</i> = ${(d - b)} / ${(a - c)}</span>
+                <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
+            </div>
+        `;
+        document.getElementById('solution-steps').innerHTML = stepsHTML;
+    }
+
+    function generateSingleIntermediate() {
+        // Equation form: (a*x)/d1 + b = (c*x)/d2 + e
+        let d1 = getRandomInt(2, 5);
+        let d2 = getRandomInt(2, 5);
+        let L = lcm(d1, d2);
+        
+        // Ensure x is a multiple of L so divisions are clean
+        let x = getRandomInt(-4, 4, true) * L;
+        
+        let a = getRandomInt(-5, 5, true);
+        let c = getRandomInt(-5, 5, true);
+        
+        // Prevent x from cancelling out (a/d1 != c/d2)
+        while (a * d2 === c * d1) {
+            c = getRandomInt(-5, 5, true);
+            d2 = getRandomInt(2, 5);
+            L = lcm(d1, d2);
+            x = getRandomInt(-4, 4, true) * L;
+        }
+        
+        let b = getRandomInt(-15, 15);
+        let e = ((a * x) / d1) + b - ((c * x) / d2);
+        
+        currentProblem = { type: 'single', ansX: x };
+        
+        let eqLeft = `${formatFractionTerm(a, 'x', d1, true)} ${b < 0 ? '-' : '+'} ${Math.abs(b)}`;
+        let eqRight = `${formatFractionTerm(c, 'x', d2, true)} ${e < 0 ? '-' : '+'} ${Math.abs(e)}`;
+        
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${eqLeft} = ${eqRight}</div>`;
+        
+        let constDiff = e - b;
+        let nA = a * (L / d1);
+        let nC = c * (L / d2);
+        let numDiff = nA - nC;
+        let finalRHS = constDiff * L;
+        
+        let stepsHTML = `
+            <div class="step">Group variable terms on the LHS and constant terms on the RHS:
+                <span class="step-math">${formatFractionTerm(a, 'x', d1, true)} ${c > 0 ? '-' : '+'} ${formatFractionTerm(Math.abs(c), 'x', d2, true)} = ${e} ${b < 0 ? '+' : '-'} ${Math.abs(b)}</span>
+                <span class="step-math">${formatFractionTerm(a, 'x', d1, true)} ${c > 0 ? '-' : '+'} ${formatFractionTerm(Math.abs(c), 'x', d2, true)} = ${constDiff}</span>
+            </div>
+            <div class="step">Find the LCM of the denominators (${d1}, ${d2}) which is ${L}. Multiply the entire equation by ${L} to clear fractions:
+                <span class="step-math">${nA}<i>x</i> ${nC > 0 ? '-' : '+'} ${Math.abs(nC)}<i>x</i> = ${constDiff} × ${L}</span>
+            </div>
+            <div class="step">Simplify and solve for <i>x</i>:
+                <span class="step-math">${numDiff}<i>x</i> = ${finalRHS}</span>
+                <span class="step-math"><i>x</i> = ${finalRHS} / ${numDiff}</span>
+                <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
+            </div>
+        `;
+        document.getElementById('solution-steps').innerHTML = stepsHTML;
+    }
+
+    function generateSingleAdvanced() {
+        // Equation form: (ax - m)/d1 + (cx - n)/d2 = e
+        let x = getRandomInt(-10, 10);
+        let a = getRandomInt(-4, 4, true);
+        let c = getRandomInt(-4, 4, true);
+        let d1 = getRandomInt(2, 5);
+        let d2 = getRandomInt(2, 5);
+        while (d1 === d2) d2 = getRandomInt(2, 5);
+        
+        // Ensure x coefficient doesn't cancel out
+        let L = lcm(d1, d2);
+        while ((a * (L/d1)) + (c * (L/d2)) === 0) {
+            c = getRandomInt(-4, 4, true);
+        }
+        
+        let k1 = getRandomInt(-3, 3, true);
+        let k2 = getRandomInt(-3, 3, true);
+        
+        let m = (a * x) - (k1 * d1);
+        let n = (c * x) - (k2 * d2);
+        let e = k1 + k2;
+
+        currentProblem = { type: 'single', ansX: x };
+
+        let num1Str = formatPolynomial([{coeff: a, var: 'x'}, {coeff: -m, var: ''}]);
+        let num2Str = formatPolynomial([{coeff: c, var: 'x'}, {coeff: -n, var: ''}]);
+        
+        let frac1 = buildFraction(num1Str, d1);
+        let frac2 = buildFraction(num2Str, d2);
+        
+        document.getElementById('equation-display').innerHTML = `<div class="equation">${frac1} + ${frac2} = ${e}</div>`;
+
+        let L1 = L / d1;
+        let L2 = L / d2;
+        
+        let coeffSum = (L1 * a) + (L2 * c);
+        let constSum = (L1 * -m) + (L2 * -n);
+        let rhsVal = L * e;
+
+        let stepsHTML = `
+            <div class="step">Find the LCM of the denominators (${d1} and ${d2}). The LCM is ${L}.</div>
+            <div class="step">Multiply the entire equation by ${L} to clear the fractions:
+                <span class="step-math">${L1}(${num1Str}) + ${L2}(${num2Str}) = ${L} × ${e}</span>
+            </div>
+            <div class="step">Expand the brackets:
+                <span class="step-math">${L1 * a}<i>x</i> ${L1*-m < 0 ? '-' : '+'} ${Math.abs(L1*-m)} + ${L2 * c}<i>x</i> ${L2*-n < 0 ? '-' : '+'} ${Math.abs(L2*-n)} = ${rhsVal}</span>
+            </div>
+            <div class="step">Group like terms on the LHS and shift constants to the RHS:
+                <span class="step-math">${coeffSum}<i>x</i> = ${rhsVal} ${constSum < 0 ? '+' : '-'} ${Math.abs(constSum)}</span>
+                <span class="step-math">${coeffSum}<i>x</i> = ${rhsVal - constSum}</span>
+            </div>
+            <div class="step">Solve for <i>x</i>:
+                <span class="step-math"><i>x</i> = ${rhsVal - constSum} / ${coeffSum}</span>
+                <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
+            </div>
+        `;
+        document.getElementById('solution-steps').innerHTML = stepsHTML;
+    }
+
+    // --- Simultaneous Generators ---
+    function generateSimulStandard() {
+        let x = getRandomInt(-10, 10);
+        let y = getRandomInt(-10, 10);
+        let a1 = getRandomInt(-6, 6, true);
+        let b1 = getRandomInt(-6, 6, true);
+        let a2 = getRandomInt(-6, 6, true);
+        let b2 = getRandomInt(-6, 6, true);
+        
+        while ((a1 * b2) - (a2 * b1) === 0) {
+            a2 = getRandomInt(-6, 6, true);
+            b2 = getRandomInt(-6, 6, true);
+        }
+
+        let c1 = a1 * x + b1 * y;
+        let c2 = a2 * x + b2 * y;
+
+        currentProblem = { type: 'simul', ansX: x, ansY: y };
+
+        let eq1Str = formatPolynomial([{coeff: a1, var: 'x'}, {coeff: b1, var: 'y'}]);
+        let eq2Str = formatPolynomial([{coeff: a2, var: 'x'}, {coeff: b2, var: 'y'}]);
+        
+        document.getElementById('equation-display').innerHTML = `
+            <div class="equation">${eq1Str} = ${c1} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(i)</span></div>
+            <div class="equation">${eq2Str} = ${c2} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(ii)</span></div>
+        `;
+
+        let mult1 = Math.abs(b2);
+        let mult2 = Math.abs(b1);
+        
+        let nA1 = a1 * mult1, nB1 = b1 * mult1, nC1 = c1 * mult1;
+        let nA2 = a2 * mult2, nB2 = b2 * mult2, nC2 = c2 * mult2;
+
+        let action = (nB1 === nB2) ? 'Subtracting' : 'Adding';
+        let xCoeff = (nB1 === nB2) ? (nA1 - nA2) : (nA1 + nA2);
+        let constant = (nB1 === nB2) ? (nC1 - nC2) : (nC1 + nC2);
+
+        let subTerm = a1 * x;
+        let rhsAfterSub = c1 - subTerm;
+
+        let stepsHTML = `
+            <div class="step">We will use the <b>Elimination Method</b> to eliminate <i>y</i>. <br>
+                Multiply equation (i) by ${mult1} and equation (ii) by ${mult2}:
+                <span class="step-math">${formatPolynomial([{coeff: nA1, var: 'x'}, {coeff: nB1, var: 'y'}])} = ${nC1} &nbsp;&nbsp;&nbsp; ...(iii)</span>
+                <span class="step-math">${formatPolynomial([{coeff: nA2, var: 'x'}, {coeff: nB2, var: 'y'}])} = ${nC2} &nbsp;&nbsp;&nbsp; ...(iv)</span>
+            </div>
+            <div class="step">${action} equation (iv) ${action === 'Subtracting' ? 'from' : 'and'} equation (iii) to eliminate <i>y</i>:
+                <span class="step-math">${formatPolynomial([{coeff: xCoeff, var: 'x'}])} = ${constant}</span>
+                <span class="step-math"><i>x</i> = ${constant} / ${xCoeff}</span>
+                <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
+            </div>
+            <div class="step">Substitute <i>x</i> = ${x} into equation (i):
+                <span class="step-math">${formatPolynomial([{coeff: a1, var: `(${x})`}])} ${formatPolynomial([{coeff: b1, var: 'y'}])} = ${c1}</span>
+            </div>
+            <div class="step">Solve for <i>y</i>:
+                <span class="step-math">${formatPolynomial([{coeff: b1, var: 'y'}])} = ${c1} - (${subTerm})</span>
+                <span class="step-math">${formatPolynomial([{coeff: b1, var: 'y'}])} = ${rhsAfterSub}</span>
+                <span class="step-math" style="color: var(--success);"><i>y</i> = ${y}</span>
+            </div>
+        `;
+        document.getElementById('solution-steps').innerHTML = stepsHTML;
+    }
+
+    function generateSimulIntermediate() {
+        // Equation form: (a1*x)/dx1 + (b1*y)/dy1 = Cnum1/Cden1
+        let x = getRandomInt(-8, 8);
+        let y = getRandomInt(-8, 8);
+        
+        let a1, b1, dx1, dy1, a2, b2, dx2, dy2;
+        
+        // Loop ensures independence
+        while (true) {
+            a1 = getRandomInt(-5, 5, true); b1 = getRandomInt(-5, 5, true);
+            dx1 = getRandomInt(1, 4); dy1 = getRandomInt(1, 4);
+            // Ensure at least one fraction in Eq 1
+            if (dx1 === 1 && dy1 === 1) dx1 = getRandomInt(2, 4);
+            
+            a2 = getRandomInt(-5, 5, true); b2 = getRandomInt(-5, 5, true);
+            dx2 = getRandomInt(1, 4); dy2 = getRandomInt(1, 4);
+            // Ensure at least one fraction in Eq 2
+            if (dx2 === 1 && dy2 === 1) dy2 = getRandomInt(2, 4);
+            
+            // Check determinant != 0
+            if ((a1 * dy1 * b2 * dx2) - (a2 * dy2 * b1 * dx1) !== 0) break;
+        }
+
+        // Calculate RHS fractions perfectly
+        let n1 = (a1 * x * dy1) + (b1 * y * dx1);
+        let d1 = dx1 * dy1;
+        let [Cnum1, Cden1] = simplifyFraction(n1, d1);
+        
+        let n2 = (a2 * x * dy2) + (b2 * y * dx2);
+        let d2 = dx2 * dy2;
+        let [Cnum2, Cden2] = simplifyFraction(n2, d2);
+        
+        currentProblem = { type: 'simul', ansX: x, ansY: y };
+
+        document.getElementById('equation-display').innerHTML = `
+            <div class="equation">${formatFractionEq(a1, dx1, b1, dy1, Cnum1, Cden1)} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(i)</span></div>
+            <div class="equation">${formatFractionEq(a2, dx2, b2, dy2, Cnum2, Cden2)} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(ii)</span></div>
+        `;
+
+        // Standardize the linear eq values
+        let L1 = lcm3(dx1, dy1, Cden1);
+        let A1 = a1 * (L1 / dx1);
+        let B1 = b1 * (L1 / dy1);
+        let K1 = Cnum1 * (L1 / Cden1);
+        
+        let L2 = lcm3(dx2, dy2, Cden2);
+        let A2 = a2 * (L2 / dx2);
+        let B2 = b2 * (L2 / dy2);
+        let K2 = Cnum2 * (L2 / Cden2);
+
+        // Standard Elimination logic follows:
+        let mult1 = Math.abs(B2);
+        let mult2 = Math.abs(B1);
+        
+        let nA1 = A1 * mult1, nB1 = B1 * mult1, nK1 = K1 * mult1;
+        let nA2 = A2 * mult2, nB2 = B2 * mult2, nK2 = K2 * mult2;
+
+        let action = (nB1 === nB2) ? 'Subtracting' : 'Adding';
+        let xCoeff = (nB1 === nB2) ? (nA1 - nA2) : (nA1 + nA2);
+        let constant = (nB1 === nB2) ? (nK1 - nK2) : (nK1 + nK2);
+        
+        let subTerm = A1 * x;
+        let rhsAfterSub = K1 - subTerm;
+
+        let stepsHTML = `
+            <div class="step"><b>Phase 1: Clear Fractions</b><br>
+                Convert to standard form by multiplying each equation by the LCM of its denominators.<br>
+                For eq(i), the LCM of (${dx1}, ${dy1}, ${Cden1}) is ${L1}. Multiply by ${L1}:<br>
+                <span class="step-math">${formatPolynomial([{coeff: A1, var: 'x'}, {coeff: B1, var: 'y'}])} = ${K1} &nbsp;&nbsp;&nbsp; ...(iii)</span>
+                For eq(ii), the LCM of (${dx2}, ${dy2}, ${Cden2}) is ${L2}. Multiply by ${L2}:<br>
+                <span class="step-math">${formatPolynomial([{coeff: A2, var: 'x'}, {coeff: B2, var: 'y'}])} = ${K2} &nbsp;&nbsp;&nbsp; ...(iv)</span>
+            </div>
+            <div class="step"><b>Phase 2: Elimination Method</b><br>
+                Multiply eq(iii) by ${mult1} and eq(iv) by ${mult2} to eliminate <i>y</i>:
+                <span class="step-math">${formatPolynomial([{coeff: nA1, var: 'x'}, {coeff: nB1, var: 'y'}])} = ${nK1} &nbsp;&nbsp;&nbsp; ...(v)</span>
+                <span class="step-math">${formatPolynomial([{coeff: nA2, var: 'x'}, {coeff: nB2, var: 'y'}])} = ${nK2} &nbsp;&nbsp;&nbsp; ...(vi)</span>
+                ${action} eq(vi) ${action === 'Subtracting' ? 'from' : 'and'} eq(v):
+                <span class="step-math">${formatPolynomial([{coeff: xCoeff, var: 'x'}])} = ${constant}</span>
+                <span class="step-math"><i>x</i> = ${constant} / ${xCoeff}</span>
+                <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
+            </div>
+            <div class="step">Substitute <i>x</i> = ${x} into eq(iii):
+                <span class="step-math">${formatPolynomial([{coeff: A1, var: `(${x})`}])} ${formatPolynomial([{coeff: B1, var: 'y'}])} = ${K1}</span>
+            </div>
+            <div class="step">Solve for <i>y</i>:
+                <span class="step-math">${formatPolynomial([{coeff: B1, var: 'y'}])} = ${K1} - (${subTerm})</span>
+                <span class="step-math">${formatPolynomial([{coeff: B1, var: 'y'}])} = ${rhsAfterSub}</span>
+                <span class="step-math" style="color: var(--success);"><i>y</i> = ${y}</span>
+            </div>
+        `;
+        document.getElementById('solution-steps').innerHTML = stepsHTML;
+    }
+
+    function generateSimulAdvanced() {
+        // Reducible: A1/(mx+p) + B1/(ny+q) = C1
+        let U = getRandomInt(2, 5) * (Math.random() < 0.5 ? 1 : -1);
+        let V = getRandomInt(2, 5) * (Math.random() < 0.5 ? 1 : -1);
+        
+        let x = getRandomInt(-5, 5); 
+        let y = getRandomInt(-5, 5);
+        
+        // Random coefficients for x and y in the denominator
+        let m = getRandomInt(1, 3);
+        let n = getRandomInt(1, 3);
+        
+        // Calculate the required constants so U and V remain clean integers
+        let p = U - (m * x);
+        let q = V - (n * y);
+
+        let a1 = getRandomInt(-4, 4, true);
+        let b1 = getRandomInt(-4, 4, true);
+        let a2 = getRandomInt(-4, 4, true);
+        let b2 = getRandomInt(-4, 4, true);
+        
+        while ((a1 * b2) - (a2 * b1) === 0) {
+            a2 = getRandomInt(-4, 4, true);
+            b2 = getRandomInt(-4, 4, true);
+        }
+
+        let A1 = a1 * U; let B1 = b1 * V; let C1 = a1 + b1;
+        let A2 = a2 * U; let B2 = b2 * V; let C2 = a2 + b2;
+
+        currentProblem = { type: 'simul', ansX: x, ansY: y };
+
+        let eq1Left = `${buildFraction(A1, formatLinearBinomial(m, 'x', p))} ${B1 < 0 ? '-' : '+'} ${buildFraction(Math.abs(B1), formatLinearBinomial(n, 'y', q))}`;
+        let eq2Left = `${buildFraction(A2, formatLinearBinomial(m, 'x', p))} ${B2 < 0 ? '-' : '+'} ${buildFraction(Math.abs(B2), formatLinearBinomial(n, 'y', q))}`;
+
+        document.getElementById('equation-display').innerHTML = `
+            <div class="equation">${eq1Left} = ${C1} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(i)</span></div>
+            <div class="equation">${eq2Left} = ${C2} <span style="font-size: 1rem; color: var(--text-muted); margin-left: 10px;">...(ii)</span></div>
+        `;
+
+        let mult1 = Math.abs(b2);
+        let mult2 = Math.abs(b1);
+        
+        let nA1 = A1 * mult1, nB1 = B1 * mult1, nC1 = C1 * mult1;
+        let nA2 = A2 * mult2, nB2 = B2 * mult2, nC2 = C2 * mult2;
+
+        let action = (nB1 === nB2) ? 'Subtracting' : 'Adding';
+        let aCoeff = (nB1 === nB2) ? (nA1 - nA2) : (nA1 + nA2);
+        let constant = (nB1 === nB2) ? (nC1 - nC2) : (nC1 + nC2);
+        
+        let simpA = simplifyFraction(constant, aCoeff); 
+        
+        let subTerm = A1 * (1/U); 
+        let rhsAfterSub = C1 - subTerm;
+        let simpB = simplifyFraction(rhsAfterSub, B1); 
+
+        let stepsHTML = `
+            <div class="step"><b>Phase 1: Substitution</b><br>
+                These equations are not linear. Let's substitute: 
+                <span class="step-math">Let <i>a</i> = ${buildFraction('1', formatLinearBinomial(m, 'x', p))} and <i>b</i> = ${buildFraction('1', formatLinearBinomial(n, 'y', q))}</span>
+                This reduces our system to linear equations:
+                <span class="step-math">${formatPolynomial([{coeff: A1, var: 'a'}, {coeff: B1, var: 'b'}])} = ${C1} &nbsp;&nbsp;&nbsp; ...(iii)</span>
+                <span class="step-math">${formatPolynomial([{coeff: A2, var: 'a'}, {coeff: B2, var: 'b'}])} = ${C2} &nbsp;&nbsp;&nbsp; ...(iv)</span>
+            </div>
+            <div class="step"><b>Phase 2: Solve for <i>a</i> and <i>b</i></b><br>
+                Multiply equation (iii) by ${mult1} and equation (iv) by ${mult2}:
+                <span class="step-math">${formatPolynomial([{coeff: nA1, var: 'a'}, {coeff: nB1, var: 'b'}])} = ${nC1} &nbsp;&nbsp;&nbsp; ...(v)</span>
+                <span class="step-math">${formatPolynomial([{coeff: nA2, var: 'a'}, {coeff: nB2, var: 'b'}])} = ${nC2} &nbsp;&nbsp;&nbsp; ...(vi)</span>
+                ${action} equation (vi) ${action === 'Subtracting' ? 'from' : 'and'} (v) to eliminate <i>b</i>:
+                <span class="step-math">${aCoeff}<i>a</i> = ${constant} 
+                    &nbsp;&nbsp;&nbsp; ⇒ &nbsp;&nbsp;&nbsp; 
+                    <i>a</i> = ${buildFraction(simpA[0], simpA[1])}</span>
+            </div>
+            <div class="step">Substitute <i>a</i> into equation (iii):
+                <span class="step-math">${A1}(${buildFraction(simpA[0], simpA[1])}) ${B1 < 0 ? '-' : '+'} ${Math.abs(B1)}<i>b</i> = ${C1}</span>
+                <span class="step-math">${subTerm} ${B1 < 0 ? '-' : '+'} ${Math.abs(B1)}<i>b</i> = ${C1} 
+                    &nbsp;&nbsp;&nbsp; ⇒ &nbsp;&nbsp;&nbsp; 
+                    <i>b</i> = ${buildFraction(simpB[0], simpB[1])}</span>
+            </div>
+            <div class="step"><b>Phase 3: Back-Substitution</b><br>
+                Now substitute back to find <i>x</i> and <i>y</i>.
+                <span class="step-math">Since <i>a</i> = ${buildFraction('1', formatLinearBinomial(m, 'x', p))} = ${buildFraction(simpA[0], simpA[1])}</span>
+                <span class="step-math">${formatLinearBinomial(m, 'x', p)} = ${simpA[1] / simpA[0]}</span>
+                ${p !== 0 ? `<span class="step-math">${m === 1 ? '<i>x</i>' : `${m}<i>x</i>`} = ${(simpA[1] / simpA[0])} ${p > 0 ? '-' : '+'} ${Math.abs(p)}</span>` : ''}
+                ${(m !== 1 && p !== 0) ? `<span class="step-math">${m}<i>x</i> = ${U - p}</span>` : ''}
+                <span class="step-math" style="color: var(--success);"><i>x</i> = ${x}</span>
+                <br>
+                <span class="step-math">Since <i>b</i> = ${buildFraction('1', formatLinearBinomial(n, 'y', q))} = ${buildFraction(simpB[0], simpB[1])}</span>
+                <span class="step-math">${formatLinearBinomial(n, 'y', q)} = ${simpB[1] / simpB[0]}</span>
+                ${q !== 0 ? `<span class="step-math">${n === 1 ? '<i>y</i>' : `${n}<i>y</i>`} = ${(simpB[1] / simpB[0])} ${q > 0 ? '-' : '+'} ${Math.abs(q)}</span>` : ''}
+                ${(n !== 1 && q !== 0) ? `<span class="step-math">${n}<i>y</i> = ${V - q}</span>` : ''}
+                <span class="step-math" style="color: var(--success);"><i>y</i> = ${y}</span>
+            </div>
+        `;
+        document.getElementById('solution-steps').innerHTML = stepsHTML;
+    }
+
+    function checkAnswer() {
+        const feedback = document.getElementById('feedback-msg');
+        let isCorrect = false;
+        let isEmpty = false;
+
+        if (currentMode === 'single') {
+            const userX = document.getElementById('ans-x').value;
+            if (userX === '') isEmpty = true;
+            else if (parseInt(userX) === currentProblem.ansX) isCorrect = true;
+        } else {
+            const userX = document.getElementById('ans-x').value;
+            const userY = document.getElementById('ans-y').value;
+            if (userX === '' || userY === '') isEmpty = true;
+            else if (parseInt(userX) === currentProblem.ansX && parseInt(userY) === currentProblem.ansY) isCorrect = true;
+        }
+
+        if (isEmpty) {
+            feedback.className = 'feedback error';
+            feedback.innerText = 'Please enter a value for all variables before checking.';
+            feedback.style.display = 'block';
+            return;
+        }
+
+        if (isCorrect) {
+            feedback.className = 'feedback success';
+            feedback.innerText = 'Excellent! Your answer is correct.';
+        } else {
+            feedback.className = 'feedback error';
+            feedback.innerText = 'Incorrect. Try again, or click "Show Steps" to see the ICSE working method.';
+        }
+        feedback.style.display = 'block';
+    }
+
+    function toggleSolution() {
+        const solBox = document.getElementById('solution-box');
+        if (solBox.style.display === 'none' || solBox.style.display === '') {
+            solBox.style.display = 'block';
+            solBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+            solBox.style.display = 'none';
+        }
+    }
+
+    document.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            if (document.activeElement.tagName === 'INPUT') {
+                checkAnswer();
+            }
+        }
+    });
+
+    window.onload = () => {
+        switchMode('single');
+    };
+</script>
+</body>
+</html>

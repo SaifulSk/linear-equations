@@ -65,6 +65,7 @@
             opacity: 0.9;
         }
 
+        /* Desktop Tabs */
         .tabs {
             display: flex;
             border-bottom: 1px solid var(--border);
@@ -96,6 +97,31 @@
             background: white;
         }
 
+        /* Mobile Topic Selector */
+        .mobile-mode-selector {
+            display: none;
+            padding: 1rem 2rem;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .mobile-mode-selector select {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            border: 2px solid var(--primary);
+            font-weight: 600;
+            color: var(--primary);
+            outline: none;
+            cursor: pointer;
+            max-width: 100%;
+            background: #f8fafc;
+            font-size: 1rem;
+        }
+
+        /* General Controls */
         .controls {
             padding: 1rem 2rem;
             background: white;
@@ -352,21 +378,16 @@
             body { padding: 1rem 0.5rem; }
             .content { padding: 1.5rem 1rem; }
             
-            /* Stack tabs fully on mobile */
-            .tabs { flex-direction: column; }
-            .tab { 
-                flex: 1 1 100%; 
-                border-left: 3px solid transparent; 
-                border-bottom: 1px solid var(--border); 
+            /* Hide desktop tabs and show mobile dropdown */
+            .tabs { display: none; }
+            .mobile-mode-selector { 
+                display: flex; 
+                flex-direction: column; 
+                align-items: stretch; 
                 padding: 1rem; 
-                text-align: center; 
+                gap: 0.5rem; 
             }
-            .tab:last-child { border-bottom: none; }
-            .tab.active { 
-                border-left-color: var(--primary); 
-                border-bottom-color: transparent;
-                background: white; 
-            }
+            .mobile-mode-selector select { text-align: center; }
             
             /* Full width controls on mobile */
             .controls { flex-direction: column; align-items: stretch; padding: 1rem; gap: 0.5rem; }
@@ -391,11 +412,23 @@
         <p>Master algebraic solving methods with step-by-step guidance</p>
     </div>
 
+    <!-- Desktop Topic Tabs -->
     <div class="tabs">
         <div class="tab active" data-mode="single" onclick="switchMode('single')">Linear Equations</div>
         <div class="tab" data-mode="simul" onclick="switchMode('simul')">Simultaneous Equations</div>
         <div class="tab" data-mode="ineq" onclick="switchMode('ineq')">Linear Inequalities</div>
         <div class="tab" data-mode="quad" onclick="switchMode('quad')">Quadratic Equations</div>
+    </div>
+
+    <!-- Mobile Topic Selector -->
+    <div class="mobile-mode-selector">
+        <label for="mobile-mode-select" style="font-weight:600; color:var(--text-muted); font-size: 0.9rem;">Select Topic:</label>
+        <select id="mobile-mode-select" onchange="switchMode(this.value)">
+            <option value="single">Linear Equations</option>
+            <option value="simul">Simultaneous Equations</option>
+            <option value="ineq">Linear Inequalities</option>
+            <option value="quad">Quadratic Equations</option>
+        </select>
     </div>
 
     <div class="controls">
@@ -589,6 +622,7 @@
         currentMode = mode;
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         document.querySelector(`.tab[data-mode="${mode}"]`).classList.add('active');
+        document.getElementById('mobile-mode-select').value = mode;
 
         const instruction = document.getElementById('problem-instruction');
         const inputContainer = document.getElementById('input-container');
@@ -1135,7 +1169,7 @@
         let ineqDenomWarning = isIneq ? ` <b>(Assume denominators are positive)</b>` : "";
 
         let stepsHTML = `
-            <div class="step">Find the LCM of the denominators: $(${den1})(${den2})$. Multiply the entire equation by this LCM:${ineqDenomWarning}
+            <div class="step">Find the LCM of the denominators: (${den1})(${den2}). Multiply the entire equation by this LCM:${ineqDenomWarning}
                 <span class="step-math">(${num1})(${den2}) + (${num2})(${den1}) ${eqStrM} ${K}(${den1})(${den2})</span>
             </div>
             <div class="step">Expand the brackets on both sides:
@@ -1267,7 +1301,7 @@
         
         let preStep = "";
         if (eqStr.indexOf('= 0') === -1 && C !== 0 && B !== 0) {
-            preStep = `<div class="step">Bring all terms to the LHS to form the standard quadratic equation ($ax^2+bx+c=0$):<span class="step-math">${formatPolynomial([{coeff:A, var:'x<sup>2</sup>'}, {coeff:B, var:'x'}, {coeff:C, var:''}])} = 0</span></div>`;
+            preStep = `<div class="step">Bring all terms to the LHS to form the standard quadratic equation (<i>ax<sup>2</sup> + bx + c = 0</i>):<span class="step-math">${formatPolynomial([{coeff:A, var:'x<sup>2</sup>'}, {coeff:B, var:'x'}, {coeff:C, var:''}])} = 0</span></div>`;
         } else if (eqStr.indexOf('= 0') === -1 && C === 0) {
              preStep = `<div class="step">Bring all terms to the LHS:<span class="step-math">${formatPolynomial([{coeff:A, var:'x<sup>2</sup>'}, {coeff:B, var:'x'}])} = 0</span></div>`;
         }
@@ -1296,7 +1330,7 @@
                 <div class="step">Expand the brackets:
                     <span class="step-math"><i>x<sup>2</sup></i> ${B < 0 ? '-' : '+'} ${Math.abs(B)}<i>x</i> ${A < 0 ? '-' : '+'} ${Math.abs(A)}<i>x</i> ${A*B < 0 ? '-' : '+'} ${Math.abs(A*B)} = ${K}</span>
                 </div>
-                <div class="step">Combine terms and shift constant to LHS to form standard quadratic equation ($ax^2 + bx + c = 0$):
+                <div class="step">Combine terms and shift constant to LHS to form standard quadratic equation (<i>ax<sup>2</sup> + bx + c = 0</i>):
                     <span class="step-math">${formatPolynomial([{coeff: 1, var: 'x<sup>2</sup>'}, {coeff: B_std, var: 'x'}, {coeff: C_std, var: ''}])} = 0</span>
                 </div>
                 ${formatQuadSteps(1, B_std, C_std, x1, x2)}
@@ -1380,7 +1414,7 @@
                     <span class="step-math"><i>x</i>(<i>x</i>) ${C < 0 ? '-' : '+'} <i>x</i>(${buildFraction(Math.abs(C), '<i>x</i>')}) = <i>x</i>(${-B})</span>
                     <span class="step-math"><i>x<sup>2</sup></i> ${C < 0 ? '-' : '+'} ${Math.abs(C)} = ${-B === 1 ? '' : (-B === -1 ? '-' : -B)}<i>x</i></span>
                 </div>
-                <div class="step">Rearrange to standard form ($ax^2 + bx + c = 0$):
+                <div class="step">Rearrange to standard form (<i>ax<sup>2</sup> + bx + c = 0</i>):
                     <span class="step-math">${formatPolynomial([{coeff: 1, var: 'x<sup>2</sup>'}, {coeff: B, var: 'x'}, {coeff: C, var: ''}])} = 0</span>
                 </div>
                 ${formatQuadSteps(1, B, C, x1, x2)}
@@ -1417,7 +1451,7 @@
             document.getElementById('equation-display').innerHTML = `<div class="equation">${lhs} = ${rhs}</div>`;
             
             stepsHTML = `
-                <div class="step">Bring all terms to the LHS to form standard quadratic equation ($ax^2 + bx + c = 0$):
+                <div class="step">Bring all terms to the LHS to form standard quadratic equation (<i>ax<sup>2</sup> + bx + c = 0</i>):
                     <span class="step-math">${formatPolynomial([{coeff: A, var: 'x<sup>2</sup>'}, {coeff: B, var: 'x'}, {coeff: C, var: ''}])} = 0</span>
                 </div>
                 ${formatQuadSteps(A, B, C, x1, x2)}
@@ -1488,7 +1522,7 @@
             document.getElementById('equation-display').innerHTML = `<div class="equation">${frac1} ${sign} ${frac2} = 1</div>`;
 
             stepsHTML = `
-                <div class="step">Multiply entire equation by LCM $(${formatLinearBinomial(1, 'x', b)})(${formatLinearBinomial(1, 'x', d)})$ to clear fractions:
+                <div class="step">Multiply entire equation by LCM (${formatLinearBinomial(1, 'x', b)})(${formatLinearBinomial(1, 'x', d)}) to clear fractions:
                     <span class="step-math">${a}(${formatLinearBinomial(1, 'x', d)}) ${sign} ${Math.abs(c)}(${formatLinearBinomial(1, 'x', b)}) = (${formatLinearBinomial(1, 'x', b)})(${formatLinearBinomial(1, 'x', d)})</span>
                 </div>
                 <div class="step">Expand brackets on both sides:
@@ -1523,7 +1557,7 @@
             document.getElementById('equation-display').innerHTML = `<div class="equation">${frac1} + ${frac2} = 3</div>`;
             
             stepsHTML = `
-                <div class="step">Multiply the entire equation by the LCM $(${formatLinearBinomial(1, 'x', B)})(${formatLinearBinomial(1, 'x', D)})$ to clear fractions:
+                <div class="step">Multiply the entire equation by the LCM (${formatLinearBinomial(1, 'x', B)})(${formatLinearBinomial(1, 'x', D)}) to clear fractions:
                     <span class="step-math">(${formatLinearBinomial(1, 'x', A)})(${formatLinearBinomial(1, 'x', D)}) + (${formatLinearBinomial(1, 'x', C)})(${formatLinearBinomial(1, 'x', B)}) = 3(${formatLinearBinomial(1, 'x', B)})(${formatLinearBinomial(1, 'x', D)})</span>
                 </div>
                 <div class="step">Expand the brackets on both sides:
@@ -1570,9 +1604,11 @@
             
             document.getElementById('equation-display').innerHTML = `<div class="equation">${A === 1 ? '' : A}${pL}${term1}${pR} ${B < 0 ? '-' : '+'} ${Math.abs(B)}${pL}${term2}${pR} = ${K}</div>`;
 
+            let subFraction = buildFraction(formatLinearBinomial(c, 'x', d), formatLinearBinomial(e, 'x', f));
+
             stepsHTML = `
                 <div class="step"><b>Phase 1: Substitution</b><br>
-                    Notice that the two fractions are reciprocals. Let <i>y</i> = $\\frac{${formatLinearBinomial(c, 'x', d)}}{${formatLinearBinomial(e, 'x', f)}}$.<br>
+                    Notice that the two fractions are reciprocals. Let <i>y</i> = ${subFraction}.<br>
                     The equation becomes: <span class="step-math">${A === 1 ? '' : A}<i>y</i> ${B < 0 ? '-' : '+'} ${buildFraction(Math.abs(B), '<i>y</i>')} = ${K}</span>
                 </div>
                 <div class="step">Multiply by <i>y</i> to clear the fraction and rearrange to standard quadratic form:
@@ -1585,10 +1621,10 @@
                 </div>
                 <div class="step"><b>Phase 3: Back-Substitute to solve for <i>x</i></b><br>
                     <b>For <i>y</i> = ${y1d === 1 ? y1n : buildFraction(y1n, y1d)}:</b>
-                    <span class="step-math">$\\frac{${formatLinearBinomial(c, 'x', d)}}{${formatLinearBinomial(e, 'x', f)}} = ${y1d === 1 ? y1n : buildFraction(y1n, y1d)}$</span>
+                    <span class="step-math">${subFraction} = ${y1d === 1 ? y1n : buildFraction(y1n, y1d)}</span>
                     Cross-multiply and solve: <span class="step-math" style="color: var(--success);"><i>x</i> = ${x1}</span><br>
                     <b>For <i>y</i> = ${y2d === 1 ? y2n : buildFraction(y2n, y2d)}:</b>
-                    <span class="step-math">$\\frac{${formatLinearBinomial(c, 'x', d)}}{${formatLinearBinomial(e, 'x', f)}} = ${y2d === 1 ? y2n : buildFraction(y2n, y2d)}$</span>
+                    <span class="step-math">${subFraction} = ${y2d === 1 ? y2n : buildFraction(y2n, y2d)}</span>
                     Cross-multiply and solve: <span class="step-math" style="color: var(--success);"><i>x</i> = ${x2}</span>
                 </div>
             `;
@@ -1706,7 +1742,7 @@
         let subTerm = a1 * x; let rhsAfterSub = c1 - subTerm;
 
         document.getElementById('solution-steps').innerHTML = `
-            <div class="step">Rearrange into standard form ($ax + by = c$):
+            <div class="step">Rearrange into standard form (<i>ax + by = c</i>):
                 <span class="step-math">${eq1Std} &nbsp;&nbsp;&nbsp; ...(iii)</span><span class="step-math">${eq2Std} &nbsp;&nbsp;&nbsp; ...(iv)</span>
             </div>
             <div class="step">Multiply eq (iii) by ${mult1} and eq (iv) by ${mult2}:
@@ -1923,7 +1959,7 @@
         document.getElementById('solution-steps').innerHTML = `
             <div class="step"><b>Phase 1 & 2: Substitute and Solve</b><br>
                 <span class="step-math">Let <i>a</i> = ${buildFraction('1', den1)}, <i>b</i> = ${buildFraction('1', den2)}</span>
-                <span class="step-math">Solving $A_1 a + B_1 b = C_1$ gives: <i>a</i> = ${buildFraction(simpA[0], simpA[1])}, <i>b</i> = ${buildFraction(simpB[0], simpB[1])}</span>
+                <span class="step-math">Solving <i>A<sub>1</sub>a + B<sub>1</sub>b = C<sub>1</sub></i> gives: <i>a</i> = ${buildFraction(simpA[0], simpA[1])}, <i>b</i> = ${buildFraction(simpB[0], simpB[1])}</span>
             </div>
             <div class="step"><b>Phase 3: Back-Substitution (New System)</b><br>
                 <span class="step-math">${den1} = ${U} &nbsp;&nbsp;&nbsp; ...(v)</span>

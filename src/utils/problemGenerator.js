@@ -1126,15 +1126,16 @@ export function setupMCQ(correctStr, w1, w2, w3) {
     export function generateQuadBrackets() {
         let type = getRandomInt(0, 2);
         let stepsHTML = "";
+        let problemData, eqHTML;
         
         if (type === 0) {
             let x1 = getRandomInt(-8, 8); let x2 = getRandomInt(-8, 8);
             while (x1 === x2) x2 = getRandomInt(-8, 8);
             let S = x1 + x2; let P = x1 * x2;
             let A = getRandomInt(-5, 5, true); let B = -S - A; let K = A * B - P;
-            let problemData = { type: 'quad', ansX1: x1, ansX2: x2 };
+            problemData = { type: 'quad', ansX1: x1, ansX2: x2 };
             let p1 = formatLinearBinomial(1, 'x', A); let p2 = formatLinearBinomial(1, 'x', B);
-            let eqHTML = `<div class="equation">(${p1})(${p2}) = ${K}</div>`;
+            eqHTML = `<div class="equation">(${p1})(${p2}) = ${K}</div>`;
             
             let B_std = -(x1 + x2); let C_std = x1 * x2;
             stepsHTML = `
@@ -1156,10 +1157,10 @@ export function setupMCQ(correctStr, w1, w2, w3) {
             let N = a/M; let P = b/M; let K = -c;
             
             let x1 = p/q; let x2 = u/v;
-            let problemData = { type: 'quad', ansX1: x1, ansX2: x2 };
+            problemData = { type: 'quad', ansX1: x1, ansX2: x2 };
             
             let bracket = formatLinearBinomial(N, 'x', P);
-            let eqHTML = `<div class="equation">${M === 1 ? '' : M}<i>x</i>(${bracket}) = ${K}</div>`;
+            eqHTML = `<div class="equation">${M === 1 ? '' : M}<i>x</i>(${bracket}) = ${K}</div>`;
             
             stepsHTML = `
                 <div class="step">Distribute the term outside the bracket:
@@ -1175,10 +1176,10 @@ export function setupMCQ(correctStr, w1, w2, w3) {
             let R = getRandomInt(1, 6); let K = R*R;
             let x1 = (-B + R) / A; let x2 = (-B - R) / A;
             
-            let problemData = { type: 'quad', ansX1: x1, ansX2: x2 };
+            problemData = { type: 'quad', ansX1: x1, ansX2: x2 };
             let bracket = formatLinearBinomial(A, 'x', B);
             let eqStr = `(${bracket})<sup>2</sup> ${Math.random() < 0.5 ? `= ${K}` : `- ${K} = 0`}`;
-            let eqHTML = `<div class="equation">${eqStr}</div>`;
+            eqHTML = `<div class="equation">${eqStr}</div>`;
             
             let preStep = eqStr.indexOf('= 0') !== -1 ? `<div class="step">Shift the constant to the RHS to isolate the squared bracket:<span class="step-math">(${bracket})<sup>2</sup> = ${K}</span></div>` : "";
 
@@ -1199,6 +1200,7 @@ export function setupMCQ(correctStr, w1, w2, w3) {
     export function generateQuadIntermediate() {
         let type = getRandomInt(0, 2);
         let stepsHTML = "";
+        let problemData, eqHTML;
         
         if (type === 2) {
             let x1, x2, B, C;
@@ -1207,9 +1209,9 @@ export function setupMCQ(correctStr, w1, w2, w3) {
                 B = -(x1 + x2); C = x1 * x2;
                 if (C !== 0 && Math.abs(B) < 20 && Math.abs(C) < 40 && x1 !== x2) break;
             }
-            let problemData = { type: 'quad', ansX1: x1, ansX2: x2 };
+            problemData = { type: 'quad', ansX1: x1, ansX2: x2 };
             let eqStr = `<i>x</i> ${C < 0 ? '-' : '+'} ${buildFraction(Math.abs(C), '<i>x</i>')} = ${-B}`;
-            let eqHTML = `<div class="equation">${eqStr}</div>`;
+            eqHTML = `<div class="equation">${eqStr}</div>`;
             
             stepsHTML = `
                 <div class="step">Multiply the entire equation by <i>x</i> to clear the fraction:
@@ -1221,8 +1223,7 @@ export function setupMCQ(correctStr, w1, w2, w3) {
                 </div>
                 ${formatQuadSteps(1, B, C, x1, x2)}
             `;
-            /* let stepsHTML = stepsHTML; */
-            return;
+            return { ...problemData, eqHTML, stepsHTML };
         }
         
         let q = getRandomInt(1, 3); let p = getRandomInt(-5, 5, true);
@@ -1234,7 +1235,7 @@ export function setupMCQ(correctStr, w1, w2, w3) {
         if (B === 0 || C === 0) return generateQuadIntermediate(); 
         
         let x1 = p/q; let x2 = u/v;
-        let problemData = { type: 'quad', ansX1: x1, ansX2: x2 };
+        problemData = { type: 'quad', ansX1: x1, ansX2: x2 };
 
         if (type === 0) { 
             let A2 = getRandomInt(-2, 2); let A1 = A + A2;
@@ -1245,7 +1246,7 @@ export function setupMCQ(correctStr, w1, w2, w3) {
             let rhs = formatPolynomial([{coeff: A2, var: 'x<sup>2</sup>'}, {coeff: B2, var: 'x'}, {coeff: C2, var: ''}]);
             if (rhs === "0") rhs = "0";
             
-            let eqHTML = `<div class="equation">${lhs} = ${rhs}</div>`;
+            eqHTML = `<div class="equation">${lhs} = ${rhs}</div>`;
             
             stepsHTML = `
                 <div class="step">Bring all terms to the LHS to form standard quadratic equation:
@@ -1265,7 +1266,7 @@ export function setupMCQ(correctStr, w1, w2, w3) {
             let lhs = lhsQuad === "0" ? buildFraction(N1 < 0 ? `-${Math.abs(N1)}` : N1, D) : `${lhsQuad} ${N1 < 0 ? '-' : '+'} ${buildFraction(Math.abs(N1), D)}`;
             let rhs = rhsQuad === "0" ? buildFraction(N2 < 0 ? `-${Math.abs(N2)}` : N2, D) : `${rhsQuad} ${N2 < 0 ? '-' : '+'} ${buildFraction(Math.abs(N2), D)}`;
             
-            let eqHTML = `<div class="equation">${lhs} = ${rhs}</div>`;
+            eqHTML = `<div class="equation">${lhs} = ${rhs}</div>`;
             
             stepsHTML = `
                 <div class="step">Bring all terms to the LHS:
@@ -1284,6 +1285,7 @@ export function setupMCQ(correctStr, w1, w2, w3) {
     export function generateQuadMastery() {
         let type = getRandomInt(0, 3);
         let stepsHTML = "";
+        let problemData, eqHTML;
         
         if (type === 0) {
             let a, b, c, d, r1, r2, B, C;
@@ -1306,12 +1308,12 @@ export function setupMCQ(correctStr, w1, w2, w3) {
                 }
             }
             
-            let problemData = { type: 'quad', ansX1: r1, ansX2: r2 };
+            problemData = { type: 'quad', ansX1: r1, ansX2: r2 };
             let frac1 = buildFraction(a, formatLinearBinomial(1, 'x', b));
             let frac2 = buildFraction(Math.abs(c), formatLinearBinomial(1, 'x', d));
             let sign = c < 0 ? '-' : '+';
             
-            let eqHTML = `<div class="equation">${frac1} ${sign} ${frac2} = 1</div>`;
+            eqHTML = `<div class="equation">${frac1} ${sign} ${frac2} = 1</div>`;
 
             stepsHTML = `
                 <div class="step">Multiply entire equation by LCM (${formatLinearBinomial(1, 'x', b)})(${formatLinearBinomial(1, 'x', d)}) to clear fractions:
@@ -1340,12 +1342,12 @@ export function setupMCQ(correctStr, w1, w2, w3) {
                     if (A !== B && C !== D) break; 
                 }
             }
-            let problemData = { type: 'quad', ansX1: r1, ansX2: r2 };
+            problemData = { type: 'quad', ansX1: r1, ansX2: r2 };
             
             let frac1 = buildFraction(formatLinearBinomial(1, 'x', A), formatLinearBinomial(1, 'x', B));
             let frac2 = buildFraction(formatLinearBinomial(1, 'x', C), formatLinearBinomial(1, 'x', D));
             
-            let eqHTML = `<div class="equation">${frac1} + ${frac2} = 3</div>`;
+            eqHTML = `<div class="equation">${frac1} + ${frac2} = 3</div>`;
             
             stepsHTML = `
                 <div class="step">Multiply the entire equation by the LCM (${formatLinearBinomial(1, 'x', B)})(${formatLinearBinomial(1, 'x', D)}) to clear fractions:
@@ -1384,13 +1386,13 @@ export function setupMCQ(correctStr, w1, w2, w3) {
                 break;
             }
             
-            let problemData = { type: 'quad', ansX1: x1, ansX2: x2 };
+            problemData = { type: 'quad', ansX1: x1, ansX2: x2 };
             
             let term1 = buildFraction(formatLinearBinomial(c, 'x', d), formatLinearBinomial(e, 'x', f));
             let term2 = buildFraction(formatLinearBinomial(e, 'x', f), formatLinearBinomial(c, 'x', d));
             let pL = `<span class="large-paren">(</span>`; let pR = `<span class="large-paren">)</span>`;
             
-            let eqHTML = `<div class="equation">${A === 1 ? '' : A}${pL}${term1}${pR} ${B < 0 ? '-' : '+'} ${Math.abs(B)}${pL}${term2}${pR} = ${K}</div>`;
+            eqHTML = `<div class="equation">${A === 1 ? '' : A}${pL}${term1}${pR} ${B < 0 ? '-' : '+'} ${Math.abs(B)}${pL}${term2}${pR} = ${K}</div>`;
             let subFraction = buildFraction(formatLinearBinomial(c, 'x', d), formatLinearBinomial(e, 'x', f));
 
             stepsHTML = `

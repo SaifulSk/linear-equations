@@ -285,92 +285,92 @@ Error generating stack: `+e.message+`
                 <div class="step">Set each factor to zero:
                     <span class="step-math" style="color: var(--success);"><i>x</i> = ${parseFloat(r.toFixed(2))}, &nbsp; <i>x</i> = ${parseFloat(i.toFixed(2))}</span>
                 </div>
-            `}}function Oe(){let e=k(0,2),t=0,n=0,r=0,i=0,a=``;e===0?(r=k(1,10),i=-r,n=-r*r,t=0,a=[`${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:n,var:``}])} = 0`,`<i>x<sup>2</sup></i> = ${-n}`][k(0,1)]):e===1?(r=0,i=k(-10,10,!0),t=-i,n=0,a=[`${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:t,var:`x`}])} = 0`,`<i>x<sup>2</sup></i> = ${-t<0?`-`:``}${Math.abs(t)}<i>x</i>`][k(0,1)]):(r=k(-8,8,!0),i=k(-8,8,!0),r===i&&i++,t=-(r+i),n=r*i,a=[`${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:t,var:`x`}])} = ${-n}`,`<i>x<sup>2</sup></i> = ${P([{coeff:-t,var:`x`},{coeff:-n,var:``}])}`,`${P([{coeff:1,var:`x<sup>2</sup>`}])} = ${P([{coeff:-t,var:`x`},{coeff:-n,var:``}])}`][k(0,2)]);let o={type:`quad`,ansX1:r,ansX2:i},s=`<div class="equation">${a}</div>`,c=``;a.indexOf(`= 0`)===-1&&n!==0&&t!==0?c=`<div class="step">Bring all terms to the LHS to form the standard quadratic equation:<span class="step-math">${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:t,var:`x`},{coeff:n,var:``}])} = 0</span></div>`:a.indexOf(`= 0`)===-1&&n===0&&(c=`<div class="step">Bring all terms to the LHS:<span class="step-math">${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:t,var:`x`}])} = 0</span></div>`);let l=c+De(1,t,n,r,i);return{...o,eqHTML:s,stepsHTML:l}}function ke(){let e=k(0,2),t=``;if(e===0){let e=k(-8,8),n=k(-8,8);for(;e===n;)n=k(-8,8);let r=e+n,i=e*n,a=k(-5,5,!0),o=-r-a,s=a*o-i;`${I(1,`x`,a)}${I(1,`x`,o)}${s}`;let c=-(e+n),l=e*n;t=`
+            `}}function Oe(){let e=k(0,2),t=0,n=0,r=0,i=0,a=``;e===0?(r=k(1,10),i=-r,n=-r*r,t=0,a=[`${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:n,var:``}])} = 0`,`<i>x<sup>2</sup></i> = ${-n}`][k(0,1)]):e===1?(r=0,i=k(-10,10,!0),t=-i,n=0,a=[`${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:t,var:`x`}])} = 0`,`<i>x<sup>2</sup></i> = ${-t<0?`-`:``}${Math.abs(t)}<i>x</i>`][k(0,1)]):(r=k(-8,8,!0),i=k(-8,8,!0),r===i&&i++,t=-(r+i),n=r*i,a=[`${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:t,var:`x`}])} = ${-n}`,`<i>x<sup>2</sup></i> = ${P([{coeff:-t,var:`x`},{coeff:-n,var:``}])}`,`${P([{coeff:1,var:`x<sup>2</sup>`}])} = ${P([{coeff:-t,var:`x`},{coeff:-n,var:``}])}`][k(0,2)]);let o={type:`quad`,ansX1:r,ansX2:i},s=`<div class="equation">${a}</div>`,c=``;a.indexOf(`= 0`)===-1&&n!==0&&t!==0?c=`<div class="step">Bring all terms to the LHS to form the standard quadratic equation:<span class="step-math">${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:t,var:`x`},{coeff:n,var:``}])} = 0</span></div>`:a.indexOf(`= 0`)===-1&&n===0&&(c=`<div class="step">Bring all terms to the LHS:<span class="step-math">${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:t,var:`x`}])} = 0</span></div>`);let l=c+De(1,t,n,r,i);return{...o,eqHTML:s,stepsHTML:l}}function ke(){let e=k(0,2),t=``,n,r;if(e===0){let e=k(-8,8),i=k(-8,8);for(;e===i;)i=k(-8,8);let a=e+i,o=e*i,s=k(-5,5,!0),c=-a-s,l=s*c-o;n={type:`quad`,ansX1:e,ansX2:i},r=`<div class="equation">(${I(1,`x`,s)})(${I(1,`x`,c)}) = ${l}</div>`;let u=-(e+i),d=e*i;t=`
                 <div class="step">Expand the brackets:
-                    <span class="step-math"><i>x<sup>2</sup></i> ${o<0?`-`:`+`} ${Math.abs(o)}<i>x</i> ${a<0?`-`:`+`} ${Math.abs(a)}<i>x</i> ${a*o<0?`-`:`+`} ${Math.abs(a*o)} = ${s}</span>
+                    <span class="step-math"><i>x<sup>2</sup></i> ${c<0?`-`:`+`} ${Math.abs(c)}<i>x</i> ${s<0?`-`:`+`} ${Math.abs(s)}<i>x</i> ${s*c<0?`-`:`+`} ${Math.abs(s*c)} = ${l}</span>
                 </div>
                 <div class="step">Combine terms and shift constant to LHS to form standard quadratic equation:
-                    <span class="step-math">${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:c,var:`x`},{coeff:l,var:``}])} = 0</span>
+                    <span class="step-math">${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:u,var:`x`},{coeff:d,var:``}])} = 0</span>
                 </div>
-                ${De(1,c,l,e,n)}
-            `}else if(e===1){let e=k(1,3),n=k(-3,3,!0),r=k(1,3),i=k(-3,3,!0),a=e*r,o=-(e*i+n*r),s=n*i;o===0&&(o=1);let c=A(Math.abs(a),Math.abs(o)),l=a/c,u=o/c,d=-s,f=n/e,p=i/r,m=I(l,`x`,u);`${c===1?``:c}${m}${d}`,t=`
+                ${De(1,u,d,e,i)}
+            `}else if(e===1){let e=k(1,3),i=k(-3,3,!0),a=k(1,3),o=k(-3,3,!0),s=e*a,c=-(e*o+i*a),l=i*o;c===0&&(c=1);let u=A(Math.abs(s),Math.abs(c)),d=s/u,f=c/u,p=-l,m=i/e,h=o/a;n={type:`quad`,ansX1:m,ansX2:h};let g=I(d,`x`,f);r=`<div class="equation">${u===1?``:u}<i>x</i>(${g}) = ${p}</div>`,t=`
                 <div class="step">Distribute the term outside the bracket:
-                    <span class="step-math">${P([{coeff:a,var:`x<sup>2</sup>`},{coeff:o,var:`x`}])} = ${d}</span>
+                    <span class="step-math">${P([{coeff:s,var:`x<sup>2</sup>`},{coeff:c,var:`x`}])} = ${p}</span>
                 </div>
                 <div class="step">Bring constant to the LHS to form standard quadratic equation:
-                    <span class="step-math">${P([{coeff:a,var:`x<sup>2</sup>`},{coeff:o,var:`x`},{coeff:s,var:``}])} = 0</span>
+                    <span class="step-math">${P([{coeff:s,var:`x<sup>2</sup>`},{coeff:c,var:`x`},{coeff:l,var:``}])} = 0</span>
                 </div>
-                ${De(a,o,s,f,p)}
-            `}else{let e=k(1,3),n=k(-5,5,!0),r=k(1,6),i=r*r,a=(-n+r)/e,o=(-n-r)/e,s=I(e,`x`,n),c=`(${s})<sup>2</sup> ${Math.random()<.5?`= ${i}`:`- ${i} = 0`}`;`${c}`,t=(c.indexOf(`= 0`)===-1?``:`<div class="step">Shift the constant to the RHS to isolate the squared bracket:<span class="step-math">(${s})<sup>2</sup> = ${i}</span></div>`)+`
+                ${De(s,c,l,m,h)}
+            `}else{let e=k(1,3),i=k(-5,5,!0),a=k(1,6),o=a*a,s=(-i+a)/e,c=(-i-a)/e;n={type:`quad`,ansX1:s,ansX2:c};let l=I(e,`x`,i),u=`(${l})<sup>2</sup> ${Math.random()<.5?`= ${o}`:`- ${o} = 0`}`;r=`<div class="equation">${u}</div>`,t=(u.indexOf(`= 0`)===-1?``:`<div class="step">Shift the constant to the RHS to isolate the squared bracket:<span class="step-math">(${l})<sup>2</sup> = ${o}</span></div>`)+`
                 <div class="step">Take the square root of both sides:
-                    <span class="step-math">${s} = &plusmn;&radic;${i}</span>
-                    <span class="step-math">${s} = &plusmn;${r}</span>
+                    <span class="step-math">${l} = &plusmn;&radic;${o}</span>
+                    <span class="step-math">${l} = &plusmn;${a}</span>
                 </div>
                 <div class="step">Solve the two resulting linear equations:
-                    <span class="step-math" style="color: var(--success);"><i>x</i> = ${parseFloat(a.toFixed(2))}, &nbsp; <i>x</i> = ${parseFloat(o.toFixed(2))}</span>
+                    <span class="step-math" style="color: var(--success);"><i>x</i> = ${parseFloat(s.toFixed(2))}, &nbsp; <i>x</i> = ${parseFloat(c.toFixed(2))}</span>
                 </div>
-            `}return{...problemData,eqHTML,stepsHTML:t}}function Ae(){let e=k(0,2),t=``;if(e===2){let e,n,r,i;for(;e=k(-8,8,!0),n=k(-8,8,!0),r=-(e+n),i=e*n,!(i!==0&&Math.abs(r)<20&&Math.abs(i)<40&&e!==n););`${F(Math.abs(i),`<i>x</i>`)}${-r}`,t=`
+            `}return{...n,eqHTML:r,stepsHTML:t}}function Ae(){let e=k(0,2),t=``,n,r;if(e===2){let e,i,a,o;for(;e=k(-8,8,!0),i=k(-8,8,!0),a=-(e+i),o=e*i,!(o!==0&&Math.abs(a)<20&&Math.abs(o)<40&&e!==i););return n={type:`quad`,ansX1:e,ansX2:i},r=`<div class="equation">${`<i>x</i> ${o<0?`-`:`+`} ${F(Math.abs(o),`<i>x</i>`)} = ${-a}`}</div>`,t=`
                 <div class="step">Multiply the entire equation by <i>x</i> to clear the fraction:
-                    <span class="step-math"><i>x</i>(<i>x</i>) ${i<0?`-`:`+`} <i>x</i>(${F(Math.abs(i),`<i>x</i>`)}) = <i>x</i>(${-r})</span>
-                    <span class="step-math"><i>x<sup>2</sup></i> ${i<0?`-`:`+`} ${Math.abs(i)} = ${-r===1?``:-r===-1?`-`:-r}<i>x</i></span>
+                    <span class="step-math"><i>x</i>(<i>x</i>) ${o<0?`-`:`+`} <i>x</i>(${F(Math.abs(o),`<i>x</i>`)}) = <i>x</i>(${-a})</span>
+                    <span class="step-math"><i>x<sup>2</sup></i> ${o<0?`-`:`+`} ${Math.abs(o)} = ${-a===1?``:-a===-1?`-`:-a}<i>x</i></span>
                 </div>
                 <div class="step">Rearrange to standard form:
-                    <span class="step-math">${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:r,var:`x`},{coeff:i,var:``}])} = 0</span>
+                    <span class="step-math">${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:a,var:`x`},{coeff:o,var:``}])} = 0</span>
                 </div>
-                ${De(1,r,i,e,n)}
-            `;return}let n=k(1,3),r=k(-5,5,!0);for(;A(Math.abs(r),n)!==1;)r=k(-5,5,!0);let i=k(1,3),a=k(-5,5,!0);for(;A(Math.abs(a),i)!==1;)a=k(-5,5,!0);let o=n*i,s=-(n*a+r*i),c=r*a;if(s===0||c===0)return Ae();let l=r/n,u=a/i,d={type:`quad`,ansX1:l,ansX2:u};if(e===0){let e=k(-2,2),n=o+e,r=k(-3,3),i=s+r,a=k(-5,5),d=c+a,f=P([{coeff:n,var:`x<sup>2</sup>`},{coeff:i,var:`x`},{coeff:d,var:``}]),p=P([{coeff:e,var:`x<sup>2</sup>`},{coeff:r,var:`x`},{coeff:a,var:``}]);p===`0`&&(p=`0`),`${f}${p}`,t=`
+                ${De(1,a,o,e,i)}
+            `,{...n,eqHTML:r,stepsHTML:t}}let i=k(1,3),a=k(-5,5,!0);for(;A(Math.abs(a),i)!==1;)a=k(-5,5,!0);let o=k(1,3),s=k(-5,5,!0);for(;A(Math.abs(s),o)!==1;)s=k(-5,5,!0);let c=i*o,l=-(i*s+a*o),u=a*s;if(l===0||u===0)return Ae();let d=a/i,f=s/o;if(n={type:`quad`,ansX1:d,ansX2:f},e===0){let e=k(-2,2),n=c+e,i=k(-3,3),a=l+i,o=k(-5,5),s=u+o,p=P([{coeff:n,var:`x<sup>2</sup>`},{coeff:a,var:`x`},{coeff:s,var:``}]),m=P([{coeff:e,var:`x<sup>2</sup>`},{coeff:i,var:`x`},{coeff:o,var:``}]);m===`0`&&(m=`0`),r=`<div class="equation">${p} = ${m}</div>`,t=`
                 <div class="step">Bring all terms to the LHS to form standard quadratic equation:
-                    <span class="step-math">${P([{coeff:o,var:`x<sup>2</sup>`},{coeff:s,var:`x`},{coeff:c,var:``}])} = 0</span>
+                    <span class="step-math">${P([{coeff:c,var:`x<sup>2</sup>`},{coeff:l,var:`x`},{coeff:u,var:``}])} = 0</span>
                 </div>
-                ${De(o,s,c,l,u)}
-            `}else{let e=k(2,6),n=k(-5,5),r=c*e+n,i=k(-2,2),a=o+i,d=k(-3,3),f=s+d,p=P([{coeff:a,var:`x<sup>2</sup>`},{coeff:f,var:`x`}]),m=P([{coeff:i,var:`x<sup>2</sup>`},{coeff:d,var:`x`}]);`${p===`0`?F(r<0?`-${Math.abs(r)}`:r,e):`${p} ${r<0?`-`:`+`} ${F(Math.abs(r),e)}`}${m===`0`?F(n<0?`-${Math.abs(n)}`:n,e):`${m} ${n<0?`-`:`+`} ${F(Math.abs(n),e)}`}`,t=`
+                ${De(c,l,u,d,f)}
+            `}else{let e=k(2,6),n=k(-5,5),i=u*e+n,a=k(-2,2),o=c+a,s=k(-3,3),p=l+s,m=P([{coeff:o,var:`x<sup>2</sup>`},{coeff:p,var:`x`}]),h=P([{coeff:a,var:`x<sup>2</sup>`},{coeff:s,var:`x`}]);r=`<div class="equation">${m===`0`?F(i<0?`-${Math.abs(i)}`:i,e):`${m} ${i<0?`-`:`+`} ${F(Math.abs(i),e)}`} = ${h===`0`?F(n<0?`-${Math.abs(n)}`:n,e):`${h} ${n<0?`-`:`+`} ${F(Math.abs(n),e)}`}</div>`,t=`
                 <div class="step">Bring all terms to the LHS:
-                    <span class="step-math">${P([{coeff:o,var:`x<sup>2</sup>`},{coeff:s,var:`x`}])} ${r-n<0?`-`:`+`} ${F(Math.abs(r-n),e)} = 0</span>
+                    <span class="step-math">${P([{coeff:c,var:`x<sup>2</sup>`},{coeff:l,var:`x`}])} ${i-n<0?`-`:`+`} ${F(Math.abs(i-n),e)} = 0</span>
                 </div>
                 <div class="step">Simplify the fraction:
-                    <span class="step-math">${P([{coeff:o,var:`x<sup>2</sup>`},{coeff:s,var:`x`},{coeff:c,var:``}])} = 0</span>
+                    <span class="step-math">${P([{coeff:c,var:`x<sup>2</sup>`},{coeff:l,var:`x`},{coeff:u,var:``}])} = 0</span>
                 </div>
-                ${De(o,s,c,l,u)}
-            `}return{...d,eqHTML,stepsHTML:t}}function je(){let e=k(0,3),t=``;if(e===0){let e,n,r,i,a,o,s,c,l=!1;for(;!l;){if(a=k(-6,6),o=k(-6,6),a===o||(s=-(a+o),c=a*o,n=k(-5,5),n===-a||n===-o))continue;let t=n*s-n*n-c;i=k(-8,8),!(i===n||i===-a||i===-o||i===0)&&t%(i-n)===0&&(e=t/(i-n),r=n+i-s-e,e!==0&&r!==0&&(l=!0))}let u=F(e,I(1,`x`,n)),d=F(Math.abs(r),I(1,`x`,i)),f=r<0?`-`:`+`;`${u}${f}${d}`,t=`
-                <div class="step">Multiply entire equation by LCM (${I(1,`x`,n)})(${I(1,`x`,i)}) to clear fractions:
-                    <span class="step-math">${e}(${I(1,`x`,i)}) ${f} ${Math.abs(r)}(${I(1,`x`,n)}) = (${I(1,`x`,n)})(${I(1,`x`,i)})</span>
+                ${De(c,l,u,d,f)}
+            `}return{...n,eqHTML:r,stepsHTML:t}}function je(){let e=k(0,3),t=``,n,r;if(e===0){let e,i,a,o,s,c,l,u,d=!1;for(;!d;){if(s=k(-6,6),c=k(-6,6),s===c||(l=-(s+c),u=s*c,i=k(-5,5),i===-s||i===-c))continue;let t=i*l-i*i-u;o=k(-8,8),!(o===i||o===-s||o===-c||o===0)&&t%(o-i)===0&&(e=t/(o-i),a=i+o-l-e,e!==0&&a!==0&&(d=!0))}n={type:`quad`,ansX1:s,ansX2:c};let f=F(e,I(1,`x`,i)),p=F(Math.abs(a),I(1,`x`,o)),m=a<0?`-`:`+`;r=`<div class="equation">${f} ${m} ${p} = 1</div>`,t=`
+                <div class="step">Multiply entire equation by LCM (${I(1,`x`,i)})(${I(1,`x`,o)}) to clear fractions:
+                    <span class="step-math">${e}(${I(1,`x`,o)}) ${m} ${Math.abs(a)}(${I(1,`x`,i)}) = (${I(1,`x`,i)})(${I(1,`x`,o)})</span>
                 </div>
                 <div class="step">Expand brackets on both sides:
-                    <span class="step-math">${P([{coeff:e+r,var:`x`},{coeff:e*i+r*n,var:``}])} = <i>x<sup>2</sup></i> ${n+i<0?`-`:`+`} ${Math.abs(n+i)}<i>x</i> ${n*i<0?`-`:`+`} ${Math.abs(n*i)}</span>
+                    <span class="step-math">${P([{coeff:e+a,var:`x`},{coeff:e*o+a*i,var:``}])} = <i>x<sup>2</sup></i> ${i+o<0?`-`:`+`} ${Math.abs(i+o)}<i>x</i> ${i*o<0?`-`:`+`} ${Math.abs(i*o)}</span>
                 </div>
                 <div class="step">Bring all terms to one side to form standard quadratic equation:
-                    <span class="step-math"><i>x<sup>2</sup></i> ${s<0?`-`:`+`} ${Math.abs(s)}<i>x</i> ${c<0?`-`:`+`} ${Math.abs(c)} = 0</span>
+                    <span class="step-math"><i>x<sup>2</sup></i> ${l<0?`-`:`+`} ${Math.abs(l)}<i>x</i> ${u<0?`-`:`+`} ${Math.abs(u)} = 0</span>
                 </div>
-                ${De(1,s,c,a,o)}
-            `}else if(e===1){let e,n,r,i,a,o;for(;;){if(e=k(-5,5),n=k(-5,5),e===n||(r=k(-5,5,!0),i=k(-5,5,!0),r===i||r===-e||r===-n||i===-e||i===-n))continue;let t=e+n+2*r+2*i,s=-e*n+3*r*i;if((s-r*t)%(i-r)===0&&(a=(s-r*t)/(i-r),o=t-a,a!==r&&o!==i))break}`${F(I(1,`x`,a),I(1,`x`,r))}${F(I(1,`x`,o),I(1,`x`,i))}`,t=`
-                <div class="step">Multiply the entire equation by the LCM (${I(1,`x`,r)})(${I(1,`x`,i)}) to clear fractions:
-                    <span class="step-math">(${I(1,`x`,a)})(${I(1,`x`,i)}) + (${I(1,`x`,o)})(${I(1,`x`,r)}) = 3(${I(1,`x`,r)})(${I(1,`x`,i)})</span>
+                ${De(1,l,u,s,c)}
+            `}else if(e===1){let e,i,a,o,s,c;for(;;){if(e=k(-5,5),i=k(-5,5),e===i||(a=k(-5,5,!0),o=k(-5,5,!0),a===o||a===-e||a===-i||o===-e||o===-i))continue;let t=e+i+2*a+2*o,n=-e*i+3*a*o;if((n-a*t)%(o-a)===0&&(s=(n-a*t)/(o-a),c=t-s,s!==a&&c!==o))break}n={type:`quad`,ansX1:e,ansX2:i},r=`<div class="equation">${F(I(1,`x`,s),I(1,`x`,a))} + ${F(I(1,`x`,c),I(1,`x`,o))} = 3</div>`,t=`
+                <div class="step">Multiply the entire equation by the LCM (${I(1,`x`,a)})(${I(1,`x`,o)}) to clear fractions:
+                    <span class="step-math">(${I(1,`x`,s)})(${I(1,`x`,o)}) + (${I(1,`x`,c)})(${I(1,`x`,a)}) = 3(${I(1,`x`,a)})(${I(1,`x`,o)})</span>
                 </div>
                 <div class="step">Expand the brackets on both sides:
-                    <span class="step-math">(<i>x<sup>2</sup></i> ${a+i<0?`-`:`+`} ${Math.abs(a+i)}<i>x</i> ${a*i<0?`-`:`+`} ${Math.abs(a*i)}) + (<i>x<sup>2</sup></i> ${r+o<0?`-`:`+`} ${Math.abs(r+o)}<i>x</i> ${r*o<0?`-`:`+`} ${Math.abs(r*o)}) = 3(<i>x<sup>2</sup></i> ${r+i<0?`-`:`+`} ${Math.abs(r+i)}<i>x</i> ${r*i<0?`-`:`+`} ${Math.abs(r*i)})</span>
+                    <span class="step-math">(<i>x<sup>2</sup></i> ${s+o<0?`-`:`+`} ${Math.abs(s+o)}<i>x</i> ${s*o<0?`-`:`+`} ${Math.abs(s*o)}) + (<i>x<sup>2</sup></i> ${a+c<0?`-`:`+`} ${Math.abs(a+c)}<i>x</i> ${a*c<0?`-`:`+`} ${Math.abs(a*c)}) = 3(<i>x<sup>2</sup></i> ${a+o<0?`-`:`+`} ${Math.abs(a+o)}<i>x</i> ${a*o<0?`-`:`+`} ${Math.abs(a*o)})</span>
                 </div>
                 <div class="step">Combine terms and shift to one side to form standard quadratic equation:
-                    <span class="step-math">${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:-(e+n),var:`x`},{coeff:e*n,var:``}])} = 0</span>
+                    <span class="step-math">${P([{coeff:1,var:`x<sup>2</sup>`},{coeff:-(e+i),var:`x`},{coeff:e*i,var:``}])} = 0</span>
                 </div>
-                ${De(1,-(e+n),e*n,e,n)}
-            `}else{let e,n,r,i,a,o,s,c,l,u,d,f,p;for(;;){if(e=k(-5,5),n=k(-5,5),e===n||(r=k(1,3),i=k(-4,4,!0),a=k(1,3),o=k(-4,4,!0),r*o-i*a===0))continue;let t=a*e+o,m=a*n+o,h=r*e+i,g=r*n+i;if(t===0||m===0||h===0||g===0)continue;let _=re(h,t);s=_[0],c=_[1];let v=re(g,m);l=v[0],u=v[1],d=Math.abs(c*u);let y=d/(c*u);if(f=y*s*l,p=y*(s*u+l*c),!(Math.abs(d)>10||Math.abs(f)>15||Math.abs(p)>30)&&!(d===0||f===0))break}let m=F(I(r,`x`,i),I(a,`x`,o)),h=F(I(a,`x`,o),I(r,`x`,i));`${d===1?``:d}${m}${Math.abs(f)}${h}${p}`;let g=F(I(r,`x`,i),I(a,`x`,o));t=`
+                ${De(1,-(e+i),e*i,e,i)}
+            `}else{let e,i,a,o,s,c,l,u,d,f,p,m,h;for(;;){if(e=k(-5,5),i=k(-5,5),e===i||(a=k(1,3),o=k(-4,4,!0),s=k(1,3),c=k(-4,4,!0),a*c-o*s===0))continue;let t=s*e+c,n=s*i+c,r=a*e+o,g=a*i+o;if(t===0||n===0||r===0||g===0)continue;let _=re(r,t);l=_[0],u=_[1];let v=re(g,n);d=v[0],f=v[1],p=Math.abs(u*f);let y=p/(u*f);if(m=y*l*d,h=y*(l*f+d*u),!(Math.abs(p)>10||Math.abs(m)>15||Math.abs(h)>30)&&!(p===0||m===0))break}n={type:`quad`,ansX1:e,ansX2:i};let g=F(I(a,`x`,o),I(s,`x`,c)),_=F(I(s,`x`,c),I(a,`x`,o)),v=`<span class="large-paren">(</span>`,y=`<span class="large-paren">)</span>`;r=`<div class="equation">${p===1?``:p}${v}${g}${y} ${m<0?`-`:`+`} ${Math.abs(m)}${v}${_}${y} = ${h}</div>`;let b=F(I(a,`x`,o),I(s,`x`,c));t=`
                 <div class="step"><b>Phase 1: Substitution</b><br>
-                    Notice that the two fractions are reciprocals. Let <i>y</i> = ${g}.<br>
-                    The equation becomes: <span class="step-math">${d===1?``:d}<i>y</i> ${f<0?`-`:`+`} ${F(Math.abs(f),`<i>y</i>`)} = ${p}</span>
+                    Notice that the two fractions are reciprocals. Let <i>y</i> = ${b}.<br>
+                    The equation becomes: <span class="step-math">${p===1?``:p}<i>y</i> ${m<0?`-`:`+`} ${F(Math.abs(m),`<i>y</i>`)} = ${h}</span>
                 </div>
                 <div class="step">Multiply by <i>y</i> to clear the fraction and rearrange to standard quadratic form:
-                    <span class="step-math">${P([{coeff:d,var:`y<sup>2</sup>`},{coeff:-p,var:`y`},{coeff:f,var:``}])} = 0</span>
+                    <span class="step-math">${P([{coeff:p,var:`y<sup>2</sup>`},{coeff:-h,var:`y`},{coeff:m,var:``}])} = 0</span>
                 </div>
                 <div class="step"><b>Phase 2: Solve for <i>y</i></b><br>
                     Solving this quadratic equation gives:
-                    <span class="step-math"><i>y</i> = ${c===1?s:F(s,c)} &nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp; <i>y</i> = ${u===1?l:F(l,u)}</span>
+                    <span class="step-math"><i>y</i> = ${u===1?l:F(l,u)} &nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp; <i>y</i> = ${f===1?d:F(d,f)}</span>
                 </div>
                 <div class="step"><b>Phase 3: Back-Substitute to solve for <i>x</i></b><br>
-                    <b>For <i>y</i> = ${c===1?s:F(s,c)}:</b>
-                    <span class="step-math">${g} = ${c===1?s:F(s,c)}</span>
-                    Cross-multiply and solve: <span class="step-math" style="color: var(--success);"><i>x</i> = ${e}</span><br>
                     <b>For <i>y</i> = ${u===1?l:F(l,u)}:</b>
-                    <span class="step-math">${g} = ${u===1?l:F(l,u)}</span>
-                    Cross-multiply and solve: <span class="step-math" style="color: var(--success);"><i>x</i> = ${n}</span>
+                    <span class="step-math">${b} = ${u===1?l:F(l,u)}</span>
+                    Cross-multiply and solve: <span class="step-math" style="color: var(--success);"><i>x</i> = ${e}</span><br>
+                    <b>For <i>y</i> = ${f===1?d:F(d,f)}:</b>
+                    <span class="step-math">${b} = ${f===1?d:F(d,f)}</span>
+                    Cross-multiply and solve: <span class="step-math" style="color: var(--success);"><i>x</i> = ${i}</span>
                 </div>
-            `}return{...problemData,eqHTML,stepsHTML:t}}var Me={x:``,y:``,x1:``,x2:``,ineqSign:`<`,userMCQ:null};function Ne(){let[e,t]=(0,y.useState)(`single`),[n,r]=(0,y.useState)(`standard`),[i,a]=(0,y.useState)(null),[o,s]=(0,y.useState)(Me),[c,l]=(0,y.useState)(null),[u,d]=(0,y.useState)(!1);(0,y.useEffect)(()=>{h()},[e,n]),(0,y.useEffect)(()=>{let e=e=>{e.key===`Enter`&&(document.activeElement.tagName===`INPUT`||document.activeElement.tagName===`SELECT`)&&g()};return document.addEventListener(`keydown`,e),()=>document.removeEventListener(`keydown`,e)},[i,o,e]);let f=e=>{t(e),r(`standard`)},p=(e,t)=>{s(n=>({...n,[e]:t}))},m=e=>{s(t=>({...t,userMCQ:e}))},h=()=>{l(null),d(!1),s(Me);let t=null,r=e===`ineq`;e===`single`||e===`ineq`?t=n===`standard`?fe(r):n===`brackets`?pe(r):n===`intermediate`?me(r):n===`advanced`?he(r):ge(r):e===`simul`?t=n===`standard`?be():n===`brackets`?Ce():n===`intermediate`?we():n===`advanced`?Te():Ee():e===`quad`?t=n===`standard`?Oe():n===`brackets`?ke():n===`intermediate`?Ae():je():e===`exp`?t=ce(n):e===`fact`?t=le(n):e===`ind`?t=ue(n):e===`log`&&(t=de(n)),a(t)},g=()=>{if(!i)return;let t=!1,n=!1;if(e===`single`||e===`ind`||e===`log`)o.x===``?n=!0:parseFloat(o.x)===i.ansX&&(t=!0);else if(e===`simul`)o.x===``||o.y===``?n=!0:parseInt(o.x)===i.ansX&&parseInt(o.y)===i.ansY&&(t=!0);else if(e===`ineq`)o.x===``?n=!0:parseInt(o.x)===i.ansX&&o.ineqSign===i.ansSign&&(t=!0);else if(e===`quad`){let e=parseFloat(o.x1),r=parseFloat(o.x2);isNaN(e)||isNaN(r)?n=!0:(Math.abs(e-i.ansX1)<.01&&Math.abs(r-i.ansX2)<.01||Math.abs(e-i.ansX2)<.01&&Math.abs(r-i.ansX1)<.01)&&(t=!0)}else (e===`exp`||e===`fact`)&&(o.userMCQ===null||o.userMCQ===void 0?n=!0:o.userMCQ===i.mcqData.ansIndex&&(t=!0));if(n){l({type:`error`,text:`Please complete your answer before checking.`});return}l(t?{type:`success`,text:`Excellent! Your answer is correct.`}:{type:`error`,text:`Incorrect. Try again, or click "Show Steps" to see the full working method.`})},_=`Solve for x`;return e===`simul`?_=`Solve the simultaneous equations`:e===`ineq`?_=`Solve the Inequation`:e===`quad`?_=`Find the roots of the Quadratic Equation`:e===`exp`?_=`Select the correct expansion`:e===`fact`&&(_=`Select the correct factors`),(0,x.jsxs)(`div`,{className:`container`,children:[(0,x.jsx)(S,{}),(0,x.jsx)(w,{currentMode:e,onSwitchMode:f}),(0,x.jsx)(T,{currentMode:e,difficulty:n,onChangeDifficulty:r}),(0,x.jsxs)(`div`,{className:`content`,children:[i&&(0,x.jsx)(ee,{instruction:_,subtitleText:i.subtitleText,eqHTML:i.eqHTML}),(0,x.jsx)(E,{currentMode:e,userInputs:o,onInputChange:p,mcqData:i?.mcqData,onMCQSelect:m}),(0,x.jsxs)(`div`,{className:`actions`,children:[(0,x.jsx)(`button`,{className:`btn-primary`,onClick:g,children:`Check Answer`}),(0,x.jsx)(`button`,{className:`btn-secondary`,onClick:h,children:`Next Problem`}),(0,x.jsx)(`button`,{className:`btn-secondary`,onClick:()=>d(!u),children:u?`Hide Steps`:`Show Steps`})]}),c&&(0,x.jsx)(`div`,{className:`feedback ${c.type}`,style:{display:`block`},children:c.text}),(0,x.jsx)(D,{show:u,stepsHTML:i?.stepsHTML})]})]})}b.createRoot(document.getElementById(`root`)).render((0,x.jsx)(y.StrictMode,{children:(0,x.jsx)(Ne,{})}));
+            `}return{...n,eqHTML:r,stepsHTML:t}}var Me={x:``,y:``,x1:``,x2:``,ineqSign:`<`,userMCQ:null};function Ne(){let[e,t]=(0,y.useState)(`single`),[n,r]=(0,y.useState)(`standard`),[i,a]=(0,y.useState)(null),[o,s]=(0,y.useState)(Me),[c,l]=(0,y.useState)(null),[u,d]=(0,y.useState)(!1);(0,y.useEffect)(()=>{h()},[e,n]),(0,y.useEffect)(()=>{let e=e=>{e.key===`Enter`&&(document.activeElement.tagName===`INPUT`||document.activeElement.tagName===`SELECT`)&&g()};return document.addEventListener(`keydown`,e),()=>document.removeEventListener(`keydown`,e)},[i,o,e]);let f=e=>{t(e),r(`standard`)},p=(e,t)=>{s(n=>({...n,[e]:t}))},m=e=>{s(t=>({...t,userMCQ:e}))},h=()=>{l(null),d(!1),s(Me);let t=null,r=e===`ineq`;e===`single`||e===`ineq`?t=n===`standard`?fe(r):n===`brackets`?pe(r):n===`intermediate`?me(r):n===`advanced`?he(r):ge(r):e===`simul`?t=n===`standard`?be():n===`brackets`?Ce():n===`intermediate`?we():n===`advanced`?Te():Ee():e===`quad`?t=n===`standard`?Oe():n===`brackets`?ke():n===`intermediate`?Ae():je():e===`exp`?t=ce(n):e===`fact`?t=le(n):e===`ind`?t=ue(n):e===`log`&&(t=de(n)),a(t)},g=()=>{if(!i)return;let t=!1,n=!1;if(e===`single`||e===`ind`||e===`log`)o.x===``?n=!0:parseFloat(o.x)===i.ansX&&(t=!0);else if(e===`simul`)o.x===``||o.y===``?n=!0:parseInt(o.x)===i.ansX&&parseInt(o.y)===i.ansY&&(t=!0);else if(e===`ineq`)o.x===``?n=!0:parseInt(o.x)===i.ansX&&o.ineqSign===i.ansSign&&(t=!0);else if(e===`quad`){let e=parseFloat(o.x1),r=parseFloat(o.x2);isNaN(e)||isNaN(r)?n=!0:(Math.abs(e-i.ansX1)<.01&&Math.abs(r-i.ansX2)<.01||Math.abs(e-i.ansX2)<.01&&Math.abs(r-i.ansX1)<.01)&&(t=!0)}else (e===`exp`||e===`fact`)&&(o.userMCQ===null||o.userMCQ===void 0?n=!0:o.userMCQ===i.mcqData.ansIndex&&(t=!0));if(n){l({type:`error`,text:`Please complete your answer before checking.`});return}l(t?{type:`success`,text:`Excellent! Your answer is correct.`}:{type:`error`,text:`Incorrect. Try again, or click "Show Steps" to see the full working method.`})},_=`Solve for x`;return e===`simul`?_=`Solve the simultaneous equations`:e===`ineq`?_=`Solve the Inequation`:e===`quad`?_=`Find the roots of the Quadratic Equation`:e===`exp`?_=`Select the correct expansion`:e===`fact`&&(_=`Select the correct factors`),(0,x.jsxs)(`div`,{className:`container`,children:[(0,x.jsx)(S,{}),(0,x.jsx)(w,{currentMode:e,onSwitchMode:f}),(0,x.jsx)(T,{currentMode:e,difficulty:n,onChangeDifficulty:r}),(0,x.jsxs)(`div`,{className:`content`,children:[i&&(0,x.jsx)(ee,{instruction:_,subtitleText:i.subtitleText,eqHTML:i.eqHTML}),(0,x.jsx)(E,{currentMode:e,userInputs:o,onInputChange:p,mcqData:i?.mcqData,onMCQSelect:m}),(0,x.jsxs)(`div`,{className:`actions`,children:[(0,x.jsx)(`button`,{className:`btn-primary`,onClick:g,children:`Check Answer`}),(0,x.jsx)(`button`,{className:`btn-secondary`,onClick:h,children:`Next Problem`}),(0,x.jsx)(`button`,{className:`btn-secondary`,onClick:()=>d(!u),children:u?`Hide Steps`:`Show Steps`})]}),c&&(0,x.jsx)(`div`,{className:`feedback ${c.type}`,style:{display:`block`},children:c.text}),(0,x.jsx)(D,{show:u,stepsHTML:i?.stepsHTML})]})]})}b.createRoot(document.getElementById(`root`)).render((0,x.jsx)(y.StrictMode,{children:(0,x.jsx)(Ne,{})}));
